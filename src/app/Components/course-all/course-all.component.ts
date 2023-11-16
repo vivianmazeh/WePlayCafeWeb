@@ -11,10 +11,6 @@ import { Observable } from 'rxjs';
 export class CourseAllComponent {
 
   courses: Course[] = [];
-  message = "I'm read only!";
-  canEdit = false;
- 
-
   constructor(private service: CourseService){}
   
   ngOnInit(): void {
@@ -33,13 +29,6 @@ export class CourseAllComponent {
   })
   }
 
-  onEditClick() {
-    this.canEdit = !this.canEdit;
-    if (this.canEdit) {
-      this.message = 'You can edit me!';
-    } else {
-      this.message = "I'm read only!";
-    }
-  }
+
 
 }

@@ -8,15 +8,22 @@ import { Course } from '../model/course';
 })
 export class CourseService {
 
-  private baseUrl: string ="http://localhost:8080/learningApp/education"
+  private baseUrl: string ="http://easytolearn.us-east-2.elasticbeanstalk.com/learningApp/education"
 
   constructor(private http: HttpClient) {}
 
   
   findAllBook(): Observable <Course[]>{
 
-    return this.http.get<Course[]>(`${this.baseUrl}/allbooks`);
-    
+      // Set up the headers to include CORS
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://angular-easy-to-learn-web.s3-website.us-east-2.amazonaws.com'
+        // Add any other required headers
+      });
+
+    return this.http.get<Course[]>(`${this.baseUrl}/allbooks`, { headers });
+  
   }
   
 }
