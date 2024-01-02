@@ -1,15 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CourseAllComponent } from './Components/course-all/course-all.component';
-import { CourseAddComponent } from './Components/course-add/course-add.component';
-import { CourseEditComponent } from './Components/course-edit/course-edit.component';
+import { HomeComponent } from './Components/home/home.component';
+import  {CafeComponent} from './Components/cafe/cafe.component'
+import {BookPartyComponent} from './Components/book-party/book-party.component';
+import {BuyTicketsComponent} from './Components/buy-tickets/buy-tickets.component';
+import { PriceComponent } from './Components/price/price.component';
+import { GalleryComponent } from './Components/gallery/gallery.component';
+import { ContactUsComponent } from './Components/contact-us/contact-us.component';
 
 // sets up routes constant where you define your routes
 const routes: Routes = [
 
-  {path: 'all', component: CourseAllComponent},
-  {path: 'add', component : CourseAddComponent},
-  {path: 'edit', component: CourseEditComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'cafe', component: CafeComponent},
+  {path: 'price', component: PriceComponent},
+  {path: 'gallery', component: GalleryComponent},
+  {path: 'contactUs', component: ContactUsComponent},
+  {path: 'book-a-party', component: BookPartyComponent},
+  {path: 'buy-tickets', component: BuyTicketsComponent},
   {path: '', redirectTo: 'all', pathMatch : 'full'},
  
 ];

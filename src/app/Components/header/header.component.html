@@ -1,15 +1,30 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">We Play & Cafe</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#" routerLink = "all">Home</a>
-          <a class="nav-link" href="#" routerLink = "add">Add</a>
-          <a class="nav-link" routerLink = "edit" href="#">Edit</a>
-        </div>
+
+<div class="header-container">  
+  <div class="header-container-logo">
+    <img src="./assets/pictures/WePlay & Cafe logo.png" class="header-logo" height="200px">
+  </div>
+  <div class="header-container-text">
+    <div class="header-container-top">
+      <div class="header-container-top-text">Welcome to WePlay & café</div>
+    </div>
+    <div class="header-container-bottom">
+      <div class="header-container-bottom-text">A fun place for your kiddos and a relax place for you
+        <img src="./assets/icons/tea.png" class="tea-icon" >
       </div>
     </div>
-  </nav>
+      
+  </div>
+  <div class="header-container-order">
+    <div class="header-container-order-party">      
+      <a href="#" routerLink = "book-a-party" class="btn header-container-order-button active" >
+        <img src="./assets/icons/cake.png" class="book-party-icon" >
+        Book a Party</a>
+    </div>
+    <div class="header-container-order-ticket">
+      <a href="#" routerLink = "buy-tickets" class="btn header-container-order-button active" >
+        <img src="./assets/icons/buy-ticket.png" class="book-party-icon" >
+        Buy Tickets</a>
+    </div>   
+  </div>
+    
+</div>

@@ -1,4 +1,74 @@
-.headerTitle{
-    height: 100px;
-    width: 100%;
+.header-container{
+    display: flex;
+    flex-direction: row;
+    height: 230px;
+}
+
+.header-container-logo{
+    height: 100%;
+    flex: 0 0 auto;
+}
+
+.header-logo{
+    padding-left: 10px;
+    height: 100%;
+}
+.header-container-order{
+    width: 700px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+.header-container-order-party{
+    flex: 1 1 auto;
+
+    align-self: center;
+}
+.header-container-order-ticket{
+    flex: 1 1 auto;
+
+    align-self: center;
+}
+.header-container-order-button {
+    color: olive; 
+    background-color:rgb(213, 124, 60);
+    border-color:rgb(194, 110, 7);
+    font-family: cursive;
+    text-align: center;
+    font-weight: 600;
+    width: 280px;
+    height: 70px;
+    font-size: 30px;
+    border-radius: 22px;
+    padding-top: 10px;
+}
+.header-container-text{
+    flex: 1 1 auto;
+    font-family: cursive;
+    color:olive;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    
+}
+.header-container-top{
+    font-size: 40px;   
+    height: 50%;
+    text-align: center;
+    flex: 0 0 auto;
+}
+.header-container-top-text{
+    align-items: center;
+}
+.header-container-bottom{
+    font-size: 22px;
+    text-align: center;
+    flex: 1 1 auto;
+}
+.header-container-top-text{  
+    margin-top: 50px;
+}
+.tea-icon{
+    height: 50px;
+    padding-bottom: 10px;
 }

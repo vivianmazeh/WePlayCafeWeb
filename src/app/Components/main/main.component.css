@@ -1,0 +1,24 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    flex-grow: inherit;
+}
+
+.main-body{
+    position: relative;
+    flex: 1 1 auto;
+}
+.main-bar{
+    flex: 0 0 auto;
+    background-color: blanchedalmond;
+}
+.nav-link-tab{
+    color: olive;
+    font-weight: bold;
+    font-family: cursive;
+    font-size: 20px;
+    margin-left: 30px;
+}
+
+
+    

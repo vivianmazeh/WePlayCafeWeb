@@ -7,17 +7,20 @@
     flex-direction: column;
 }
 .page-header{
-    background-color: #F4D03F;
+    background-color: #FFF8F2;
     color: #fff;
     flex-grow: 0;
     flex-shrink: 0;
 }
 .page-main{
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 .page-footer{
-    background-color: #F4D03F;
+    background-color: #FFF8F2;
     color: #fff;
     flex-grow: 0;
     flex-shrink: 0;
+    height: 80px;
 }
