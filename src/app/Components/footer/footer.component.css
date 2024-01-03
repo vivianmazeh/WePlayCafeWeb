@@ -1,5 +1,7 @@
 .foot-page{
-    
+    height: inherit;
+    display: flex;
+    justify-content: center;
 }
 
 .footerTitle{
@@ -13,7 +15,6 @@
     font-weight: bold;
 }
 .foot-page-content{
-    width: 80%;
     display: flex;
     flex-direction: row;
 }
@@ -21,4 +22,14 @@
     color:olive;
     font-family: Times New Roman;
     font-size: 12px;
+    margin-left: 40px;
+    margin-right: 40px;
+    align-self: center;
+}
+.social-media-icons{
+    margin-left: 50px;
+    align-self: center;
+}
+.foot-page-icon{
+    margin-left: 15px;
 }
