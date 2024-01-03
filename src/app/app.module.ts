@@ -11,7 +11,6 @@ import { LoginComponent } from './Components/login/login.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { MainComponent } from './Components/main/main.component';
-import { BookPartyComponent } from './Components/book-party/book-party.component';
 import { BuyTicketsComponent } from './Components/buy-tickets/buy-tickets.component';
 import { PriceComponent } from './Components/price/price.component';
 import { CafeComponent } from './Components/cafe/cafe.component';
