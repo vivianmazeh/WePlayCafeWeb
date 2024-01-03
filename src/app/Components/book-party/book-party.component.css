@@ -1,0 +1,68 @@
+.book-a-party-page{
+    background-image: url("src\assets\pictures\background.jpg");
+    height: 100%; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    position: absolute;
+    width: 100%;
+    align-self: center;
+}
+.select-a-service-section{
+    width: 25%;
+}
+.select-a-dateTime-section{
+    width: 25%;
+}
+.detail-section{
+    width: 25%;
+}
+.payment-section{
+    width: 25%;
+}
+.title{   
+    font-family: cursive;
+    font-size: 16px;
+    font-weight: bold;
+    text-emphasis-color: olive;
+    color: olive;
+}
+.card-content{  
+    left: 35%;
+    height:inherit;
+    background-color:  #FFF8F2;
+    width: 800px;
+}
+.next-button{
+    color: #fff; 
+    background-color:rgb(213, 124, 60);
+    border-color:rgb(194, 110, 7);
+    font-family: cursive;
+    text-align: center;
+    font-weight: 500;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 5px;  
+}
+.book-a-party-card-body{
+    display: flex;
+    flex-direction: column;
+}
+.book-a-party-card-title{
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    flex: 0 0 auto;
+}
+.book-a-party-content{
+    flex: 1 1 auto;
+}
+.book-a-party-btn{
+    flex: 0 0 auto;
+    height: 55px;
+    align-self: end;
+    padding-right: 35px;
+
+}
+

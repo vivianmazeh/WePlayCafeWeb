@@ -30,9 +30,9 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    BookPartyComponent,
+
     BuyTicketsComponent,
-    BookPartyComponent,
+ 
     BuyTicketsComponent,
     PriceComponent,
     CafeComponent,
