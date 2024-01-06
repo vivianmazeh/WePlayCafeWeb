@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
 .book-a-party-page{
     background-image: url("src\assets\pictures\background.jpg");
     height: 100%; /* You must set a specified height */
@@ -8,17 +10,9 @@
     width: 100%;
     align-self: center;
 }
-.select-a-service-section{
-    width: 25%;
-}
-.select-a-dateTime-section{
-    width: 25%;
-}
-.detail-section{
-    width: 25%;
-}
-.payment-section{
-    width: 25%;
+.card-content{
+    display: flex;
+    flex-direction: column;
 }
 .title{   
     font-family: cursive;
@@ -33,17 +27,28 @@
     background-color:  #FFF8F2;
     width: 800px;
 }
-.next-button{
-    color: #fff; 
-    background-color:rgb(213, 124, 60);
-    border-color:rgb(194, 110, 7);
+.party-page-button{
+    color: olive; 
+    background-color: khaki;
     font-family: cursive;
     text-align: center;
-    font-weight: 500;
-    width: 100px;
-    height: 40px;
+    font-weight: 700;
     font-size: 16px;
     border-radius: 5px;  
+}
+.next-button{
+    width: 100px;
+    height: 40px;
+   
+}
+.more-info-button{
+    width: 120px;
+    height: 40px; 
+    background-color: #FFF8F2;
+}
+.party-page-button:hover{
+    background-color:rgb(213, 124, 60);
+    border-color:rgb(194, 110, 7);
 }
 .book-a-party-card-body{
     display: flex;
@@ -57,12 +62,138 @@
 }
 .book-a-party-content{
     flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 40px;
 }
+.book-a-party-package{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 350px;
+    margin-bottom: 35px;;
+    color: olive;
+    background-color:khaki;
+    box-shadow: 20px 20px rgba(0,0,0,.15);
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    transition: all .4s ease;
+}
+
+.book-a-party-package:hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
+  }
+
+  .package-top{
+    height: 40px;
+    display: flex;
+    flex-direction: row ;
+  }
+  .package-buttom{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    flex: 1 1 auto;
+  }
+  .package-top-title{
+    width: 150px;
+    margin-top: 10px;
+    margin-left: 15px;
+    flex: 0 0 auto;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: cursive;
+ 
+  }
+  .package-top-checkbox{
+    flex: 1 1 auto;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .package-form-checkbox{
+    margin-left: auto;
+    margin-right: 20px;
+    border-radius: 0.25em;
+    width: 25px;
+    height: 25px;
+  }
+  .package-form-checkbox:checked{
+    background-color: rgb(213, 124, 60);
+    border-color: rgb(194, 110, 7);
+  }
+  .package-price-hour{
+    font-family: cursive;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: oblique;
+  }
+  
 .book-a-party-btn{
     flex: 0 0 auto;
     height: 55px;
     align-self: end;
     padding-right: 35px;
-
 }
+.package-buttom{
+    display: flex;
+    flex-direction: row;
+}
+.package-info{
+    width: 200px;
+    align-self: center; 
+}
+.package-more-info{
+    flex: 1 1 auto;
+    align-self: center;
+}
+
+  .custom-popover {
+    width: 500px;
+    background-color:khaki;
+    color: olive;
+  }
+
+  .custom-popover {
+    background: aliceblue;
+    font-size: 125%;
+    width: 500px;
+  }
+  .custom-popovers .arrow::after {
+    border-top-color: aliceblue;
+  }
+
+  .popover-content{
+    font-family: cursive;
+    font-size: 16px;
+    font-style: italic;
+  }
+  .popover-content-line{
+    height: 30px;
+    margin-bottom: 8px;
+  }
+
+  .package-more-info .more-info-button .popover.my-custom-class {
+    max-width: 600px !important;
+    width: auto !important; /* or set a specific width if needed */
+  }
+
+
+  .my-custom-class .popover-content{
+    max-width: 600px !important;
+    width: auto !important; /* or set a specific width if needed */
+  }
+  .my-custom-class.popover-content .arrow::after {
+    border-top-color: aliceblue;
+  }
+  .ngb-popover {
+    max-width: 600px !important;
+    width: auto !important; /* or set a specific width if needed */
+  }
+  .ngb-popover-body {
+    font-size: 16px; /* Set the font size */
+    max-width: 600px !important;
+    width: auto !important; /* or set a specific width if needed */
+  }
 

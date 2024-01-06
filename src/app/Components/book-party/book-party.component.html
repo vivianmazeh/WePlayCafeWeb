@@ -8,29 +8,129 @@
                 <div class="book-a-party-package">
                     <div class="package-top">
                         <span class="package-top-title">Gold Package</span>
-                        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                        <span class="package-top-checkbox">
+                            <input class="form-check-input package-form-checkbox" 
+                                   type="checkbox"
+                                   value="gold-package" 
+                                   aria-label="Checkbox for following text input"
+                                   name="party-page-checkbox"
+                                   checked
+                                   [checked]="currentlyChecked === check_box_type.GOLD_PACKAGE"
+                                   (click) = "selectedCheckbox(check_box_type.GOLD_PACKAGE)">
+                        </span>
                     </div>
                     <div class="package-buttom">
-                        <Span class="package-price">$400</Span>
-                        <span class="package-hour">3 hours</span>
+                        <div class="package-info">
+                            <img src="./assets/icons/money-50.png" style ="height: 35px; width: 35px;" >
+                            <Span class="package-price-hour">$550</Span>
+                            <img src="./assets/icons/time-50.png" style ="height: 35px; width: 35px; margin-left: 15px;" >
+                            <span class="package-price-hour">2 hours</span>
+                        </div>
                         <div class="package-more-info">
                             <button type="button" 
-                                    class="btn btn-secondary" 
-                                    data-bs-container="body" 
-                                    data-bs-toggle="popover" 
-                                    data-bs-placement="q"
-                                    data-bs-title="q"
-                                    data-bs-content="sdf"
-                                   
+                                    class="btn party-page-button more-info-button"                                                                    
+                                    placement="bottom"
+                                    [ngbPopover]="goldPackageContent"
+                                    [autoClose]="'outside'"
+	                                popoverTitle="Gold Package"  
+                                    container="body"  
+                                    popoverClass="my-custom-class"      
                                    >
                                 More Info
-                              </button>                            
+                              </button>                                                        
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="book-a-party-package">
+                    <div class="package-top">                       
+                        <span class="package-top-title">Silver Package</span>                      
+                        <span class="package-top-checkbox">
+                            <input class="form-check-input package-form-checkbox" 
+                                   type="checkbox" 
+                                   value="silver-package" 
+                                   aria-label="Checkbox for following text input"
+                                   name="party-page-checkbox"
+                                   [checked]="currentlyChecked === check_box_type.SILVER_PACKAGE"
+                                   (click) = "selectedCheckbox(check_box_type.SILVER_PACKAGE)">
+                        </span>
+                       
+                    </div>
+                    <div class="package-buttom">
+                        <div class="package-info">
+                            <img src="./assets/icons/money-50.png" style ="height: 35px; width: 35px;" >
+                            <Span class="package-price-hour">$450</Span>
+                            <img src="./assets/icons/time-50.png" style ="height: 35px; width: 35px; margin-left: 15px;" >
+                            <span class="package-price-hour">2 hours</span>
+                        </div>
+                        <div class="package-more-info">
+                            <button type="button" 
+                                    class="btn party-page-button more-info-button" 
+                                    data-bs-container="body" 
+                                    data-bs-toggle="popover" 
+                                    data-bs-placement="bottom"
+                                    [attr.data-bs-title]= "vm.silverPackage.title"
+                                    data-bs-html="true"
+                                    [attr.data-bs-content]="vm.silverPackage.content"                            
+                                   >
+                                More Info
+                              </button>                                                        
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-a-party-package">
+                    <div class="package-top">
+                        <span class="package-top-title">Bronze Package</span>
+                        <span class="package-top-checkbox">
+                            <input class="form-check-input package-form-checkbox" 
+                                   type="checkbox" 
+                                   value="bronze-package" 
+                                   name="party-page-checkbox"
+                                   aria-label="Checkbox for following text input"
+                                   [checked]="currentlyChecked === check_box_type.BRONZE_PACKAGE"
+                                   (click) = "selectedCheckbox(check_box_type.BRONZE_PACKAGE)">
+                        </span>                       
+                    </div>
+                    <div class="package-buttom">
+                        <div class="package-info">
+                            <img src="./assets/icons/money-50.png" style ="height: 35px; width: 35px;" >
+                            <Span class="package-price-hour">$400</Span>
+                            <img src="./assets/icons/time-50.png" style ="height: 35px; width: 35px; margin-left: 15px;" >
+                            <span class="package-price-hour">2 hours</span>
+                        </div>
+                        <div class="package-more-info">
+                            <button type="button" 
+                                    class="btn party-page-button more-info-button" 
+                                    data-bs-container="body" 
+                                    data-bs-toggle="popover" 
+                                    data-bs-placement="bottom"
+                                    [attr.data-bs-title]= "vm.bronzePackage.title"
+                                    data-bs-html="true"
+                                    [attr.data-bs-content]="vm.bronzePackage.content"                            
+                                   >
+                                More Info
+                              </button>                                                        
                         </div>
                     </div>
                 </div>
             </div>
             <div class="book-a-party-btn"> 
-                <a href="#" class="btn next-button">Next</a>
+                <a href="#" class="btn party-page-button next-button">Next</a>
             </div>
         </div>     
+
+        <ng-template #goldPackageContent>
+            <div class="popover-body">
+                <ul class="popover-content">
+                    <li class="popover-content-line">Rental is up to 2 hours, and $100 per additional hour.</li>
+                    <li class="popover-content-line">Includes up to 20 children, and $20 per additional child.</li>
+                    <li class="popover-content-line">Includes FREE Photo Booth for printing.</li>
+                    <li class="popover-content-line">Includes a Projector, and you can play your own music.</li>
+                    <li class="popover-content-line">The maximum capicity for the room is 50 people.</li>
+                    <li class="popover-content-line">You may bring your own food and decorations.</li>
+                    <li class="popover-content-line">50% Deposit is required.</li>
+                </ul>    
+        </div>           
+        </ng-template>
 </div>

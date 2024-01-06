@@ -1,125 +1,139 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule} from '@angular/forms';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+
+import * as $ from 'jquery';
 
 declare var bootstrap: any;
+enum CheckBoxType {GOLD_PACKAGE, SILVER_PACKAGE, BRONZE_PACKAGE , NONE};
 @Component({
   selector: 'app-book-party',
   standalone: true,
   templateUrl: './book-party.component.html',
   styleUrls: ['./book-party.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, NgbPopoverModule],
 })
-export class BookPartyComponent {
+export class BookPartyComponent implements OnInit, AfterViewInit {
   BookPartyComponent= new FormControl('');
-
+  check_box_type = CheckBoxType;
+  currentlyChecked: CheckBoxType = 0;
 
   vm: {
     goldPackage: {
-      contentPoint1: string;
-      contentPoint2: string;
-      contentPoint3: string;
-      contentPoint4: string;
-      contentPoint5: string;
-      contentPoint6: string;
-      contentPoint7: string;
+      content: string;
+    
       title: string;
-      placehold: string;
+    
     };
     silverPackage: {
-      contentPoint1: string;
-      contentPoint2: string;
-      contentPoint3: string;
-      contentPoint4: string;
-      contentPoint5: string;
-      contentPoint6: string;
-      contentPoint7: string;
+      content: string;
       title: string;
-      placehold: string;
+      
     };
     bronzePackage: {
-      contentPoint1: string;
-      contentPoint2: string;
-      contentPoint3: string;
-      contentPoint4: string;
-      contentPoint5: string;
+      content: string;
       title: string;
-      placehold: string;
+     
     };
   } = {
     goldPackage: {
-      contentPoint1: '',
-      contentPoint2:'',
-      contentPoint3: '',
-      contentPoint4: '',
-      contentPoint5: '',
-      contentPoint6: '',
-      contentPoint7: '',
+      content: '',
+   
       title: '',
-      placehold: '',
+    
     },
     silverPackage: {
-      contentPoint1: '',
-      contentPoint2:'',
-      contentPoint3: '',
-      contentPoint4: '',
-      contentPoint5: '',
-      contentPoint6: '',
-      contentPoint7: '',
+      content: '', 
       title: '',
-      placehold: '',
+      
     },
     bronzePackage: {
-      contentPoint1: '',
-      contentPoint2:'',
-      contentPoint3: '',
-      contentPoint4: '',
-      contentPoint5: '',
+      content: '',
       title: '',
-      placehold: '',
+  
     },
   };
    
-    constructor(){
+  constructor(private elementRef: ElementRef) { 
 
+    let raw_content_gold_package: string[] = [ "Rental is up to 2 hours, and $100 per additional hour.",
+                          "Includes up to 20 children, and $20 per additional child." ,
+                          "Includes FREE Photo Booth for printing." ,
+                          "Includes a Projector, and you can play your own music.",
+                          "The maximum capicity for the room is 50 people." ,
+                          "You may bring your own food and decorations." ,
+                          "50% Deposit is required. "];
+
+   let raw_content_silver_package: string[] = [ "Rental is up to 2 hours, and $100 per additional hour.",
+                          "Includes up to 15 children, and $20 per additional child." ,
+                          "Includes a Projector, and you can play your own music.",
+                          "Photo Booth rental for $100",
+                          "The maximum capicity for the room is 50 people." ,
+                          "You may bring your own food and decorations." ,
+                          "50% Deposit is required. "];
+    let raw_content_bronze_package: string[] = [ "Rental is up to 2 hours, and $100 per additional hour.",
+                          "Includes up to 15 children, and $20 per additional child." ,
+                          "Includes a Projector, and you can play your own music.",
+                          "Photo Booth rental for $100",
+                          "The maximum capicity for the room is 50 people." ,
+                          "You may bring your own food and decorations." ,
+                          "50% Deposit is required. "];                      
+                          
   
-
-
       this.vm.goldPackage = {
-        contentPoint1: 'Rental is up to 2 hours, and $100 per additional hour.',
-        contentPoint2: 'Includes up to 20 children, and $20 per additional child.',
-        contentPoint3: 'Includes FREE Photo Booth for printing. ',
-        contentPoint4: 'Includes a Projector, and you can play your own music ',
-        contentPoint5: 'The maximum capicity for the room is 50 people. ',
-        contentPoint6: 'You may bring your own food and decorations ',
-        contentPoint7: '50% Deposit is required. ',
-        title: 'More Info',
-        placehold: 'Gold Package'
+        content: this.gold_package_content(raw_content_gold_package),
+        title: 'Gold Package'
+    
       }
 
       this.vm.silverPackage = {
-        contentPoint1: 'Rental is up to 2 hours, and $100 per additional hour.',
-        contentPoint2: 'Includes up to 15 children, and $20 per additional child.',      
-        contentPoint3: 'Includes a Projector, and you can play your own music ',
-        contentPoint4: 'The maximum capicity for the room is 50 people. ',
-        contentPoint5: 'You may bring your own food and decorations ',
-        contentPoint6: 'Photo Booth rental for $100',
-        contentPoint7: '50% Deposit is required. ',
-        title: 'More Info',
-        placehold: 'Silver Package'
+        content: this.gold_package_content(raw_content_silver_package),
+        title: 'Silver Package'
+       
       }
 
       this.vm.bronzePackage = {
-        contentPoint1: 'Rental is up to 2 hours, and $100 per additional hour.',
-        contentPoint2: 'Includes up to 15 children, and $20 per additional child.',      
-        contentPoint3: 'Includes a Projector, and you can play your own music ',
-        contentPoint4: 'The maximum capicity for the room is 50 people. ',
-        contentPoint5: '50% Deposit is required. ',
-        title: 'More Info',
-        placehold: 'Bronze package'
+        content: this.gold_package_content(raw_content_bronze_package),
+        title: 'Bronze package'
+     
       }
     }
 
- 
+    ngOnInit() { }
 
+    ngAfterViewInit() {
+      // Initialize Bootstrap popover
+      const popoverTriggerList = [].slice.call(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="popover"]'));
+      const popoverList = popoverTriggerList.map(function (popoverTriggerEl: any) {
+        return new bootstrap.Popover(popoverTriggerEl);
+      });
+    }
+
+
+     gold_package_content( raw_content :string[]):string {
+        var content = "";
+  
+        content = "<ul>";
+
+        for(var i =0; i < raw_content.length; i ++ ){
+          content +=  "<li>" + raw_content[i] + "</li>"
+        }
+
+        content += "</ul>";
+
+      return content;
+    }
+
+    selectedCheckbox(targetType: CheckBoxType) {
+      // If the checkbox was already checked, clear the currentlyChecked variable
+      if(this.currentlyChecked === targetType) {
+        this.currentlyChecked = CheckBoxType.NONE;
+        return;
+      }
+  
+      this.currentlyChecked = targetType;
+    }
 }
+
+
