@@ -7,6 +7,7 @@ import {BuyTicketsComponent} from './Components/buy-tickets/buy-tickets.componen
 import { PriceComponent } from './Components/price/price.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 
 // sets up routes constant where you define your routes
 const routes: Routes = [
@@ -17,8 +18,9 @@ const routes: Routes = [
   {path: 'gallery', component: GalleryComponent},
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'book-a-party', component: BookPartyComponent},
+  {path: 'select-date', component: BookPartySelectDateComponent},
   {path: 'buy-tickets', component: BuyTicketsComponent},
-  {path: '', redirectTo: 'all', pathMatch : 'full'},
+  {path: '', redirectTo: 'home', pathMatch : 'full'},
  
 ];
 

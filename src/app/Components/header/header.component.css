@@ -1,23 +1,71 @@
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 480px) {
+    .header-container {
+      flex-direction: row; /* Stack elements vertically on smaller screens */
+    }
+  
+    .header-container-logo,
+    .header-container-text,
+    .header-container-order {
+      flex: 1; /* Each section takes up the full width on smaller screens */
+    }
+  
+    .header-container-logo,
+    .header-container-order {
+      flex-basis: auto; /* Reset the basis for header and footer */
+    }
+    .header-container-order-button{
+       
+        width:  calc(100% - 60px);
+        height: calc(100% - 10px);
+        font-size: 20px;
+        border-radius: 14px;
+        padding-top: 5px;
+    }
+
+    .header-container-top{
+        font-size: calc(100% - 10px); }
+  }
+
+
 .header-container{
     display: flex;
     flex-direction: row;
-    height: 230px;
+    height:100%;
+    
 }
 
 .header-container-logo{
+    max-width: 10%;
+    width: auto;
     height: 100%;
     flex: 0 0 auto;
 }
-
-.header-logo{
-    padding-left: 10px;
-    height: 100%;
+.header-container-text{
+    width: auto;
+    flex: 1 1 auto;
+    color:olive;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    
 }
 .header-container-order{
-    width: 700px;
+    width: auto;
+    width: 30%;
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
+}
+
+.header-logo{
+   
+    padding-left: 10px;
+    height: 80%;
+    width: 80%;
 }
 .header-container-order-party{
     flex: 1 1 auto;
@@ -31,7 +79,6 @@
     color: olive; 
     background-color:rgb(213, 124, 60);
     border-color:rgb(194, 110, 7);
-    font-family: cursive;
     text-align: center;
     font-weight: 600;
     width: 280px;
@@ -40,15 +87,7 @@
     border-radius: 22px;
     padding-top: 10px;
 }
-.header-container-text{
-    flex: 1 1 auto;
-    font-family: cursive;
-    color:olive;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    
-}
+
 .header-container-top{
     font-size: 40px;   
     height: 50%;
@@ -70,3 +109,4 @@
     height: 50px;
     padding-bottom: 10px;
 }
+

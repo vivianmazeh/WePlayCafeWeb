@@ -66,12 +66,11 @@
                         <div class="package-more-info">
                             <button type="button" 
                                     class="btn party-page-button more-info-button" 
-                                    data-bs-container="body" 
-                                    data-bs-toggle="popover" 
-                                    data-bs-placement="bottom"
-                                    [attr.data-bs-title]= "vm.silverPackage.title"
-                                    data-bs-html="true"
-                                    [attr.data-bs-content]="vm.silverPackage.content"                            
+                                    [ngbPopover]="silverPackageContent"
+                                    [autoClose]="'outside'"
+	                                popoverTitle="Silver Package"  
+                                    container="body"  
+                                    popoverClass="my-custom-class"                              
                                    >
                                 More Info
                               </button>                                                        
@@ -102,12 +101,11 @@
                         <div class="package-more-info">
                             <button type="button" 
                                     class="btn party-page-button more-info-button" 
-                                    data-bs-container="body" 
-                                    data-bs-toggle="popover" 
-                                    data-bs-placement="bottom"
-                                    [attr.data-bs-title]= "vm.bronzePackage.title"
-                                    data-bs-html="true"
-                                    [attr.data-bs-content]="vm.bronzePackage.content"                            
+                                    [ngbPopover]="bronzePackageContent"
+                                    [autoClose]="'outside'"
+	                                popoverTitle="Bronze Package"  
+                                    container="body"  
+                                    popoverClass="my-custom-class"                          
                                    >
                                 More Info
                               </button>                                                        
@@ -116,8 +114,11 @@
                 </div>
             </div>
             <div class="book-a-party-btn"> 
-                <a href="#" class="btn party-page-button next-button">Next</a>
+                <a href="#" routerLink = "select-date" 
+                class="btn party-page-button next-button"
+                >Next</a>
             </div>
+       
         </div>     
 
         <ng-template #goldPackageContent>
@@ -126,6 +127,34 @@
                     <li class="popover-content-line">Rental is up to 2 hours, and $100 per additional hour.</li>
                     <li class="popover-content-line">Includes up to 20 children, and $20 per additional child.</li>
                     <li class="popover-content-line">Includes FREE Photo Booth for printing.</li>
+                    <li class="popover-content-line">Includes a Projector, and you can play your own music.</li>
+                    <li class="popover-content-line">The maximum capicity for the room is 50 people.</li>
+                    <li class="popover-content-line">You may bring your own food and decorations.</li>
+                    <li class="popover-content-line">50% Deposit is required.</li>
+                </ul>    
+        </div>           
+        </ng-template>
+
+        <ng-template #silverPackageContent>
+            <div class="popover-body">
+                <ul class="popover-content">
+                    <li class="popover-content-line">Rental is up to 2 hours, and $100 per additional hour.</li>
+                    <li class="popover-content-line">Includes up to 10 children, and $20 per additional child.</li>
+                    <li class="popover-content-line">Photo Booth rental $100.</li>
+                    <li class="popover-content-line">Includes a Projector, and you can play your own music.</li>
+                    <li class="popover-content-line">The maximum capicity for the room is 50 people.</li>
+                    <li class="popover-content-line">You may bring your own food and decorations.</li>
+                    <li class="popover-content-line">50% Deposit is required.</li>
+                </ul>    
+        </div>           
+        </ng-template>
+
+        <ng-template #bronzePackageContent>
+            <div class="popover-body">
+                <ul class="popover-content">
+                    <li class="popover-content-line">Rental is up to 2 hours, and $100 per additional hour.</li>
+                    <li class="popover-content-line">Includes up to 10 children, and $20 per additional child.</li>
+                    <li class="popover-content-line">Photo Booth rental $100.</li>
                     <li class="popover-content-line">Includes a Projector, and you can play your own music.</li>
                     <li class="popover-content-line">The maximum capicity for the room is 50 people.</li>
                     <li class="popover-content-line">You may bring your own food and decorations.</li>

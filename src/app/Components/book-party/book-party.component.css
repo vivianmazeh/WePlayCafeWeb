@@ -1,5 +1,13 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 
+@media (max-width: 768px) {
+
+}
+
+@media (max-height: 600px) {
+
+}
+
 .book-a-party-page{
     background-image: url("src\assets\pictures\background.jpg");
     height: 100%; /* You must set a specified height */
@@ -15,7 +23,6 @@
     flex-direction: column;
 }
 .title{   
-    font-family: cursive;
     font-size: 16px;
     font-weight: bold;
     text-emphasis-color: olive;
@@ -30,7 +37,7 @@
 .party-page-button{
     color: olive; 
     background-color: khaki;
-    font-family: cursive;
+
     text-align: center;
     font-weight: 700;
     font-size: 16px;
@@ -66,6 +73,8 @@
     flex-direction: column;
     align-self: center;
     margin-top: 40px;
+    height: 100%;
+    max-height: 100%;
 }
 .book-a-party-package{
     display: flex;
@@ -103,8 +112,6 @@
     flex: 0 0 auto;
     font-size: 20px;
     font-weight: bold;
-    font-family: cursive;
- 
   }
   .package-top-checkbox{
     flex: 1 1 auto;
@@ -124,7 +131,6 @@
     border-color: rgb(194, 110, 7);
   }
   .package-price-hour{
-    font-family: cursive;
     font-size: 16px;
     font-weight: 500;
     font-style: oblique;
@@ -165,35 +171,28 @@
   }
 
   .popover-content{
-    font-family: cursive;
-    font-size: 16px;
+    font-size: 18px;
     font-style: italic;
+    color: olive;
   }
   .popover-content-line{
     height: 30px;
     margin-bottom: 8px;
   }
+::ng-deep .popover-body {
+    width: 600px !important;
+  
+   }
+::ng-deep .popover{
+    max-width: 600px;
+    width: 600px !important;
+    background-color: azure;
+   }
+::ng-deep .popover-header{
+  background-color:rgb(213, 124, 60);
+  font-size: 22px; 
+  color:black;
+}
 
-  .package-more-info .more-info-button .popover.my-custom-class {
-    max-width: 600px !important;
-    width: auto !important; /* or set a specific width if needed */
-  }
 
-
-  .my-custom-class .popover-content{
-    max-width: 600px !important;
-    width: auto !important; /* or set a specific width if needed */
-  }
-  .my-custom-class.popover-content .arrow::after {
-    border-top-color: aliceblue;
-  }
-  .ngb-popover {
-    max-width: 600px !important;
-    width: auto !important; /* or set a specific width if needed */
-  }
-  .ngb-popover-body {
-    font-size: 16px; /* Set the font size */
-    max-width: 600px !important;
-    width: auto !important; /* or set a specific width if needed */
-  }
-
+  
