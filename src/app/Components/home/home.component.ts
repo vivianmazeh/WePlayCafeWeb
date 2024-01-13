@@ -4,7 +4,7 @@ import { Course } from '../../model/course';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-course-all',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

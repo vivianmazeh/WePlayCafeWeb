@@ -1,3 +1,15 @@
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  
+  
+}
+/* Media query for desktop/tablet screens */
+@media screen and (min-width: 769px) {
+
+
+}
+
 .foot-page{
     height: inherit;
     display: flex;

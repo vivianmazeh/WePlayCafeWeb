@@ -1,47 +1,108 @@
 
 
 /* Media query for smaller screens */
-@media screen and (max-width: 480px) {
-    .header-container {
-      flex-direction: row; /* Stack elements vertically on smaller screens */
+@media screen and (max-width: 768px) {
+    .header-container-top{
+        font-size: 15px;  
     }
-  
-    .header-container-logo,
-    .header-container-text,
-    .header-container-order {
-      flex: 1; /* Each section takes up the full width on smaller screens */
+    .header-container-text{
+        display: none !important;
     }
-  
-    .header-container-logo,
-    .header-container-order {
-      flex-basis: auto; /* Reset the basis for header and footer */
+
+    .header-container-order{  
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
-    .header-container-order-button{
-       
-        width:  calc(100% - 60px);
-        height: calc(100% - 10px);
-        font-size: 20px;
-        border-radius: 14px;
+    .header-container-order-button {
+        width: 80%;
+        height: 40px;
+        font-size: 13px;
+        border-radius: 8px;
         padding-top: 5px;
     }
 
-    .header-container-top{
-        font-size: calc(100% - 10px); }
+    .main-bar{
+        width: 4em;
+        flex-grow: 0;
+        
+    }
+
+    .header-container{
+        flex: 1;
+    }
+
+    .header-container-logo{
+        width: 50%;
+    }
+    .header-container-order-party{
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+        width: 100%;
+        margin-top: 1.5em;
+    }
+
+    .header-container-order-ticket{
+        width: 100%;
+        height: 50%; 
+    }
+    .book-party-icon{
+        width: 2em;
+        height: 100%;
+    }
   }
 
+  /* Media query for desktop/tablet screens */
+@media screen and (min-width: 769px) {
+ 
+    .header-container-top{
+        font-size: 30px;  
+    }
 
-.header-container{
+    .header-container-order{
+        width: auto;
+        width: 30%;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .header-container-order-button {
+        width: 280px;
+        height: 70px;
+        font-size: 30px;
+        border-radius: 22px;
+        padding-top: 10px;
+    }
+
+    .main-bar{
+        width: 100%;
+        height: 3em;
+    }
+
+    .header-container-logo{
+        max-width: 10%;
+        width: auto;
+        height: 100%;
+        flex: 0 0 auto;
+    }
+
+    .nav-link-tab{
+        color: olive;
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: 30px;
+    }
+ 
+  }
+
+  /* General css for all screen sizes*/
+  .header-container{
     display: flex;
     flex-direction: row;
     height:100%;
     
-}
-
-.header-container-logo{
-    max-width: 10%;
-    width: auto;
-    height: 100%;
-    flex: 0 0 auto;
 }
 .header-container-text{
     width: auto;
@@ -51,15 +112,10 @@
     display: flex;
     flex-direction: column;
     white-space: nowrap;
+    height: 100%;
     
 }
-.header-container-order{
-    width: auto;
-    width: 30%;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: row;
-}
+
 
 .header-logo{
    
@@ -76,20 +132,15 @@
     align-self: center;
 }
 .header-container-order-button {
-    color: olive; 
+    color: lemonchiffon; 
     background-color:rgb(213, 124, 60);
     border-color:rgb(194, 110, 7);
     text-align: center;
     font-weight: 600;
-    width: 280px;
-    height: 70px;
-    font-size: 30px;
-    border-radius: 22px;
-    padding-top: 10px;
+   
 }
 
-.header-container-top{
-    font-size: 40px;   
+.header-container-top{  
     height: 50%;
     text-align: center;
     flex: 0 0 auto;
@@ -108,5 +159,13 @@
 .tea-icon{
     height: 50px;
     padding-bottom: 10px;
-}
+} 
 
+
+nav{
+    height: 100%;
+    width: 100%;
+}
+nav a {
+    align-items: center;
+}

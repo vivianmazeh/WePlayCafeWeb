@@ -1,23 +1,19 @@
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  
+  
+}
+/* Media query for desktop/tablet screens */
+@media screen and (min-width: 769px) {
+
+
+}
+
 .main{
-    display: flex;
-    flex-direction: column;
-    flex-grow: inherit;
+
 }
 
 .main-body{
-    position: relative;
-    flex: 1 1 auto;
-}
-.main-bar{
-    flex: 0 0 auto;
-    background-color: blanchedalmond;
-}
-.nav-link-tab{
-    color: olive;
-    font-weight: bold;
-
-    font-size: 20px;
-    margin-left: 30px;
 }
 
 

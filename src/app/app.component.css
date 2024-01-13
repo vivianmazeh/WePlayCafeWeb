@@ -1,68 +1,45 @@
 
-html, body {
-    font-family: cursive;
-    font-size: 1rem;
-    font-weight: 100;
-    font-style: normal;
-    line-height: 1.5em;
-    text-decoration: none;
-    text-transform: none;
-    letter-spacing: 0px;
-}
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .page-header{
+    height: 10em;
+    line-height: 10em;
+    display: flex;
+    flex-direction: row;
+  }
+  }
+/* Media query for desktop/tablet screens */
+@media screen and (min-width: 769px) {
+  .page-header{
+    height: 18%;
+    line-height: 18%;
+  }
   
+  }
 
-.wrapper{
-    min-height: 100vh;
-    overflow: hidden;
-    height: 100vh; 
-    max-width: 100%;
-    width: 100%;
+
+  .wrapper{
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: auto !important; /* Enable vertical scrolling if content overflows */
+    overflow-x: hidden;
+    /*  max-height: calc(100vh - 160px); Calculate the maximum height of the main content area */
+    max-height: 100vh;
 }
 .page-header{
     background-color: #FFF8F2;
     color: #fff;
-    flex: 0 0 15%;
+
 }
 .page-main{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  margin: 20px; 
+  display: flex;
+  flex-direction: column;
 }
 .page-footer{
     background-color: blanchedalmond;
-    flex: 0 0 5%;
+    height: 5%;
+    line-height: 5%;
 }
-
-
-/* Media query for smaller screens */
-@media screen and (max-width: 480px) {
-    .wrapper {
-      width: calc(100% - 40px); /* Adjust width for smaller screens */
-      flex-direction: column; /* Stack elements vertically on smaller screens */
-    }
-  
-    .page-header,
-    .page-main,
-    .page-footer {
-      flex: 1; /* Each section takes up the full width on smaller screens */
-    }
-  
-    .page-header,
-    .page-footer {
-      flex-basis: auto; /* Reset the basis for header and footer */
-    }
-  }
-
-  /* Media query for smaller screens based on height */
-@media (max-height: 600px) {
-
-    .wrapper {
-        overflow: hidden;
-    }
-    .page-header,
-    .page-footer {
-      flex: 0 0 10%; /* Adjust the height for header and footer on smaller heights */
-    }
-  }
