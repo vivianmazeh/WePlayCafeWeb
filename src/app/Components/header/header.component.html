@@ -34,19 +34,26 @@
   </div>
 </div>
   <div class="main-bar">
-    <nav class="navbar navbar-expand-lg main-nav-bar">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light main-nav-bar">
           <div class="container-fluid justify-content-center">
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
+                    aria-expanded="false" aria-label="Toggle navigation" (click)="clickNavbarButton()">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="collapsed navbar-collapse" >
               <div class="navbar-nav">
-                <a class="nav-link active nav-link-tab" aria-current="page" href="#" routerLink = "home">Home</a>
-                <a class="nav-link nav-link-tab" href="#" routerLink = "price">Hours and Price</a>
-                <a class="nav-link nav-link-tab" href="#" routerLink = "cafe">Cafe</a>
-                <a class="nav-link nav-link-tab" href="#" routerLink = "gallery">Gallery</a>
-                <a class="nav-link nav-link-tab" routerLink = "contactUs" href="#">Contact Us</a>
+                <a class="nav-link active nav-link-tab" aria-current="page" href="#" routerLink = "home" (click)="closeNavbar()">
+                  <span class="nav-link-tab-title">Home</span></a>
+                <a class="nav-link nav-link-tab" href="#" routerLink = "price" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">Hours and Price</span></a>
+                <a class="nav-link nav-link-tab" href="#" routerLink = "cafe" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">Cafe</span></a>
+                <a class="nav-link nav-link-tab" href="#" routerLink = "gallery" (click)="closeNavbar()">
+                  <span class="nav-link-tab-title">Gallery</span></a>
+                <a class="nav-link nav-link-tab" routerLink = "contactUs" href="#" (click)="closeNavbar()">
+                  <span class="nav-link-tab-title">Contact Us</span></a>
               </div>
             </div>
           </div>

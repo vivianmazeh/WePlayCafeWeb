@@ -2,6 +2,7 @@
 
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {
+
     .header-container-top{
         font-size: 15px;  
     }
@@ -51,6 +52,33 @@
         width: 2em;
         height: 100%;
     }
+
+      .navbar-collapse {
+        height: 100vh;
+        width: 100%;
+        background-color: burlywood; 
+        top: 0; 
+        left: 0;
+        overflow-y: auto;
+        position: fixed;
+        display: none;    
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+      }
+
+      .nav-link-tab{
+        width: 100%;
+        height: 5em;
+        line-height: 5em;
+        padding-bottom: 8px;
+        padding-left: 10px;
+        text-align: center;
+      }
+      .nav-link-tab-title{
+        align-self: center;
+      }
   }
 
   /* Media query for desktop/tablet screens */
@@ -94,7 +122,10 @@
         font-size: 20px;
         margin-left: 30px;
     }
- 
+    nav{
+        background-color: burlywood;
+    }
+      
   }
 
   /* General css for all screen sizes*/
@@ -115,7 +146,6 @@
     height: 100%;
     
 }
-
 
 .header-logo{
    
@@ -160,12 +190,8 @@
     height: 50px;
     padding-bottom: 10px;
 } 
-
-
 nav{
     height: 100%;
     width: 100%;
 }
-nav a {
-    align-items: center;
-}
+

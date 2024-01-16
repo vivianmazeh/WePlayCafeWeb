@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -39,7 +40,8 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbCollapseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

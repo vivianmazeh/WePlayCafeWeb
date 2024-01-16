@@ -2,12 +2,19 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:4200/home",
+      "webRoot": "${workspaceFolder}"
+    },
 
     {
       "name": "Debug",
       "request": "launch",
       "type": "chrome",
-      "url": "http://localhost:4200/all",
+      "url": "http://localhost:4200/home",
       "webRoot": "${workspaceFolder}"
     },
 
@@ -16,7 +23,7 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/home"
     },
     {
      "name": "ng test",
