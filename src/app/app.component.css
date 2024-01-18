@@ -1,23 +1,29 @@
 
 /* Media query for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 932px) {
   .page-header{
-    height: 10em;
-    line-height: 10em;
     display: flex;
     flex-direction: row;
   }
+  .page-footer{
+    background-color:burlywood;
+  
+}
   }
 /* Media query for desktop/tablet screens */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 933px) {
+  .page-footer{
+    background-color:burlywood;
+    height: 5%;
+    line-height: 5%;
+}
+  }
+
   .page-header{
-    height: 18%;
-    line-height: 18%;
+    background-color: #FFF8F2;
+    color: #fff;
   }
   
-  }
-
-
   .wrapper{
     margin: 0;
     padding: 0;
@@ -28,18 +34,7 @@
     /*  max-height: calc(100vh - 160px); Calculate the maximum height of the main content area */
     max-height: 100vh;
 }
-.page-header{
-    background-color: #FFF8F2;
-    color: #fff;
-
-}
 .page-main{
-  margin: 20px; 
   display: flex;
   flex-direction: column;
-}
-.page-footer{
-    background-color: blanchedalmond;
-    height: 5%;
-    line-height: 5%;
 }

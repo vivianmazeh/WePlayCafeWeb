@@ -1,12 +1,28 @@
 
 /* Media query for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 932px) {
   
+    .foot-page-content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .foot-page-name{
+        font-size: 15px;;
+    }
+
   
 }
 /* Media query for desktop/tablet screens */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 933px) {
+    .foot-page-content{
+        display: flex;
+        flex-direction: row;
+    }
 
+    .foot-page-name{
+        font-size: 20px;;
+    }
 
 }
 
@@ -16,6 +32,7 @@
     justify-content: center;
 }
 
+
 .footerTitle{
     height: 100px;
     width: 100%;
@@ -23,13 +40,9 @@
 .foot-page-name{
     color:olive;
     font-family: cursive;
-    font-size: 20px;
     font-weight: bold;
 }
-.foot-page-content{
-    display: flex;
-    flex-direction: row;
-}
+
 .foot-page-copyright{
     color:olive;
     font-family: Times New Roman;
