@@ -12,7 +12,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { MainComponent } from './Components/main/main.component';
 import { BuyTicketsComponent } from './Components/buy-tickets/buy-tickets.component';
 import { PriceComponent } from './Components/price/price.component';
-import { CafeComponent } from './Components/cafe/cafe.component';
+import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
 
@@ -21,7 +21,7 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
     AppComponent,
     HomeComponent,
     PriceComponent,
-    CafeComponent,
+    WaiverComponent,
     GalleryComponent,
     ContactUsComponent,
     LoginComponent,
@@ -31,7 +31,6 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
     BuyTicketsComponent,
     BuyTicketsComponent,
     PriceComponent,
-    CafeComponent,
     GalleryComponent,
     ContactUsComponent
 

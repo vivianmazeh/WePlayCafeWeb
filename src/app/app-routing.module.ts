@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
-import  {CafeComponent} from './Components/cafe/cafe.component'
+import  {WaiverComponent} from './Components/waiver/waiver.component'
 import {BookPartyComponent} from './Components/book-party/book-party.component';
 import {BuyTicketsComponent} from './Components/buy-tickets/buy-tickets.component';
 import { PriceComponent } from './Components/price/price.component';
@@ -13,7 +13,7 @@ import { BookPartySelectDateComponent } from './Components/book-party-select-dat
 const routes: Routes = [
 
   {path: 'home', component: HomeComponent},
-  {path: 'cafe', component: CafeComponent},
+  {path: 'waiver', component: WaiverComponent},
   {path: 'price', component: PriceComponent},
   {path: 'gallery', component: GalleryComponent},
   {path: 'contactUs', component: ContactUsComponent},

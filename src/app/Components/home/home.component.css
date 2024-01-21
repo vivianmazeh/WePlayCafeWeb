@@ -1,0 +1,48 @@
+
+/* Media query for smaller screens */
+@media screen and (max-width: 932px) {
+ 
+    
+}
+
+ /* Media query for desktop/tablet screens */
+ @media screen and (min-width: 933px) {
+    
+ }
+
+
+
+ /*CSS for all sizes of screen*/
+.home-page{
+    width: 100%;
+}
+
+.carousel-background{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    
+}
+
+.background-picture {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+}
+.order-button{
+    background-color: lemonchiffon;
+    font-family:'Courier New', Courier, monospace;
+    width: 180px;
+    height: 50px;
+    font-weight: 800;
+    font-size: 18px;
+    padding-top: 10px;
+   
+}
+.order-button-name{
+    color:rgb(213, 124, 60);
+    height: 16px;
+
+
+}

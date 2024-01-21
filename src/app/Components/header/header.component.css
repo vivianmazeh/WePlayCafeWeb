@@ -21,9 +21,6 @@
         width: 160px;
     }
 
-    .order-button-name{    
-        font-size: 14px;
-    }  
     .main-bar{
         width: 4em;
         flex-grow: 0;
@@ -71,7 +68,15 @@
       }
       .nav-link-tab-title{
         align-self: center;
+       
       }
+
+      .order-button-name{    
+        height: 16px;
+        padding-left: 2px;
+        justify-items: baseline;
+        font-size: 12px;
+    }
   }
 
 
@@ -99,14 +104,18 @@
         height: 100%;
         flex: 0 0 auto;
     }
-    .nav-link-tab{
-        color: olive;
-        font-weight: bold;
+    .nav-link-tab{  
         font-size: 20px;
         margin-left: 30px;
     }
     nav{
         background-color: burlywood;
+    }
+
+    .order-button-name{    
+        height: 40px;
+        padding-left: 4px;
+        justify-items: baseline;
     }
       
   }
@@ -164,6 +173,7 @@
     font-weight: 600;
     display: flex;
     align-items: center;   
+    font-family:'Courier New', Courier, monospace;
 }
 .header-container-bottom-text{
     width: 100%;
@@ -197,12 +207,15 @@
     text-align: center;
     padding-left: 5px;
 }
-.order-button-name{    
-    height: inherit;
-    padding-left: 4px;
-}
+
+
 nav{
     height: 100%;
     width: 100%;
+}
+.nav-link-tab{
+    font-family:'Courier New', Courier, monospace;
+    color: olive;
+    font-weight: bold;
 }
 

@@ -1,55 +1,72 @@
 <div class="home-page">
-    <div class="home-page-content">
-        <h1>Fixed positioning</h1>
-
-        <div class="positioned">Fixed</div>
-        
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam
-        dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus
-        ut, rutrum luctus orci.
-        </p>
-        
-        <p>
-        Cras porttitor imperdiet nunc, at ultricies tellus laoreet sit amet. Sed
-        auctor cursus massa at porta. Integer ligula ipsum, tristique sit amet orci
-        vel, viverra egestas ligula. Curabitur vehicula tellus neque, ac ornare ex
-        malesuada et.
-        </p>
-        
-        <p>
-        In vitae convallis lacus. Aliquam erat volutpat. Suspendisse ac imperdiet
-        turpis. Aenean finibus sollicitudin eros pharetra congue. Duis ornare egestas
-        augue ut luctus. Proin blandit quam nec lacus varius commodo et a urna. Ut id
-        ornare felis, eget fermentum sapien.
-        </p>
+     <div class="home-page-carousel"> <!-- -->
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" >
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">  <!-- data-bs-interval="10000"-->
+             <div class="carousel-item active" > 
+                <div class="carousel-background " >
+                    <img class="background-picture" src="./assets/pictures/birthday.jpg">
+                </div>
+                <div class="carousel-caption d-md-block">
+                    <a href="#" routerLink = "/book-a-party" class="btn order-button active" >                    
+                        <span class="order-button-name">Reserve Party</span>
+                      </a>
+                </div>
+              </div><!--  data-bs-interval="2000"-->
+              <div class="carousel-item">
+                <div class=" carousel-background" >
+                    <img class="background-picture" src="./assets/pictures/ticket-background.jpg">
+                </div>
+                
+                <div class="carousel-caption d-md-block">
+                    <a href="#" routerLink = "/buy-tickets" class="btn order-button active" >                   
+                        <span class="order-button-name">Buy Tickets</span>
+                    </a>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-background" >
+                    <img class="background-picture" src="./assets/pictures/sign-background.jpg">
+                </div>
+                <div class="carousel-caption  d-md-block">
+                    <a href="#" routerLink = "/buy-tickets" class="btn order-button active" >
+                        <span class="order-button-name">Online Waiver</span>
+                    </a>
+                </div>
+              </div>
+            </div>
+         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button> 
+          </div>
     </div>
     <div class="home-page-content">
-        <h1>Fixed positioning</h1>
+        <div class="soft-play-area">
 
-        <div class="positioned">Fixed</div>
-        
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam
-        dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus
-        ut, rutrum luctus orci.
-        </p>
-        
-        <p>
-        Cras porttitor imperdiet nunc, at ultricies tellus laoreet sit amet. Sed
-        auctor cursus massa at porta. Integer ligula ipsum, tristique sit amet orci
-        vel, viverra egestas ligula. Curabitur vehicula tellus neque, ac ornare ex
-        malesuada et.
-        </p>
-        
-        <p>
-        In vitae convallis lacus. Aliquam erat volutpat. Suspendisse ac imperdiet
-        turpis. Aenean finibus sollicitudin eros pharetra congue. Duis ornare egestas
-        augue ut luctus. Proin blandit quam nec lacus varius commodo et a urna. Ut id
-        ornare felis, eget fermentum sapien.
-        </p>
+        </div>
+        <div class="playland-cafe">
+
+        </div>
+        <div class="parties">
+
+        </div>
+        <div class="groud ticket">
+
+        </div>
+        <div class="map">
+
+        </div>
     </div>
-    <div class="home-page-images">
+ <!--    <div class="home-page-images">
         <img src="./assets/pictures/background.jpg">
-    </div>
+    </div> -->
 </div>
