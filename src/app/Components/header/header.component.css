@@ -1,7 +1,7 @@
 
 
 /* Media query for smaller screens */
-@media screen and (max-width: 932px) {
+@media screen and (max-width: 736px) {
 
     .header-container-top{
         font-size: 15px;  
@@ -82,7 +82,7 @@
 
 
   /* Media query for desktop/tablet screens */
-@media screen and (min-width: 933px) {
+@media screen and (min-width: 737px) {
  
     .header-container-top{
         font-size: 30px;  
