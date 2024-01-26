@@ -1,4 +1,16 @@
+@font-face {
+  font-family: 'KidsPlay';
+  src: url('./assets/fonts/KidsPlay-g01q.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'JosefinSans';
+  src: url('./assets/fonts/JosefinSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 html {
   display: flex;
@@ -12,12 +24,10 @@ html {
 body{
   max-width: 1440px;
   width: 100%;
-  font-family: cursive;
   font-size: 1rem;
-  font-weight: 100;
-  font-style: normal;
   line-height: 1.5em;
   text-decoration: none;
   text-transform: none;
   letter-spacing: 0px;
+  font-family: 'JosefinSans', sans-serif;
 }

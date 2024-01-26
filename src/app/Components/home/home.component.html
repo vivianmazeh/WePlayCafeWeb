@@ -1,28 +1,32 @@
 <div class="home-page">
-     <div class="home-page-carousel"> <!-- -->
+     <div class="home-page-carousel"> <!--  -->
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" >
-            <div class="carousel-indicators">
+            <div class="carousel-indicators" >
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner">  <!-- data-bs-interval="10000"-->
-             <div class="carousel-item active" > 
+            <div class="carousel-inner">  <!-- -->
+             <div class="carousel-item active"  data-bs-interval="10000"> 
                 <div class="carousel-background " >
                     <img class="background-picture" src="./assets/pictures/birthday.jpg">
+                   
                 </div>
+               
                 <div class="carousel-caption d-md-block">
+                   <div class="carousel-caption-title">Your family's happy place awaits!</div>
                     <a href="#" routerLink = "/book-a-party" class="btn order-button active" >                    
                         <span class="order-button-name">Reserve Party</span>
                       </a>
                 </div>
-              </div><!--  data-bs-interval="2000"-->
-              <div class="carousel-item">
+              </div><!--  -->
+              <div class="carousel-item" data-bs-interval="5000">
                 <div class=" carousel-background" >
                     <img class="background-picture" src="./assets/pictures/ticket-background.jpg">
                 </div>
-                
+               
                 <div class="carousel-caption d-md-block">
+                  <div class="carousel-caption-title">Escape the screen time trap and let your kids bloom. Visit WePlay & Cafe today!</div>
                     <a href="#" routerLink = "/buy-tickets" class="btn order-button active" >                   
                         <span class="order-button-name">Buy Tickets</span>
                     </a>
@@ -33,6 +37,7 @@
                     <img class="background-picture" src="./assets/pictures/sign-background.jpg">
                 </div>
                 <div class="carousel-caption  d-md-block">
+                  <div class="carousel-caption-title">Sign our waiver online for a quick check-in</div>
                     <a href="#" routerLink = "/buy-tickets" class="btn order-button active" >
                         <span class="order-button-name">Online Waiver</span>
                     </a>
@@ -55,13 +60,50 @@
           <div class="row gtr-150">
             <div class="col-6 col-12-medium">
               <header class="major">
-                <h2>Lorem ipsum dolor adipiscing<br />
-                amet dolor consequat</h2>
+                <h2>WePlay & café<br/>
+                  <h3>Where happy memories blossom, rainy or shine</h3></h2>
               </header>
-              <p>Adipiscing a commodo ante nunc accumsan et interdum mi ante adipiscing. A nunc lobortis non nisl amet vis sed volutpat aclacus nascetur ac non. Lorem curae et ante amet sapien sed tempus adipiscing id accumsan.</p>
+              <p>{{pageContent[0]?.subtitle}}</p>
             </div>
             <div class="col-6 col-12-medium imp-medium">
-              <span class="image fit"><img src="./assets/pictures/WePlay & Cafe.png" alt="" /></span>
+              <span class="image fit"><img src="./assets/pictures/background.jpg" alt="" /></span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="two" class="main style2">
+        <div class="container">
+          <div class="row gtr-150">
+            <div class="col-6 col-12-medium imp-medium">
+              <span class="image fit"><img src="./assets/pictures/background.jpg" alt="" /></span>
+            </div>
+            <div class="col-6 col-12-medium">
+              <header class="major">
+                <h2>Birthday Party<br />
+                  <h3>Effortless for you, boundless joy for the kids, and unforgettable memories for all</h3></h2>
+              </header>
+              <p>{{pageContent[1]?.subtitle}}</p>
+            </div>
+         
+          </div>
+        </div>
+      </section>
+      <section id="three" class="main style1">
+        <div class="container">
+          <div class="row gtr-150">
+            <div class="col-6 col-12-medium">
+              <header class="major">
+                <h2>Field Trips<br />
+                  <h3>A Wonderland for Little Explorers, fun starts here</h3></h2>
+              </header>
+              <p>{{pageContent[2]?.subtitle}} <br>
+                <br/>
+                {{pageContent[3]?.subtitle}} <br>
+                <br/>
+                {{pageContent[4]?.subtitle}}</p>
+            </div>
+            <div class="col-6 col-12-medium imp-medium">
+              <span class="image fit"><img src="./assets/pictures/background.jpg" alt="" /></span>
             </div>
           </div>
         </div>
@@ -93,47 +135,47 @@
 				</div>
 			</section>
 
-      <section id="three" class="main style1 special">
+      <section id="four" class="main style1 special">
 				<div class="container">
 					<header class="major">
-						<h2>Adipiscing amet consequat</h2>
+						<h2>Play, Spark Joy, and Unleash Imagination</h2>
 					</header>
-					<p>Ante nunc accumsan et aclacus nascetur ac ante amet sapien sed.</p>
+					<p>Where Imagination Takes Flight in a World of Playful Wonders!</p>
 					<div class="row gtr-150">
 						<div class="col-4 col-12-medium">
 							<span class="image fit"><img src="./assets/pictures/thank-you.png" alt="" /></span>
-							<h3>Magna feugiat lorem</h3>
-							<p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-							<ul class="actions special">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
+							<h3>Play Hub and Café</h3>
+							<p>Kids can have a blast, and parents can unwind over delicious treats. Your family's happy place awaits.</p>
+              <a href="#" routerLink = "/buy-tickets" class="btn order-button active  special" >                   
+                <span class="order-button-name">Join The Fun</span>
+            </a>
 						</div>
 						<div class="col-4 col-12-medium">
 							<span class="image fit"><img src="./assets/pictures/thank-you.png" alt="" /></span>
-							<h3>Magna feugiat lorem</h3>
-							<p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-							<ul class="actions special">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
+							<h3>Birthday Paties</h3>
+							<p>Effortless birthdays for you, boundless joy for the kids, and unforgettable memories for all!</p>
+							<a href="#" routerLink = "/book-a-party" class="btn order-button special active" >                    
+                <span class="order-button-name">Reserve Party</span>
+              </a>
 						</div>
 						<div class="col-4 col-12-medium">
 							<span class="image fit"><img src="./assets/pictures/thank-you.png" alt="" /></span>
-							<h3>Magna feugiat lorem</h3>
-							<p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-							<ul class="actions special">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
+							<h3>Playful Zone</h3>
+							<p>A Wonderland for Little Explorers, fun starts here</p>
+              <a href="#" routerLink = "/buy-tickets" class="btn order-button active  special" >                   
+                <span class="order-button-name">Join The Fun</span>
+            </a>
 						</div>
 					</div>
 				</div>
 			</section>
 
-      <section id="four" class="main style2 special">
+      <section id="five" class="main style2 special">
 				<div class="container">
 					<header class="major">
-						<h2>Ipsum feugiat consequat?</h2>
+						<h2>Contact Us</h2>
 					</header>
-					<p>Sed lacus nascetur ac ante amet sapien.</p>
+					<p></p>
 					<ul class="actions special">
 						<li><a href="#" class="button wide primary">Sign Up</a></li>
 						<li><a href="#" class="button wide">Learn More</a></li>

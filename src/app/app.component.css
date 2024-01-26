@@ -35,6 +35,7 @@
     overflow-x: hidden;
     /*  max-height: calc(100vh - 160px); Calculate the maximum height of the main content area */
     max-height: 100vh;
+
 }
 .page-main{
   display: flex;
