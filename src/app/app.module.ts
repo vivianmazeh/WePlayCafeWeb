@@ -15,6 +15,7 @@ import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    GoogleMapsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
