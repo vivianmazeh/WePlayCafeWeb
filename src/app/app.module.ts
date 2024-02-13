@@ -11,6 +11,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { MainComponent } from './Components/main/main.component';
 import { BuyTicketsComponent } from './Components/buy-tickets/buy-tickets.component';
+import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
@@ -33,7 +34,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     BuyTicketsComponent,
     PriceComponent,
     GalleryComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    BookPartySelectDateComponent
 
   ],
   imports: [

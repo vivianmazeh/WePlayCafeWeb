@@ -1,0 +1,24 @@
+@import url(../../../assets/css/shared-style.css);
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+	.join-the-fun{
+		margin-bottom: 20px;
+	}
+}
+/* Media query for desktop/tablet screens */
+@media screen and (min-width: 769px) {
+
+
+}
+.text-shadow{
+	text-shadow: 1px 1px 1px #664d03, 0 0 25px rgb(194,110,7), 0 0 5px rgb(194,110,7);
+}
+.price-section{
+	background-color: #FFF8F2;
+	height: 450px;
+	padding-top: 25px;
+    border-radius: 30px;
+	border-style: outset;
+	border-width: 5px;
+}

@@ -1,8 +1,28 @@
 
 @import url(../../../assets/css/shared-style.css);
 
+@media screen and (max-width: 736px) {
+  .row > .col-5 {
+    width: 100%;
+  }
+
+  .row > .col-3 {
+    width: 100%;
+  }
+
+}
 #map {
     height: 400px; /* Adjust as needed */
     width: 100%;
     margin-top: 20px;
+  }
+
+  .col-content{
+    display: flex;
+    padding-top: 40px;
+    font-size: 20px;
+  }
+  .col-top{
+    font-size: 20px;
+    padding-bottom: 20px;
   }

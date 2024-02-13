@@ -11,15 +11,9 @@
 
 }
 
-.book-a-party-page{
-    background-image: url("src\assets\pictures\background.jpg");
-    height: 100%; /* You must set a specified height */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    position: absolute;
-    width: 100%;
-    align-self: center;
+.book-a-party-page{  
+  display: flex;
+  justify-content: center;
 }
 .card-content{
     display: flex;
@@ -32,7 +26,6 @@
     color: olive;
 }
 .card-content{  
-    left: 35%;
     height:inherit;
     background-color:  #FFF8F2;
     width: 800px;
@@ -157,26 +150,14 @@
     flex: 1 1 auto;
     align-self: center;
 }
-
-  .custom-popover {
-    width: 500px;
-    background-color:khaki;
-    color: olive;
-  }
-
-  .custom-popover {
-    background: aliceblue;
-    font-size: 125%;
-    width: 500px;
-  }
   .custom-popovers .arrow::after {
     border-top-color: aliceblue;
   }
 
   .popover-content{
     font-size: 18px;
-    font-style: italic;
-    color: olive;
+    font-family: 'JosefinSans', sans-serif;
+  
   }
   .popover-content-line{
     height: 30px;
@@ -189,7 +170,8 @@
 ::ng-deep .popover{
     max-width: 600px;
     width: 600px !important;
-    background-color: azure;
+    background-color: #FFF8F2;
+
    }
 ::ng-deep .popover-header{
   background-color:rgb(213, 124, 60);
