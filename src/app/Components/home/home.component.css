@@ -1,13 +1,15 @@
 @import url(../../../assets/css/shared-style.css);
 /* Media query for smaller screens */
- @media screen and (max-width: 736px) {
+ @media screen and (max-width: 767px) {
     .carousel-caption-title{
 		font-size: 16px;
 		}
 }
 
+@media (min-width: 768px) and (max-width: 1024px){
 
-@media screen and (min-width: 737px) {
+}
+@media screen and (min-width: 1025px) {
 
 	.carousel-caption-title{
 		font-size: 22px;

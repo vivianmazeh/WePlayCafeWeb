@@ -1,6 +1,6 @@
 
 /* Media query for smaller screens */
-@media screen and (max-width: 932px) {
+@media screen and (max-width: 767px) {
   
     .foot-page-content{
         display: flex;
@@ -13,8 +13,12 @@
 
   
 }
+
+@media (min-width: 768px) and (max-width: 1024px){
+
+}
 /* Media query for desktop/tablet screens */
-@media screen and (min-width: 933px) {
+@media screen and (min-width: 1025px) {
     .foot-page-content{
         display: flex;
         flex-direction: row;

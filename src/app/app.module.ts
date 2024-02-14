@@ -16,7 +16,8 @@ import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     HttpClientModule,
     FormsModule,
     NgbCollapseModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    FullCalendarModule
 
   ],
   providers: [],

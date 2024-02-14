@@ -113,14 +113,11 @@
                     </div>
                 </div>
             </div>
-            <div class="book-a-party-btn"> 
-                <a href="#" routerLink = "select-date" 
-                class="btn party-page-button next-button"
-                >Next</a>
-            </div>
-       
+             <div class="book-a-party-btn"> 
+                <a routerLink = "/book-a-party/select-date" href="#" class="btn party-page-button next-button">Continue</a>
+            </div>     
         </div>     
-
+     
         <ng-template #goldPackageContent>
             <div class="popover-body">
                 <ul class="popover-content">
@@ -163,3 +160,4 @@
         </div>           
         </ng-template>
 </div>
+<router-outlet></router-outlet>

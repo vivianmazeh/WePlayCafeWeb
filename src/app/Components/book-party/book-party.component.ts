@@ -1,7 +1,9 @@
 
 
-import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { FormControl, ReactiveFormsModule} from '@angular/forms';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -12,7 +14,7 @@ enum CheckBoxType {GOLD_PACKAGE, SILVER_PACKAGE, BRONZE_PACKAGE , NONE};
   standalone: true,
   templateUrl: './book-party.component.html',
   styleUrls: ['./book-party.component.css'],
-  imports: [ReactiveFormsModule, NgbPopoverModule],
+  imports: [ReactiveFormsModule, NgbPopoverModule, CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class BookPartyComponent implements OnInit, AfterViewInit {
   BookPartyComponent= new FormControl('');
@@ -20,9 +22,11 @@ export class BookPartyComponent implements OnInit, AfterViewInit {
   currentlyChecked: CheckBoxType = 0;
 
    
-  constructor(private elementRef: ElementRef) { 
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private router: Router) { 
   }                
     ngOnInit() { }
+
+
 
     ngAfterViewInit() {
       // Initialize Bootstrap popover
@@ -32,6 +36,9 @@ export class BookPartyComponent implements OnInit, AfterViewInit {
       });
     }
     selectedCheckbox(targetType: CheckBoxType) {
+
+     // this.router.navigate(['/book-a-party/select-date']);
+
       // If the checkbox was already checked, clear the currentlyChecked variable
       if(this.currentlyChecked === targetType) {
         this.currentlyChecked = CheckBoxType.NONE;
@@ -43,6 +50,11 @@ export class BookPartyComponent implements OnInit, AfterViewInit {
     selectedSerice(){
 
     }
+    closeNavbar() {
+    
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      this.renderer.setStyle(navbarCollapse, 'display', 'none');
+    }  
 }
 
 

@@ -17,9 +17,12 @@ const routes: Routes = [
   {path: 'price', component: PriceComponent},
   {path: 'gallery', component: GalleryComponent},
   {path: 'contactUs', component: ContactUsComponent},
-  {path: 'book-a-party', component: BookPartyComponent},
-  {path: 'select-date', component: BookPartySelectDateComponent},
   {path: 'buy-tickets', component: BuyTicketsComponent},
+  {path: 'book-a-party', 
+          component: BookPartyComponent,
+          children: [    
+            {path: 'select-date', component: BookPartySelectDateComponent}
+   ]},
   {path: '', redirectTo: 'home', pathMatch : 'full'},
  
 ];

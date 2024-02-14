@@ -1,1 +1,25 @@
-<p>book-party-select-date works!</p>
+<div class='select-date'>
+
+    <div class='select-date-sidebar'>
+     
+      <div class='select-date-sidebar-section'>
+        <h2>All Events ({{currentEvents.length}})</h2>
+        <ul>
+          <li *ngFor='let event of currentEvents()'>
+            <b>{{event.startStr}}</b>
+            <i>{{event.title}}</i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class='select-date-main'>
+      <full-calendar  [options]='calendarOptions()'>
+        <ng-template #eventContent let-arg>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </ng-template>
+      </full-calendar>
+    </div>
+    
+  </div>

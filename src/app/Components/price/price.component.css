@@ -1,13 +1,16 @@
 @import url(../../../assets/css/shared-style.css);
 
 /* Media query for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 	.join-the-fun{
 		margin-bottom: 20px;
 	}
 }
+@media (min-width: 768px) and (max-width: 1024px){
+
+}
 /* Media query for desktop/tablet screens */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1025px) {
 
 
 }

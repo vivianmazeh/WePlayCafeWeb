@@ -1,7 +1,7 @@
 
 @import url(../../../assets/css/shared-style.css);
 
-@media screen and (max-width: 736px) {
+@media screen and (max-width: 767px) {
   .row > .col-5 {
     width: 100%;
   }
@@ -10,6 +10,15 @@
     width: 100%;
   }
 
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+  .row > .col-5 {
+    width: 100%;
+  }
+  .row > .col-3 {
+    width: 100%;
+  }
 }
 #map {
     height: 400px; /* Adjust as needed */

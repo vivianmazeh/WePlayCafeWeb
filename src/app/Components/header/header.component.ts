@@ -10,7 +10,7 @@ import { Router } from '@angular/router'; // Import Router from '@angular/router
 })
 export class HeaderComponent {
   
-  constructor(private renderer: Renderer2, private el: ElementRef, private router: Router) {}
+  constructor(private renderer: Renderer2) {}
 
    clickNavbarButton() {
     const navbarCollapse = document.querySelector('.navbar-collapse');
