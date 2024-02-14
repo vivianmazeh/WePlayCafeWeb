@@ -25,9 +25,9 @@ export class BookPartySelectDateComponent implements OnInit {
       listPlugin,
     ],
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev,next',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: ''
     },
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -60,20 +60,19 @@ export class BookPartySelectDateComponent implements OnInit {
   }
  
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
+   
     const calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
 
-    if (title) {
+   
       calendarApi.addEvent({
-        id: createEventId(),
-        title,
+        id: createEventId(),     
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       });
-    }
+    
   }
 
   handleEventClick(clickInfo: EventClickArg) {

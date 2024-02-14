@@ -1,17 +1,4 @@
-<div class='select-date'>
-
-    <div class='select-date-sidebar'>
-     
-      <div class='select-date-sidebar-section'>
-        <h2>All Events ({{currentEvents.length}})</h2>
-        <ul>
-          <li *ngFor='let event of currentEvents()'>
-            <b>{{event.startStr}}</b>
-            <i>{{event.title}}</i>
-          </li>
-        </ul>
-      </div>
-    </div>
+<div class='select-date'> 
   
     <div class='select-date-main'>
       <full-calendar  [options]='calendarOptions()'>
@@ -20,6 +7,46 @@
           <i>{{ arg.event.title }}</i>
         </ng-template>
       </full-calendar>
+      <div class='appointment-time'>
+        <h4 class='appointment-time-header'>
+          Available on Mon, Feb 19, 2024
+        </h4>
+        <p class='appointment-time-detail'>
+          <span class='appointment-time-booking-window'>
+              You can book a party between 1 day and 90 days ahead of time. 
+          </span>
+          <span class='appointment-time-current-section'>
+             <strong>Time zone: </strong> Eastern Time Zone (EST)
+        </span>
+        </p>
+        <div class='container appointment-time-slots'>
+          <h5 class="appointment-time-category-title">Please select a time</h5>
+          <div class="row row-cols-lg-3">      
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">10:00 am</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">11:00 am</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">12:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">1:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">2:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">3:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">4:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">5:00 pm</button>
+            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">6:00 pm</button>
+          </div>    
+        </div>
+
+      </div>
+    </div>
+
+    <div class='select-date-details'>
+     
+      <div class='select-date-details-section'>
+        <h2>Date and Time</h2>
+        <ul>
+          <li *ngFor='let event of currentEvents()'>
+            <b>{{event.startStr}}</b>          
+          </li>
+        </ul>
+      </div>
     </div>
     
   </div>

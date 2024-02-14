@@ -1,4 +1,45 @@
+@media screen and (max-width: 767px) {
 
+  .book-party-container{
+    width: 100%;    
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .book-party-container{
+    width: 768px;
+  }
+}
+
+.select-date {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.appointment-time{
+  margin-top: 30px;
+}
+.appointment-time-header{
+  text-align: center;
+}
+.appointment-time-detail{
+  display: flex;
+  flex-direction: column;
+}
+.appointment-time-booking-window{
+
+}
+.appointment-time-current-section{
+
+}
+.appointment-time-slots{
+
+}
+.appointment-time-category-title{
+  text-align: center;
+  width: 100%;
+}
 h2 {
   margin: 0;
   font-size: 16px;
@@ -18,27 +59,24 @@ b { /* used for event dates/times */
   margin-right: 3px;
 }
 
+.select-date-details {
+  width: 100%;
+  background: khaki;
+  border-right: 1px solid #d3e2e8;
+}
 .select-date {
-  display: flex;
-  min-height: 100%;
- 
+  min-height: 100%; 
   font-size: 14px;
 }
 
-.select-date-sidebar {
-  width: 300px;
-  line-height: 1.5;
-  background: #eaf9ff;
-  border-right: 1px solid #d3e2e8;
-}
-
-.select-date-sidebar-section {
+.select-date-details-section {
   padding: 2em;
 }
 
 .select-date-main {
   flex-grow: 1;
   padding: 3em;
+  border-right: 1px solid #d3e2e8;
 }
 
 .fc { /* the calendar root */
