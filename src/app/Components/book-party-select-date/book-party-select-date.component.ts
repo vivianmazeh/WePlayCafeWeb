@@ -30,7 +30,7 @@ export class BookPartySelectDateComponent implements OnInit {
       right: ''
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
     selectable: true,
@@ -38,14 +38,17 @@ export class BookPartySelectDateComponent implements OnInit {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
+ 
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
     eventRemove:
     */
   });
+
   currentEvents = signal<EventApi[]>([]);
+  selectedDate: String = '';
 
   constructor(private changeDetector: ChangeDetectorRef) {
 
@@ -62,6 +65,18 @@ export class BookPartySelectDateComponent implements OnInit {
   handleDateSelect(selectInfo: DateSelectArg) {
    
     const calendarApi = selectInfo.view.calendar;
+    let date = new Date(selectInfo.start);
+
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    };
+    const dateTimeFormat = new Intl.DateTimeFormat('en-US', options);
+    this.selectedDate = dateTimeFormat.format(date);
+
+
 
     calendarApi.unselect(); // clear date selection
 
@@ -85,5 +100,7 @@ export class BookPartySelectDateComponent implements OnInit {
     this.currentEvents.set(events);
     this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
   }
+
+
   
 }
