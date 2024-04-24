@@ -6,7 +6,7 @@
     flex-direction: row;
   }
   .page-footer{
-    background-color:burlywood;
+    background-color:#4878a3;
   
 }
   }
@@ -17,7 +17,7 @@
 /* Media query for desktop/tablet screens */
 @media screen and (min-width: 1025px) {
   .page-footer{
-    background-color:burlywood;
+    background-color:#4878a3;
     height: 5%;
     line-height: 5%;
 }

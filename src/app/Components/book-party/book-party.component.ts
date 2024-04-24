@@ -5,6 +5,7 @@ import { Component, OnInit, AfterViewInit, ElementRef, Renderer2 } from '@angula
 import { FormControl, ReactiveFormsModule} from '@angular/forms';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { EventService } from 'src/app/service/event-service.service';
 
 
 declare var bootstrap: any;
@@ -14,6 +15,7 @@ enum CheckBoxType {GOLD_PACKAGE, SILVER_PACKAGE, BRONZE_PACKAGE , NONE};
   standalone: true,
   templateUrl: './book-party.component.html',
   styleUrls: ['./book-party.component.css'],
+  providers: [EventService],
   imports: [ReactiveFormsModule, NgbPopoverModule, CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class BookPartyComponent implements OnInit, AfterViewInit {
@@ -22,7 +24,7 @@ export class BookPartyComponent implements OnInit, AfterViewInit {
   currentlyChecked: CheckBoxType = 0;
 
    
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, private router: Router) { 
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private service: EventService) { 
   }                
     ngOnInit() { }
 
@@ -36,8 +38,6 @@ export class BookPartyComponent implements OnInit, AfterViewInit {
       });
     }
     selectedCheckbox(targetType: CheckBoxType) {
-
-     // this.router.navigate(['/book-a-party/select-date']);
 
       // If the checkbox was already checked, clear the currentlyChecked variable
       if(this.currentlyChecked === targetType) {

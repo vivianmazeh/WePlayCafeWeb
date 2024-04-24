@@ -19,9 +19,15 @@
 }
 .price-section{
 	background-color: #FFF8F2;
-	height: 450px;
+	height: 580px;
 	padding-top: 25px;
     border-radius: 30px;
 	border-style: outset;
 	border-width: 5px;
+}
+
+hr {
+	border: 0;
+	border-top: 2px solid #8c8b8b;
+	margin: 20px 0;
 }

@@ -9,44 +9,37 @@
       </full-calendar>
       <div class='appointment-time'>
         <h4 class='appointment-time-header'>
-          Available on {{selectedDate}}
+         {{appointmentHeader}} 
         </h4>
         <p class='appointment-time-detail'>
           <span class='appointment-time-booking-window'>
-              You can book a party between 1 day and 90 days ahead of time. 
+              You can book a party between 1 day and 180 days ahead of time. 
           </span>
           <span class='appointment-time-current-section'>
              <strong>Time zone: </strong> Eastern Time Zone (EST)
         </span>
         </p>
-        <div class='container appointment-time-slots'>
+        <div class='container appointment-time-slots' *ngIf= "showSelectTime">
           <h5 class="appointment-time-category-title">Please select a time</h5>
           <div class="row row-cols-lg-3">      
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">10:00 am</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">11:00 am</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">12:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">1:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">2:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">3:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">4:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">5:00 pm</button>
-            <button class="col btn btn-outline-secondary" data-js = "time-slot" type = "button">6:00 pm</button>
+            <ng-container *ngFor="let slot of dateTime.timeSlots">
+              <button 
+                class="col btn btn-outline-secondary" 
+                (click)="selectTimeSlot(slot.time_hour)" 
+                type="button" 
+                *ngIf="!slot.selected">
+                {{slot.time}}
+          </button>
+            </ng-container>
+
           </div>    
         </div>
 
       </div>
     </div>
 
-    <div class='select-date-details'>
-     
-      <div class='select-date-details-section'>
-        <h2>Date and Time</h2>
-        <ul>
-          <li *ngFor='let event of currentEvents()'>
-            <b>{{event.startStr}}</b>          
-          </li>
-        </ul>
-      </div>
+    <div class='appointment-time-header' >         
+        <h4>{{yourReservation}} </h4>          
     </div>
     
   </div>

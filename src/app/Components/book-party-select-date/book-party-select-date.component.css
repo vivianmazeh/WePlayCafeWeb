@@ -59,18 +59,10 @@ b { /* used for event dates/times */
   margin-right: 3px;
 }
 
-.select-date-details {
-  width: 100%;
-  background: khaki;
-  border-right: 1px solid #d3e2e8;
-}
 .select-date {
   min-height: 100%; 
   font-size: 14px;
-}
-
-.select-date-details-section {
-  padding: 2em;
+  padding-bottom: 100px;
 }
 
 .select-date-main {
@@ -82,4 +74,8 @@ b { /* used for event dates/times */
 .fc { /* the calendar root */
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.fc-day-selected {
+  background-color: #ffcc00;
 }
