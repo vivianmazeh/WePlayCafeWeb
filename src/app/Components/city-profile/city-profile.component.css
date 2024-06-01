@@ -1,0 +1,34 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.sortable span {
+    margin-left: 5px;
+}
+.sort-icons {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.sort-icon {
+    cursor: pointer;
+}

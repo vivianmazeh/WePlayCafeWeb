@@ -16,8 +16,10 @@ import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     PriceComponent,
     GalleryComponent,
     ContactUsComponent,
+    CityProfileComponent,
     BookPartySelectDateComponent
 
   ],

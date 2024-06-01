@@ -8,6 +8,7 @@ import { PriceComponent } from './Components/price/price.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
 import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
+import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 
 // sets up routes constant where you define your routes
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'gallery', component: GalleryComponent},
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'buy-tickets', component: BuyTicketsComponent},
+  {path: 'city-profile', component: CityProfileComponent},
   {path: 'book-a-party', 
           component: BookPartyComponent,
           children: [    

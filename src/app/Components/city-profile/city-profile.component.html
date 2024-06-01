@@ -1,0 +1,50 @@
+<div class="container" *ngIf="cityProfiles.length > 0">
+  <table>
+      <thead>
+          <tr>
+              <th>City Name</th>
+              <th class="sortable" >
+                  <span>Total Population</span>
+                  <div class="sort-icons">
+                      <span (click)="sortData('total_population', 'asc')" class="sort-icon">
+                        <i class="fa-duotone fa-arrow-up-1-9"></i>
+                      </span>
+                      <span (click)="sortData('total_population', 'desc')" class="sort-icon">
+                        <i class="fa-duotone fa-arrow-down-9-1"></i>
+                      </span>
+                  </div>
+              </th>
+              <th class="sortable">
+                  <span>Population Under 10</span>
+                  <div class="sort-icons">
+                      <span (click)="sortData('under_10', 'asc')" class="sort-icon">↑</span>
+                      <span (click)="sortData('under_10', 'desc')" class="sort-icon">↓</span>
+                  </div>
+              </th>
+              <th>Median Household Income</th>
+              <th>Employment Rate</th>
+              <th>House Units</th>
+              <th>Poverty Rate</th>
+              <th>Total Race</th>
+              <th>Race - Asian</th>
+              <th>Race - White</th>
+              <th>Race - Black</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let cityProfile of filteredCityProfiles()">
+              <td>{{ cityProfile.city_name }}</td>
+              <td>{{ cityProfile.total_population }}</td>
+              <td>{{ cityProfile.under_10 }}</td>
+              <td>{{ cityProfile.median_household_income | currency }}</td>
+              <td>{{ cityProfile.employment_rate }}%</td>
+              <td>{{ cityProfile.house_units }}</td>
+              <td>{{ cityProfile.poverty_rate | number:'1.2-2' }}%</td>
+              <td>{{ cityProfile.total_race }}</td>
+              <td>{{ cityProfile.race_asian }}</td>
+              <td>{{ cityProfile.race_white }}</td>
+              <td>{{ cityProfile.race_black }}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>

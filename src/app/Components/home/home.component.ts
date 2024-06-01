@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { CourseService } from '../../service/course.service';
-import { Course } from '../../model/course';
-import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-home',
@@ -10,11 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent {
 
-  courses: Course[] = [];
+  
   pageContent: any[] = [];
 
 
-  constructor(private service: CourseService){
+  constructor(){
 
     this.pageContent = [ {subtitle: 'Michigan winters have long shadows, but at WePlay & Cafe, the sun always shines inside. We are not just an indoor playground - ' +
                                     'we are a haven for kids to discover the joy of play, fostering essential social skills while offering a much-needed respite from excessive screen time.' + 
@@ -41,18 +40,7 @@ export class HomeComponent {
   
    // this.getAllCourse();
   }
-  getAllCourse(){
-
-    console.log("called getAllCourse function");
-    this.service.findAllBook().subscribe({
-      next: (v) => {this.courses = v;
-                    console.log(v)},
-      error: (e) => {this.courses = [];
-                     console.log(e);},
-      complete: () => console.info('complete') 
-  })
-  }
-
+  
 
 
 }
