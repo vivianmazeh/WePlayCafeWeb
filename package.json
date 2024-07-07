@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
+    "heroku-postbuild": "ng build --configuration production && npm install -g http-server-spa",
     "start": "http-server-spa dist/easy-to-learn-web index.html $PORT",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   },
   "private": true,
   "dependencies": {
