@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { CityProfile } from '../model/city-profile';
+import { environment } from '../environments/env.pro';
 
 
 @Injectable({
@@ -10,10 +11,11 @@ import { CityProfile } from '../model/city-profile';
 })
 export class CityProfileService {
 
+  baseUrl = environment.baseUrl;
+  originalUrl = environment.originalUrl;
 
-
-  private localBaseUrl: string ="http://www.localhost:8080/weplay/cityprofiles";
-  private originUrl: string = 'http://localhost:4200';
+ private url: string = this.baseUrl + "weplay/cityprofiles";
+ // private originUrl: string = 'http://localhost:4200';
 
 
   constructor(private http: HttpClient) { }
@@ -25,11 +27,11 @@ getCityProfile(stateName: String): Observable<CityProfile[]> {
      // Set up the headers to include CORS
      const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': this.originUrl
+      'Access-Control-Allow-Origin': this.originalUrl
       // Add any other required headers
     });
 
-  return this.http.get<CityProfile[]>(`${this.localBaseUrl}/${stateName}`, {headers}).pipe(
+  return this.http.get<CityProfile[]>(`${this.url}/${stateName}`, {headers}).pipe(
     map(data => data.map( item => new CityProfile(
       item.city_name,
       item.total_population,
