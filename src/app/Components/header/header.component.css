@@ -74,6 +74,16 @@
         justify-items: baseline;
         font-size: 12px;
     }
+    .tea-icon{
+        height: 50px;
+        padding-bottom: 10px;
+    } 
+    .header-logo{  
+        max-height: 165px;
+        max-width: 165px;
+        height: auto;
+        width: auto;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 1024px){
@@ -108,6 +118,16 @@
         height: 16px;   
         justify-items: baseline;
         font-size: 12px;
+    }
+    .tea-icon{
+        height: 50px;
+        padding-bottom: 10px;
+    } 
+    .header-logo{  
+        max-height: 165px;
+        max-width: 268px;
+        height: auto;
+        width: auto;
     }
 
   }
@@ -148,6 +168,18 @@
         padding-left: 4px;
         justify-items: baseline;
     }
+
+    .header-logo{  
+        max-height: 165px;
+        max-width: 268px;
+        height: auto;
+        width: auto;
+    }
+
+    .tea-icon{
+        height: 50px;
+        padding-bottom: 10px;
+    } 
       
   }
 
@@ -185,12 +217,6 @@
     margin-top: 1.5em;
 }
 
-.header-logo{  
-    max-height: 165px;
-    max-width: 268px;
-    height: auto;
-    width: auto;
-}
 .header-container-order-party{
     flex: 1 1 auto;
     align-self: center;
@@ -211,7 +237,6 @@
 .header-container-bottom-text{
     width: 100%;
 }
-
 .header-container-top{  
     height: 50%;
     text-align: center;
@@ -232,10 +257,7 @@
 
 }
 
-.tea-icon{
-    height: 50px;
-    padding-bottom: 10px;
-} 
+
 
 .text-title {
     text-align: center;
@@ -251,4 +273,3 @@ nav{
     color: #ffffff;
     font-weight: bold;
 }
-
