@@ -43,7 +43,48 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/env.ts",
+                  "with": "src/app/environments/env.prod.ts"
+                }
+              ]
+            },
+            "test": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/env.ts",
+                  "with": "src/app/environments/env.test.ts"
+                }
+              ]
+            },
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/env.ts",
+                  "with": "src/app/environments/env.local.ts"
+                }
+              ]
             },
             "development": {
               "buildOptimizer": false,
@@ -58,9 +99,18 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "easy-to-learn-web:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "easy-to-learn-web:build:production"
+              "buildTarget": "easy-to-learn-web:build:production"
+            },
+            "test": {
+              "buildTarget": "easy-to-learn-web:build:test"
+            },
+            "local": {
+              "buildTarget": "easy-to-learn-web:build:local"
             },
             "development": {
               "browserTarget": "easy-to-learn-web:build:development"
@@ -68,7 +118,6 @@
           },
           "defaultConfiguration": "development"
         },
-        
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -90,7 +139,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js"]
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
@@ -98,5 +149,6 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "easy-to-learn-web"
 }

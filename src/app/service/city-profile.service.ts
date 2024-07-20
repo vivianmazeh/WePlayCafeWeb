@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { CityProfile } from '../model/city-profile';
-import { environment } from '../environments/env.pro';
+import { environment } from '../environments/env';
 
 
 @Injectable({
