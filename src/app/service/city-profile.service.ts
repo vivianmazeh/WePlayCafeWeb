@@ -14,9 +14,7 @@ export class CityProfileService {
   baseUrl = environment.baseUrl;
   originalUrl = environment.originalUrl;
 
- private url: string = this.baseUrl + "weplay/cityprofiles";
- // private originUrl: string = 'http://localhost:4200';
-
+ private url: string = this.baseUrl + "cityprofiles";
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +29,7 @@ getCityProfile(stateName: String): Observable<CityProfile[]> {
       // Add any other required headers
     });
 
-  return this.http.get<CityProfile[]>(`${this.url}/${stateName}`, {headers}).pipe(
+  return this.http.get<CityProfile[]>(`${this.url}/${stateName}`, {headers : { 'Content-Type': 'application/json' }}).pipe(
     map(data => data.map( item => new CityProfile(
       item.city_name,
       item.total_population,

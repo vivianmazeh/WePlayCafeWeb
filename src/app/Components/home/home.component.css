@@ -4,21 +4,37 @@
     .carousel-caption-title{
 		font-size: 16px;
 		}
+	    .row.gtr-150 {
+		margin-top: 0;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 @media (min-width: 768px) and (max-width: 1024px){
-
+	
 }
 @media screen and (min-width: 1025px) {
 
 	.carousel-caption-title{
 		font-size: 22px;
 	}
+	.row.gtr-150 {
+		margin-top: 0;
+		padding-left: 3em;
+		padding-right: 3em;
+	}
 }
- 
+
+/* Ensure images fit within their containers */
+.image.fit img {
+    width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below the image */
+}
 
 .home-page{
-    width: 100%;
+	width: 100% !important; /* Force width to 100% */
 }
 
 .carousel-background{
@@ -118,7 +134,7 @@ ul.major-icons {
 			line-height: 8em;
 			margin: 0;
 			text-align: center;
-			width: 8em;
+			
 		}
 
 			ul.major-icons li .icon:before {

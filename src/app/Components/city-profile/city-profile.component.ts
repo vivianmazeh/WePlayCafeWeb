@@ -11,12 +11,13 @@ export class CityProfileComponent implements OnInit{
   cityProfiles: CityProfile[] = [];
   sortColumn: string | null = null;
   sortOrder: 'asc' | 'desc' = 'asc';
+  stateName : string = 'Michigan';
 
 
   constructor(private cityProfileService: CityProfileService) { }
 
   ngOnInit(): void {
-    this.getCityProfiles('Michigan');
+    this.getCityProfiles(this.stateName);
   }
 
   getCityProfiles(stateName: string): void {

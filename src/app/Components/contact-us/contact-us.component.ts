@@ -29,7 +29,7 @@ export class ContactUsComponent implements OnInit {
       position: center,
       map: this.map,
       icon: {
-        url: '../assets/pictures/WePlay & Cafe small.png',
+        url: '../assets/icons/weplay/__Insta Profile.jpg',
         scaledSize: new google.maps.Size(50, 50) 
       },
       title: 'WePlay Cafe'

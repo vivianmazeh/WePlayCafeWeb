@@ -1,7 +1,7 @@
 
 /* General CSS for all screen sizes */
 .wrapper {
-  max-width: 1440px;
+ 
   width: 100%;
   margin: 0;
   padding: 0;
@@ -15,11 +15,13 @@
 .page-header {
   background-color: #FFF8F2;
   color: #fff;
+  width: 100%;
 }
 
 .page-main {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .page-footer {
@@ -31,6 +33,9 @@
   .page-header{
     display: flex;
     flex-direction: row;
+    height: 225px;
+    padding-top: 25px;
+    padding-bottom: 25px;
   }
   .page-footer{
     background-color:#4878a3;

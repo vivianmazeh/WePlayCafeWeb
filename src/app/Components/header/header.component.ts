@@ -10,17 +10,27 @@ import { Router } from '@angular/router'; // Import Router from '@angular/router
 })
 export class HeaderComponent {
   
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2,  private el: ElementRef) {}
 
    clickNavbarButton() {
+    // const navbarCollapse = document.querySelector('.navbar-collapse');
+    // this.renderer.setStyle(navbarCollapse, 'display', 'block'); // Always show on click
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    this.renderer.setStyle(navbarCollapse, 'display', 'block'); // Always show on click
-    } 
+    if (navbarCollapse) {
+      this.renderer.addClass(navbarCollapse, 'show');
+    }
+  } 
+
 
   closeNavbar() {
-    
+ 
+
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    this.renderer.setStyle(navbarCollapse, 'display', 'none');
+    if (navbarCollapse) {
+      this.renderer.removeClass(navbarCollapse, 'show');
+    }
+    // const navbarCollapse = document.querySelector('.navbar-collapse');
+    // this.renderer.setStyle(navbarCollapse, 'display', 'none');
   }  
 
 }
