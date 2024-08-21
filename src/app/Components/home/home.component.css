@@ -26,11 +26,11 @@
 	}
 }
 
-/* Ensure images fit within their containers */
+
 .image.fit img {
     width: 100%;
     height: auto;
-    display: block; /* Remove extra space below the image */
+    display: block; 
 }
 
 .home-page{
@@ -74,8 +74,6 @@
 section {
 	display: block;
 }
-
-
 	.align-left {
 		text-align: left;
 	}
@@ -115,13 +113,11 @@ ul.major-icons {
 	list-style: none;
 	padding-left: 0;
 }
-
 	ul.major-icons li {
 		display: inline-block;
 		padding: 2.5em;
 		text-align: center;
 	}
-
 		ul.major-icons li .icon {
 			-moz-transform: rotate(45deg);
 			-webkit-transform: rotate(45deg);
@@ -136,7 +132,6 @@ ul.major-icons {
 			text-align: center;
 			
 		}
-
 			ul.major-icons li .icon:before {
 				-moz-transform: rotate(-45deg);
 				-webkit-transform: rotate(-45deg);

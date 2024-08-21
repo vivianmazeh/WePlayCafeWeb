@@ -1,7 +1,89 @@
 
+.header-container{
+    display: flex;
+    flex-direction: row;
+    height: auto;   
+}
+.header-container-text{
+    width: auto;
+    flex: 1 1 auto;
+    color:#4878a3;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;   
+}
 
-/* Media query for smaller screens */
+.header-container-order{  
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+}
+.header-container-order-party{
+    display: flex;
+    flex: 1 1 auto;
+    align-self: center;
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+    margin-top: 1.5em;
+}
+
+.header-container-order-ticket{
+    flex: 1 1 auto;
+    align-self: center;
+}
+.header-container-order-button {
+    color:  #4878a3; 
+    background-color:#ffae00;
+    border-color:#ffae00;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    align-items: center;   
+}
+.header-container-bottom-text{
+    width: 100%;
+}
+.header-container-top{  
+    height: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-container-bottom{
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.header-container-top-text{  
+   height: 30px;
+   align-items: center;
+}
+.text-title {
+    text-align: center;
+    padding-left: 5px;
+}
+
+nav{
+    height: 100%;
+    width: 100%;
+}
+.nav-link-tab{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
 @media screen and (max-width: 376px) {
+    .header-container{
+        flex: 1;
+        width: 70%;
+    }
+
     .header-container-top{
         font-size: 15px;  
     }
@@ -12,7 +94,6 @@
     .header-container-order{  
         flex-grow: 1;
         padding-left: 5px;
-
     }
     .header-container-order-button {
         border-radius: 15px;
@@ -22,13 +103,7 @@
 
     .main-bar{
         width: 4em;
-        flex-grow: 0;
-        
-    }
-
-    .header-container{
-        flex: 1;
-        width: 70%;
+        flex-grow: 0;    
     }
 
     .header-container-order-ticket{
@@ -47,8 +122,7 @@
         top: 0; 
         left: 0;
         overflow-y: auto;
-        position: fixed;
-         
+        position: fixed;     
       }
 
       .navbar-nav {
@@ -88,8 +162,8 @@
     .container-nav-button{
         display: flex;
         align-items: center;
-        justify-content: center; /* Optional: centers horizontally as well */
-        height: 100%; /* Ensure the div has a height, so centering works correctly */
+        justify-content: center; 
+        height: 100%; 
     }
 }
 @media screen and (min-width: 377px )and (max-width: 767px) {
@@ -114,8 +188,7 @@
 
     .main-bar{
         width: 4em;
-        flex-grow: 0;
-        
+        flex-grow: 0;  
     }
 
     .header-container{
@@ -157,8 +230,7 @@
         text-align: center;
       }
       .nav-link-tab-title{
-        align-self: center;
-       
+        align-self: center;  
       }
 
       .order-button-name{    
@@ -181,8 +253,8 @@
     .container-nav-button{
         display: flex;
         align-items: center;
-        justify-content: center; /* Optional: centers horizontally as well */
-        height: 100%; /* Ensure the div has a height, so centering works correctly */
+        justify-content: center; 
+        height: 100%; 
     }
   }
 
@@ -233,7 +305,6 @@
         height: 100%;
         flex: 0 0 auto;
     }
-
   }
 
   @media (min-width: 821px) and (max-width: 1024px){
@@ -287,7 +358,6 @@
 
   }
 
-  /* Media query for desktop/tablet screens */
 @media screen and (min-width: 1025px) {
  
     .header-container-top{
@@ -336,88 +406,4 @@
       
   }
 
-  /* General css for all screen sizes*/
-  .header-container{
-    display: flex;
-    flex-direction: row;
-    height: auto;
-    
-}
-.header-container-text{
-    width: auto;
-    flex: 1 1 auto;
-    color:#4878a3;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    white-space: nowrap;
-    
-}
-
-.header-container-order{  
-    width: 22%;
-    display: flex;
-    flex-direction: column;
-}
-.header-container-order-party{
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    width: 100%;
-    margin-top: 1.5em;
-}
-
-.header-container-order-party{
-    flex: 1 1 auto;
-    align-self: center;
-}
-.header-container-order-ticket{
-    flex: 1 1 auto;
-    align-self: center;
-}
-.header-container-order-button {
-    color:  #4878a3; 
-    background-color:#ffae00;
-    border-color:#ffae00;
-    text-align: center;
-    font-weight: 600;
-    display: flex;
-    align-items: center;   
-}
-.header-container-bottom-text{
-    width: 100%;
-}
-.header-container-top{  
-    height: 50%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header-container-bottom{
-
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-.header-container-top-text{  
-   height: 30px;
-   align-items: center;
-
-}
-
-.text-title {
-    text-align: center;
-    padding-left: 5px;
-}
-
-
-nav{
-    height: 100%;
-    width: 100%;
-}
-.nav-link-tab{
-    color: #ffffff;
-    font-weight: bold;
-}
+  

@@ -19,6 +19,18 @@
             "polyfills": [
               "zone.js"
             ],
+            "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "5kb"
+            }
+],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
