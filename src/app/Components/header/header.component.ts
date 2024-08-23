@@ -1,3 +1,4 @@
+
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router from '@angular/router'
 
@@ -10,27 +11,17 @@ import { Router } from '@angular/router'; // Import Router from '@angular/router
 })
 export class HeaderComponent {
   
-  constructor(private renderer: Renderer2,  private el: ElementRef) {}
+  constructor(private renderer: Renderer2) {}
 
    clickNavbarButton() {
-    // const navbarCollapse = document.querySelector('.navbar-collapse');
-    // this.renderer.setStyle(navbarCollapse, 'display', 'block'); // Always show on click
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse) {
-      this.renderer.addClass(navbarCollapse, 'show');
-    }
-  } 
-
+    this.renderer.setStyle(navbarCollapse, 'display', 'block'); // Always show on click
+    } 
 
   closeNavbar() {
- 
-
+    
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse) {
-      this.renderer.removeClass(navbarCollapse, 'show');
-    }
-    // const navbarCollapse = document.querySelector('.navbar-collapse');
-    // this.renderer.setStyle(navbarCollapse, 'display', 'none');
+    this.renderer.setStyle(navbarCollapse, 'display', 'none');
   }  
 
 }
