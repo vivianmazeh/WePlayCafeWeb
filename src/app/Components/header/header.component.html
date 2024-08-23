@@ -86,7 +86,7 @@
                   <a class="nav-link nav-link-tab" routerLink = "contactUs"  (click)="closeNavbar()">
                     <span class="nav-link-tab-title">Contact Us</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!hideNavbar">
                   <a class="nav-link nav-link-tab"  routerLink = "city-profile" (click)="closeNavbar()" >
                     <span class="nav-link-tab-title">City Profile</span></a>
                 </li>

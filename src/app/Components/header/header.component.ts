@@ -1,6 +1,7 @@
 
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router from '@angular/router'
+import { environment } from 'src/app/environments/env';
 
 
 @Component({
@@ -10,9 +11,13 @@ import { Router } from '@angular/router'; // Import Router from '@angular/router
 
 })
 export class HeaderComponent {
-  
+  hideNavbar: boolean = false;
+
   constructor(private renderer: Renderer2) {}
 
+  ngOnInit() {
+    this.hideNavbar = environment.production; // Hide the navbar if in production
+  }
    clickNavbarButton() {
     const navbarCollapse = document.querySelector('.navbar-collapse');
     this.renderer.setStyle(navbarCollapse, 'display', 'block'); // Always show on click
