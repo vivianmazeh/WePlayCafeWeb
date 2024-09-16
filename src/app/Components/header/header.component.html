@@ -31,7 +31,7 @@
       </a>
     </div>
     <div class="header-container-order-party">
-      <a href="#" routerLink = "buy-tickets" class="btn header-container-order-button active" >
+      <a href="#" routerLink = "card-payment" class="btn header-container-order-button active" >
         <img src="./assets/icons/buy-ticket.png" class="book-party-icon" >
         <span class="order-button-name">Buy Tickets</span>
       </a>
@@ -63,6 +63,11 @@
                     <span class="nav-link-tab-title">Hours and Price</span></a>
                 </li>
 
+                <li class="nav-item">
+                  <a class="nav-link nav-link-tab" routerLink = "menu" (click)="closeNavbar()" >
+                    <span class="nav-link-tab-title">Menu</span></a>
+                </li>
+
                 <li class="nav-item dropdown">
                   <a class="nav-link nav-link-tab dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="nav-link-tab-title">Join Us</span>
@@ -71,7 +76,7 @@
                     <li><a class="dropdown-item"  routerLink = "book-a-party" (click)="closeNavbar()">
                           <span style="font-weight: 800; font-size: 18px;">Reserve Party</span>
                         </a></li>
-                    <li><a class="dropdown-item"  routerLink = "buy-tickets" (click)="closeNavbar()">
+                    <li><a class="dropdown-item"  routerLink = "card-payment" (click)="closeNavbar()">
                           <span style="font-weight: 800; font-size: 18px;">Buy Tickets</span>
                         </a></li>
                     <li><hr class="dropdown-divider"></li>
