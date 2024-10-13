@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event } from '../model/event.model';
+import { Event } from '../models/event.model';
 
 
 @Injectable({

@@ -1,49 +1,114 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/env';
+
 declare global {
   interface Window {
     Square: any;
   }
 }
+
 @Component({
   selector: 'app-card-payment',
-  standalone: true,
-  imports: [],
   templateUrl: './card-payment.component.html',
-  styleUrl: './card-payment.component.css'
+  styleUrls: ['./card-payment.component.css'],
 })
-export class CardPaymentComponent implements OnInit{
-  private appId = 'sandbox-sq0idb-ucpDX7q3yDlQeR4mNtJ_Jw'; // Sandbox App ID
-  private locationId = 'L5RQX9N79RTZK'; // Sandbox Location ID
-  private card: any;
-  private payments: any;
-  public serviceName: string = '';
-  public servicePrice: string = '';
-  public totalAmount: number = 8.00; // Initial total
+export class CardPaymentComponent implements OnInit {
+ 
 
-  async ngOnInit() {
+  private payments: any;
+  private card: any;
+  public totalAmount: number = 15.99; // Initial total
+  private baseUrl = environment.baseUrl;
+  private locationId = environment.locationId;
+  private applicationId = environment.applicationId;
+
+
+  async ngOnInit(): Promise<void> {
     await this.initializeSquare();
 
-    const proceedToPaymentButton = document.getElementById('proceed-to-payment-button');
+    // Ensure total price is updated on quantity change
     const quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
-   
-     // Listen for changes in the quantity input fields
-     quantityInputs.forEach(input => {
+    quantityInputs.forEach(input => {
       input.addEventListener('input', () => this.updateTotalPrice());
     });
-
+    
+    // Handle click event on Proceed to Payment button
+    const proceedToPaymentButton = document.getElementById('proceed-to-payment-button');
     if (proceedToPaymentButton) {
       proceedToPaymentButton.addEventListener('click', () => {
-        // Show the payment form
-        document.getElementById('payment-form-container')!.style.display = 'block';
+        const paymentFormContainer = document.getElementById('payment-form-container');
+        if (paymentFormContainer) {
+          // Show the payment form when the button is clicked
+          paymentFormContainer.style.display = 'block';
+        }
       });
     }
+  }
+
+
+
+  private initializeSquare(): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        this.payments = window.Square.payments(this.applicationId, this.locationId);
+        this.card = await this.initializeCard(this.payments);
+        resolve();
+      } catch (e) {
+        console.error('Initializing Square Payments failed', e);
+        reject(e);
+      }
+    }).then(() => {
+      const paymentButton = document.getElementById('payment-button');
+      if (paymentButton) {
+        paymentButton.addEventListener('click', async () => {
+          const firstName = (document.getElementById('firstName') as HTMLInputElement).value;
+          const lastName = (document.getElementById('lastName') as HTMLInputElement).value;
+          const email = (document.getElementById('email') as HTMLInputElement).value;
+
+          // Tokenize card details
+          const cardResult = await this.card.tokenize();
+          if (cardResult.status === 'OK') {
+            const requestBody = {
+              token: cardResult.token,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              amount: 5000  // Example amount in cents ($50.00)
+            };
+
+            // Send tokenized card data and customer info to the backend
+            fetch(`${this.baseUrl}payment`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+              alert('Payment Successful');
+            })
+            .catch(error => {
+              console.error('Payment failed:', error);
+            });
+          } else {
+            console.error('Tokenization failed:', cardResult.errors);
+          }
+        });
+      }
+    });
+  }
+
+  private async initializeCard(payments: any): Promise<any> {
+    const card = await payments.card();
+    await card.attach('#card-container');
+    return card;
   }
 
   private updateTotalPrice() {
     const quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
     let totalPrice = 0;
 
-    // Calculate the total price based on selected services and their quantities
     quantityInputs.forEach(input => {
       const price = parseFloat(input.getAttribute('data-price') || '0');
       const quantity = parseInt(input.value, 10);
@@ -53,33 +118,8 @@ export class CardPaymentComponent implements OnInit{
     this.totalAmount = totalPrice;
     document.getElementById('total-price')!.innerText = totalPrice.toFixed(2);
   }
-  
-  private async initializeSquare() {
-    if (!window.Square) {
-      throw new Error('Square.js failed to load properly');
-    }
 
-    try {
-      this.payments = window.Square.payments(this.appId, this.locationId);
-      this.card = await this.initializeCard(this.payments);
-    } catch (e) {
-      console.error('Initializing Square Payments failed', e);
-      return;
-    }
-
-    const cardButton = document.getElementById('card-button');
-    if (cardButton) {
-      cardButton.addEventListener('click', (event) => this.handlePaymentMethodSubmission(event, this.card));
-    }
-  }
-
-  private async initializeCard(payments: any) {
-    const card = await payments.card();
-    await card.attach('#card-container');
-    return card;
-  }
-
-  private async tokenize(paymentMethod: any) {
+  private async tokenize(paymentMethod: any): Promise<string> {
     const tokenResult = await paymentMethod.tokenize();
     if (tokenResult.status === 'OK') {
       return tokenResult.token;
@@ -92,20 +132,20 @@ export class CardPaymentComponent implements OnInit{
     }
   }
 
-  private async verifyBuyer(payments: any, token: string) {
+  private async verifyBuyer(payments: any, token: string): Promise<string> {
     const verificationDetails = {
-      amount: this.servicePrice,
+      amount: '1.00',
       billingContact: {
         givenName: 'John',
         familyName: 'Doe',
-        email: 'john.doe@example.com',
-        phone: '1234567890',
-        addressLines: ['123 Main Street'],
-        city: 'Some City',
-        state: 'ST',
-        countryCode: 'US',
+        email: 'john.doe@square.example',
+        phone: '3214563987',
+        addressLines: ['123 Main Street', 'Apartment 1'],
+        city: 'London',
+        state: 'LND',
+        countryCode: 'GB',
       },
-      currencyCode: 'USD',
+      currencyCode: 'GBP',
       intent: 'CHARGE',
     };
 
@@ -113,7 +153,7 @@ export class CardPaymentComponent implements OnInit{
     return verificationResults.token;
   }
 
-  private displayPaymentResults(status: any) {
+  private displayPaymentResults(status: string): void {
     const statusContainer = document.getElementById('payment-status-container');
     if (statusContainer) {
       if (status === 'SUCCESS') {
@@ -127,41 +167,19 @@ export class CardPaymentComponent implements OnInit{
     }
   }
 
-  private async handlePaymentMethodSubmission(event: Event, card: any) {
+  private async handlePaymentMethodSubmission(event: Event, card: any): Promise<void> {
     event.preventDefault();
     const cardButton = event.target as HTMLButtonElement;
-
     try {
       cardButton.disabled = true;
       const token = await this.tokenize(card);
       const verificationToken = await this.verifyBuyer(this.payments, token);
-      const paymentResults = await this.createPayment(token, verificationToken);
+      // Send token and verificationToken to your server to process the payment
       this.displayPaymentResults('SUCCESS');
-      console.debug('Payment Success', paymentResults);
     } catch (e) {
       cardButton.disabled = false;
       this.displayPaymentResults('FAILURE');
       console.error(e);
     }
-  }
-
-  private async createPayment(token: string, verificationToken: string) {
-    // Here you would send the token and verification token to your backend server
-    // to process the payment.
-    console.log('Payment created with token:', token);
-  }
-
-  // Method to get the selected service from the form
-  private getSelectedService(): { name: string, price: string } | null {
-    const form = document.getElementById('service-selection-form') as HTMLFormElement;
-    const checkedRadio = form.querySelector('input[type="radio"]:checked');
-    
-    if (checkedRadio) {
-      return {
-        name: checkedRadio.getAttribute('data-name') || '',
-        price: checkedRadio.getAttribute('value') || '0.00'
-      };
-    }
-    return null;
   }
 }

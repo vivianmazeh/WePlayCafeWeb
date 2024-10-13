@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityProfileService } from 'src/app/service/city-profile.service';
-import { CityProfile } from 'src/app/model/city-profile';
+import { CityProfile } from 'src/app/models/city-profile';
 
 @Component({
   selector: 'app-city-profile',

@@ -9,4 +9,3 @@ export const environment = {
     acessToken: 'EAAAl8lYJShpLQmZqOHnZ2uBeogd7o6ycWvRbhCBx8mF0QVksyGxprlf56jp0CgW'
   };
   
- 

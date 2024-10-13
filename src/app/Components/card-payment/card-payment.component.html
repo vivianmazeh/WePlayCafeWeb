@@ -82,6 +82,15 @@
     <h4 class="text-center mb-4">Payment Details</h4>
    
     <form id="payment-form">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      
       <div id="card-container"></div>
       <button id="card-button" type="button" class="btn payment-button">Pay Now</button>
     </form>

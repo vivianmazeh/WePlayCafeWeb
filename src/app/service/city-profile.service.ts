@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { CityProfile } from '../model/city-profile';
+import { CityProfile } from '../models/city-profile';
 import { environment } from '../environments/env';
 
 

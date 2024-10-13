@@ -35,3 +35,12 @@
     font-size: 20px;
     padding-bottom: 20px;
   }
+  .col-instagram{
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+  }
+  .col-instagram-icon{
+    margin-left: 18px;
+    margin-top: 24px;
+  }
