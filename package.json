@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --configuration production && npm install -g http-server-spa",
+    "heroku-postbuild": "ng build --configuration ${NODE_ENV:-production} && npm install -g http-server-spa",
     "start": "http-server-spa dist/easy-to-learn-web index.html $PORT",
-    "build": "ng build",
+    "build": "ng build --configuration ${NODE_ENV:-production}",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

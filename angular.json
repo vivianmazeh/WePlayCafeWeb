@@ -92,14 +92,6 @@
               "sourceMap": true,
               "namedChunks": true
 
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
           }
        
@@ -118,12 +110,10 @@
             },
             "local": {
               "buildTarget": "easy-to-learn-web:build:local"
-            },
-            "development": {
-              "browserTarget": "easy-to-learn-web:build:development"
             }
-          },
-          "defaultConfiguration": "development"
+      
+          }
+          
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
