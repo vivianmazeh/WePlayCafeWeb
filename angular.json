@@ -90,13 +90,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/app/environments/env.ts",
-                  "with": "src/app/environments/env.local.ts"
-                }
-              ]
+              "namedChunks": true
+
             },
             "development": {
               "buildOptimizer": false,
@@ -106,8 +101,8 @@
               "sourceMap": true,
               "namedChunks": true
             }
-          },
-          "defaultConfiguration": "production"
+          }
+       
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
