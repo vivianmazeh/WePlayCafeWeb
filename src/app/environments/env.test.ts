@@ -6,8 +6,6 @@ export const environment = {
     originalUrl: 'https://weplay-web-test-856b7b731215.herokuapp.com',
     applicationId: 'sandbox-sq0idb-ucpDX7q3yDlQeR4mNtJ_Jw',
     locationId: 'L5RQX9N79RTZK',
-    acessToken: 'EAAAl8lYJShpLQmZqOHnZ2uBeogd7o6ycWvRbhCBx8mF0QVksyGxprlf56jp0CgW'
-
   };
   
   

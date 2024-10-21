@@ -6,5 +6,4 @@ export const environment = {
     originalUrl: 'https://weplayofficial.com',
     applicationId: 'sq0idp-Ae4-Glipmn58CgS9K_CGmw',
     locationId: 'L0YRVCK6VFFB3',
-    acessToken: 'EAAAFEzDcn9Ccb1fD1xGp88bM02npnnW1MOKqoUdZeDB7St3Hsvio0RTC16ZAXYh'
   };
