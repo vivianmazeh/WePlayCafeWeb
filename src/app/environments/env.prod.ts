@@ -1,4 +1,4 @@
-// environment.prod.ts
+// env.prod.ts
 export const environment = {
     production: true,
     googleMapsApiKey: 'AIzaSyDWGU_QfhrH4eBs-XuEdcayzjowvZTmeH8',

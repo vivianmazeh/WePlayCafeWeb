@@ -58,6 +58,8 @@ export class CardPaymentComponent implements OnInit {
 
     
     try {
+      console.log('Location ID:', this.locationId);
+      console.log('if Evn is production:', environment.production);
       this.payments = window.Square.payments(this.appId, this.locationId);
     } catch(e) {
       console.error('Initializing Square Payments failed', e);
