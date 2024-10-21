@@ -20,6 +20,7 @@ export class CardPaymentComponent implements OnInit {
   private card: any;
   public totalAmount: number = 0; // Initial total
   private locationId = environment.locationId;
+  private baseUrl = environment.baseUrl;
   private appId = environment.applicationId;
   private statusContainer: any;
 
@@ -117,7 +118,7 @@ export class CardPaymentComponent implements OnInit {
       }
     });
     try {
-      const paymentResponse = await fetch('http://localhost:8080/payment', {
+      const paymentResponse = await fetch(`${this.baseUrl}payment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
