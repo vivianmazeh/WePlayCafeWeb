@@ -6,7 +6,6 @@
         min-height: 350px;
         height: 350px;
     }
-
 }
 
 @media (max-width: 1050px) {
@@ -24,14 +23,10 @@
       box-sizing: border-box;
     }
   }
-  
-
-
 .service-option {
     background-color:#FFF8F2;
     color: #664d03;
     background-attachment: fixed;
-    /* background-image: url("./assets/pictures/background.jpg"); */
     background-size: cover;
 }
 .description-card-payment{
@@ -72,23 +67,7 @@
     border-radius: 20px;
     align-items: center;
   }
-  
 
-  
-  
-  
-  #ach-wrapper {
-    display: none;
-  }
-  
- 
-  #payment-flow-message {
-    width: 100%;
-    margin-top: 11px;
-    margin-bottom: 11px;
-    height: 100px;
-    display: block;
-  }
   #payment-status-container {
     display: flex;
     align-items: center;
@@ -160,25 +139,6 @@
   
   #payment-status-container.is-failure.store-card-message:after {
     content: 'Store card failed';
-  }
-  #customer-input {
-    margin-bottom: 40px;
-  }
-  #card-input {
-    margin-top: 0;
-    margin-bottom: 40px;
-  }
-
-  h3 {
-    margin: 0;
-  } 
-  p {
-    line-height: 24px;
-  }
- 
-  label {
-    font-size: 12px;
-    width: 100%;
   }
   input:focus {
     border: 1px solid #006aff;
