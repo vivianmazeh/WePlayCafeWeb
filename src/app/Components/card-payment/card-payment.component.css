@@ -58,9 +58,7 @@
     padding: 12px;
     width: 100%;
     box-shadow: 1px;
-
 }
-
 
 /* For payment form***/
 
@@ -72,91 +70,18 @@
     display: flex;
     justify-content: center;
     border-radius: 20px;
-  }
-  
-  .payment-form {
     align-items: center;
   }
   
 
-  #apple-pay-button {
-    height: 48px;
-    width: 100%;
-    display: inline-block;
-    -webkit-appearance: -apple-pay-button;
-    -apple-pay-button-type: plain;
-    -apple-pay-button-style: black;
-  }
   
-  #fast-checkout {
-    background: #fafafa;
-    color: black;
-  }
   
-  #fast-checkout input {
-    border-radius: 6px;
-    position: relative;
-  }
-  
-  #fast-checkout .wrapper {
-    max-width: 343px;
-    position: relative;
-  }
-  
-  #fast-checkout button {
-    width: 100%;
-  }
-  
-  #fast-checkout button#apple-pay-button {
-    background: white;
-    color: black;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    justify-content: center;
-    line-height: 18px;
-    padding: 13px;
-  }
-  
-  #fast-checkout .border {
-    color: rgba(0, 0, 0, 0.55);
-    background: rgba(0, 0, 0, 0.1);
-    height: 1px;
-    width: 100%;
-    margin: 30px 0;
-    font-size: 12px;
-    line-height: 20px;
-    text-transform: uppercase;
-    position: relative;
-  }
-  
-  #fast-checkout .border span {
-    position: absolute;
-    top: -10px;
-    background: #fafafa;
-    padding: 0 10px;
-    left: calc(50% - 1em - 5px);
-  }
   
   #ach-wrapper {
     display: none;
   }
   
-  #ach-wrapper input:first-of-type {
-    margin-bottom: 10px;
-  }
-  
-  #ach-message {
-    width: 100%;
-    margin-top: 11px;
-    margin-bottom: 11px;
-    font-size: 14px;
-    display: inline-block;
-    color: #bf0020;
-  }
-  
-  #ach-message:empty:before, #message:empty:before {
-    content: "\200b";
-  }
-  
+ 
   #payment-flow-message {
     width: 100%;
     margin-top: 11px;
@@ -164,17 +89,6 @@
     height: 100px;
     display: block;
   }
-  
-  #payment-flow-message.error {
-    color: #bf0020;
-    font-size: 12px;
-    line-height: 14px;
-  }
-  
-  #payment-flow-message.success {
-    color: #3374ff;
-  }
-
   #payment-status-container {
     display: flex;
     align-items: center;
@@ -247,72 +161,28 @@
   #payment-status-container.is-failure.store-card-message:after {
     content: 'Store card failed';
   }
-  
-  #afterpay-button {
-    height: 40px;
-  }
-  
-  #ach-button {
-    margin-top: 20px;
-  }
-  
-  #landing-page-layout {
-    width: 80%;
-    margin: 150px auto;
-    max-width: 1000px;
-  }
-  
-  #its-working {
-    color: #737373;
-  }
-  
-  #example-container {
-    width: 100%;
-    border: 1px solid #b3b3b3;
-    padding: 48px;
-    margin: 32px 0;
-    border-radius: 12px;
-  }
-  
-  #example-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
   #customer-input {
     margin-bottom: 40px;
   }
-  
   #card-input {
     margin-top: 0;
     margin-bottom: 40px;
   }
-  
+
   h3 {
     margin: 0;
-  }
-  
+  } 
   p {
     line-height: 24px;
   }
-  
+ 
   label {
     font-size: 12px;
     width: 100%;
   }
-  
-
   input:focus {
     border: 1px solid #006aff;
-  }
-  
-
-  
-  button:active {
-    background-color: rgb(0, 85, 204);
-  }
-  
+  } 
   button:disabled {
     background-color: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
