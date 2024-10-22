@@ -23,6 +23,8 @@ export class CardPaymentComponent implements OnInit {
   private baseUrl = environment.baseUrl;
   private appId = environment.applicationId;
   private statusContainer: any;
+  private proceedToPaymentButton: HTMLButtonElement | null = null;
+  private paymentFormContainer: HTMLButtonElement | null = null;
 
 
   async ngOnInit(): Promise<void> {
@@ -38,19 +40,36 @@ export class CardPaymentComponent implements OnInit {
       input.addEventListener('input', () => this.updateTotalPrice());
     });
 
+    this.proceedToPaymentButton = document.getElementById('proceed-to-payment-button') as HTMLButtonElement | null;
+    this.updateProceedButtonState();
+
     // Handle click event on Proceed to Payment button
-    const proceedToPaymentButton = document.getElementById('proceed-to-payment-button');
-    if (proceedToPaymentButton) {
-      proceedToPaymentButton.addEventListener('click', () => {
-        const paymentFormContainer = document.getElementById('payment-form-container');
-        if (paymentFormContainer) {
-          // Show the payment form when the button is clicked
-          paymentFormContainer.style.display = 'block';
-        }
-      });
-    }
+     
+      if (this.proceedToPaymentButton) {
+        this.proceedToPaymentButton.addEventListener('click', () => {
+          this.paymentFormContainer = document.getElementById('payment-form-container')as HTMLButtonElement | null;
+          if (this.paymentFormContainer) {
+            // Show the payment form when the button is clicked
+            this.paymentFormContainer.style.display = 'block';
+          }
+        });
+      }
+      
+    
   }
 
+  private updateProceedButtonState() {
+    if (this.proceedToPaymentButton) {
+      if (this.totalAmount > 0) {
+        this.proceedToPaymentButton.disabled = false; // Enable the button
+      } else {
+        this.proceedToPaymentButton.disabled = true;  // Disable the button
+        if(this.paymentFormContainer)
+           // hide the payment form when the totalAmont is equal to zero
+          this.paymentFormContainer.style.display = 'none';
+      }
+    }
+  }
   private async initializeSquare() : Promise<void>{
     if (!window.Square) {
       throw new Error('Square.js failed to load properly');
@@ -81,12 +100,12 @@ export class CardPaymentComponent implements OnInit {
         return;
       }
   
-  const cardButton = document.getElementById('card-button');
-  if (cardButton) {
-    cardButton.addEventListener('click', async (event) => {
-      await this.handlePaymentMethodSubmission(event, this.card);
-    });
-  }
+    const cardButton = document.getElementById('card-button');
+    if (cardButton) {
+      cardButton.addEventListener('click', async (event) => {
+        await this.handlePaymentMethodSubmission(event, this.card);
+      });
+    }
   }
 
   private updateTotalPrice() {
@@ -101,6 +120,8 @@ export class CardPaymentComponent implements OnInit {
 
     this.totalAmount = totalPrice;
     document.getElementById('total-price')!.innerText = totalPrice.toFixed(2);
+
+    this.updateProceedButtonState();
   }
 
   private async initializeCard(payments: any): Promise<any> {
@@ -189,12 +210,15 @@ export class CardPaymentComponent implements OnInit {
     );
 
     if(this.statusContainer){
+      this.statusContainer.style.visibility = 'visible';
       if (status === 'SUCCESS') {
         this.statusContainer.classList.remove('is-failure');
         this.statusContainer.classList.add('is-success');
+      
       } else {
         this.statusContainer.classList.remove('is-success');
         this.statusContainer.classList.add('is-failure');
+      
       }
   
    this.statusContainer.style.visibility = 'visible';

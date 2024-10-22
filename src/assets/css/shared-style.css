@@ -1,8 +1,7 @@
 @media screen and (max-width: 767px) {
     
 	.container {
-		max-width: 100% !important;
-		width: 100% !important;
+		max-width: calc(100% - 4em);
 	}
 
     .row {
@@ -106,13 +105,13 @@
 }
 
 
-/* Container */
+/* Container 
 
 .container {
     margin: 0 auto;
     max-width: calc(100% - 4em);
     width: 80em;
-}
+}*/
 
 header.major {
 	margin: 0 0 1em 0;
