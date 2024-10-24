@@ -23,8 +23,11 @@ export class CardPaymentComponent implements OnInit {
   private baseUrl = environment.baseUrl;
   private appId = environment.applicationId;
   private statusContainer: any;
+  public quantity10: number = 0;
+  public quantity15: number = 0;
   private proceedToPaymentButton: HTMLButtonElement | null = null;
   private paymentFormContainer: HTMLButtonElement | null = null;
+  private quantityInputs: NodeListOf<HTMLInputElement> | null = null;
 
 
   async ngOnInit(): Promise<void> {
@@ -33,43 +36,10 @@ export class CardPaymentComponent implements OnInit {
     } catch (e) {
       console.error('Error during Square initialization', e);
     }
-
-    // Ensure total price is updated on quantity change
-    const quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
-    quantityInputs.forEach(input => {
-      input.addEventListener('input', () => this.updateTotalPrice());
-    });
-
-    this.proceedToPaymentButton = document.getElementById('proceed-to-payment-button') as HTMLButtonElement | null;
-    this.updateProceedButtonState();
-
-    // Handle click event on Proceed to Payment button
-     
-      if (this.proceedToPaymentButton) {
-        this.proceedToPaymentButton.addEventListener('click', () => {
-          this.paymentFormContainer = document.getElementById('payment-form-container')as HTMLButtonElement | null;
-          if (this.paymentFormContainer) {
-            // Show the payment form when the button is clicked
-            this.paymentFormContainer.style.display = 'block';
-          }
-        });
-      }
-      
-    
+    this.takeInputsValues();  
   }
 
-  private updateProceedButtonState() {
-    if (this.proceedToPaymentButton) {
-      if (this.totalAmount > 0) {
-        this.proceedToPaymentButton.disabled = false; // Enable the button
-      } else {
-        this.proceedToPaymentButton.disabled = true;  // Disable the button
-        if(this.paymentFormContainer)
-           // hide the payment form when the totalAmont is equal to zero
-          this.paymentFormContainer.style.display = 'none';
-      }
-    }
-  }
+
   private async initializeSquare() : Promise<void>{
     if (!window.Square) {
       throw new Error('Square.js failed to load properly');
@@ -108,15 +78,69 @@ export class CardPaymentComponent implements OnInit {
     }
   }
 
-  private updateTotalPrice() {
-    const quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
-    let totalPrice = 0;
-
-    quantityInputs.forEach(input => {
-      const price = parseFloat(input.getAttribute('data-price') || '0');
-      const quantity = parseInt(input.value, 10);
-      totalPrice += price * quantity;
+  private async takeInputsValues(){
+    // Ensure total price is updated on quantity change
+    this.quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
+    this.quantityInputs.forEach(input => {
+    
+      // Update total price when the value changes
+     input.addEventListener('blur', () => this.updateTotalPrice());
     });
+
+    this.proceedToPaymentButton = document.getElementById('proceed-to-payment-button') as HTMLButtonElement | null;
+    this.updateProceedButtonState();
+
+    // Handle click event on Proceed to Payment button
+    if (this.proceedToPaymentButton) {
+      this.proceedToPaymentButton.addEventListener('click', () => {
+        this.paymentFormContainer = document.getElementById('payment-form-container') as HTMLButtonElement | null;
+        if (this.paymentFormContainer) {
+          // Show the payment form when the button is clicked
+          this.paymentFormContainer.style.display = 'block';
+        }
+      });
+    }
+}
+
+private updateProceedButtonState() {
+  if (this.proceedToPaymentButton) {
+    if (this.totalAmount > 0) {
+      this.proceedToPaymentButton.disabled = false; // Enable the button
+    } else {
+      this.proceedToPaymentButton.disabled = true;  // Disable the button
+      if(this.paymentFormContainer)
+         // hide the payment form when the totalAmont is equal to zero
+        this.paymentFormContainer.style.display = 'none';
+    }
+  }
+}
+  private updateTotalPrice() {
+  
+    let totalPrice = 0;
+  
+    if(this.quantityInputs)
+      this.quantityInputs.forEach(input => {
+
+        const price = parseFloat(input.getAttribute('data-price') || '0');
+        let quantity = parseInt(input.value, 10);
+        if(quantity != 0){
+          if (input.id === 'quantity10'){
+          
+            if(quantity < 10){
+              quantity = 10;
+              input.value = '10';
+            }
+             
+          }else if(input.id === 'quantity15'){
+            if(quantity < 15){
+              quantity = 15;
+              input.value = '15';
+            }
+             
+          }
+        }
+        totalPrice += price * quantity;
+      });
 
     this.totalAmount = totalPrice;
     document.getElementById('total-price')!.innerText = totalPrice.toFixed(2);

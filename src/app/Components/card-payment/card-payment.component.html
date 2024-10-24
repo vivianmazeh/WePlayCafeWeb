@@ -41,7 +41,17 @@
           <p class="card-text">$13.00 per booking</p>
           <div class="input-group mb-3">
             <span class="input-group-text">Qty</span>
-            <input type="number" class="form-control quantity-input" id="quantity3" min="10" value="0" data-price="13.00">
+            <input type="number" 
+                  class="form-control quantity-input" 
+                  [value]="quantity10"
+                  min="10" 
+                  id="quantity10"
+                  inputmode="numeric" 
+                  pattern="[0-9]*"
+                  value="0" 
+                  data-price="13.00"
+                 
+                  >
           </div>
         </div>
       </div>
@@ -53,10 +63,20 @@
         <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
         <div class="card-body">
           <h5 class="card-title" style="font-size: 15px;">Group Rate (over 15 Children)</h5>
-          <p class="card-text">$12.00 per booking</p>
+          <p class="card-text">$11.00 per booking</p>
           <div class="input-group mb-3">
             <span class="input-group-text">Qty</span>
-            <input type="number" class="form-control quantity-input" id="quantity3" min="15" value="0" data-price="12.00">
+            <input type="number" 
+                   class="form-control quantity-input" 
+                   id="quantity15" 
+                   [value]="quantity15"
+                   min="15" 
+                   value="0" 
+                   inputmode="numeric" 
+                   pattern="[0-9]*"
+                   data-price="11.00"
+                  
+                   >
           </div>
         </div>
       </div>

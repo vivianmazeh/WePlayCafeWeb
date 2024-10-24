@@ -18,7 +18,7 @@ export class PriceComponent {
       monthly_three: 165,
       monthly_four: 195,
       group_10: 13,
-      group_15: 12,
+      group_15: 11,
     
     };  
   }
