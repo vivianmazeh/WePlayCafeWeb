@@ -16,10 +16,11 @@ import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
-
+import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
+import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CityProfileComponent } from './Components/city-profile/city-profile.com
     GalleryComponent,
     ContactUsComponent,
     CityProfileComponent,
-    BookPartySelectDateComponent
+    BookPartySelectDateComponent,
+    CardPaymentComponent
 
   ],
   imports: [
@@ -49,8 +51,8 @@ import { CityProfileComponent } from './Components/city-profile/city-profile.com
     FormsModule,
     NgbCollapseModule,
     GoogleMapsModule,
-    FullCalendarModule
-
+    FullCalendarModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

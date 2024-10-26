@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/env';
+
 var cors = require('cors');
 
 declare global {
@@ -18,6 +19,7 @@ export class CardPaymentComponent implements OnInit {
   
   private payments: any;
   private card: any;
+  public price: any;
   public totalAmount: number = 0; // Initial total
   private locationId = environment.locationId;
   private baseUrl = environment.baseUrl;
@@ -27,10 +29,19 @@ export class CardPaymentComponent implements OnInit {
   public quantity15: number = 0;
   private proceedToPaymentButton: HTMLButtonElement | null = null;
   private paymentFormContainer: HTMLButtonElement | null = null;
+  public videoOverPlay: HTMLButtonElement | null = null;
   private quantityInputs: NodeListOf<HTMLInputElement> | null = null;
+  public isVideoVisible: boolean = false;  // Controls video visibility
+
 
 
   async ngOnInit(): Promise<void> {
+    this.price = {   
+      monthly_one: 60,
+      monthly_two: 115,
+      monthly_three: 165,
+      monthly_four: 195,  
+    };  
     try {
       await this.initializeSquare();
     } catch (e) {
@@ -267,6 +278,15 @@ private updateProceedButtonState() {
       console.error(e);
     }
   }
+  
+  
+  openVideo() {
+    this.isVideoVisible = true;
+  }
 
+  closeVideo() {
+    this.isVideoVisible = false;
+  }
+  
 
 }

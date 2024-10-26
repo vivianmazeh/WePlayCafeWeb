@@ -1,120 +1,234 @@
 <div class="container mt-5">
-  <!-- Services Section -->
-  <div class="row">
-    <!-- Service Card 2 -->
-   <div class="col-sm">
-    <div class="card shadow-sm service-option">
-      <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
-      <div class="card-body">
-        <h5 class="card-title">Three Hours Pass</h5>
-        <h6 class="card-title">One Child and One Adult</h6>
-        <p class="card-text">$15.99 per pass</p>
-        <div class="input-group mb-3">
-          <span class="input-group-text">Qty</span>
-          <input type="number" class="form-control quantity-input" id="quantity2" min="0" value="0" data-price="15.99">
-        </div>
+
+   <!-- Subscrilption Services Section -->
+  <div  class="ticket-section" >
+    
+    <div class="section-header">
+      <div class="section-header-top">
+        <span class="section-header-top-title">Membership</span>
+      </div>
+      <div class="section-header-buttom">
+          <div class="section-header-buttom-content">
+            <p class="align-left"> <strong>Unlimited Entry</strong>– Visit as often as you like!</p>
+            <p class="align-left"> <strong>NO restrictions</strong>– Enjoy any day, including weekends.</p>
+            <p class="align-left"> <strong>Access to Events & Classes</strong> – Free with all materials provided!</p>
+            <p  class="align-left"><strong>Please click <button type="button"  (click)="openVideo()" class="btn btn-link">Our activities</button></strong></p>
+          </div>
+          <div class="video-overlay" id="videoOverlay"  *ngIf="isVideoVisible">
+            <div class="video-container">
+              <button class="close-button" (click)="closeVideo()">×</button>
+              <video controls autoplay>
+                <source src="assets/video/activities.mp4" type="video/mp4">         
+              </video>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="columns">
+        <ul class="price">
+          <li class="header">
+            <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
+          </li>
+          <li class="grey">Membership for one child</li>
+          <li class="grey"><strong>$ 60 / month</strong></li>
+          <li class="grey" style="height: 55px;"><a href="#" class="button">Sign Up</a></li>
+        </ul>
+      </div>
+
+      <div class="columns">
+        <ul class="price">
+          <li class="header">
+            <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
+          </li>
+          <li class="grey">Membership for two children</li>
+          <li class="grey"><strong>$ 115 / month</strong></li>
+          <li class="grey" style="height: 55px;"><a href="#" class="button">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="columns">
+        <ul class="price">
+          <li class="header">
+            <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
+          </li>
+          <li class="grey">Membership for three children</li>
+          <li class="grey"><strong>$ 165 / month</strong></li>
+          <li class="grey" style="height: 55px;"><a href="#" class="button">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="columns">
+        <ul class="price">
+          <li class="header">
+            <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
+          </li>
+          <li class="grey">Membership for four children</li>
+          <li class="grey"><strong>$ 195 / month</strong></li>
+          <li class="grey" style="height: 55px;"><a href="#" class="button">Sign Up</a></li>
+        </ul>
       </div>
     </div>
   </div>
 
-    <!-- Service Card 1 -->
-    <div class="col-sm">
-      <div class="card shadow-sm service-option">
-        <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Addtional Adult Pass</h5>
-          <p class="card-text">$8.00 per pass</p>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Qty</span>
-            <input type="number" class="form-control quantity-input" id="quantity1" min="0" value="0" data-price="8.00">
-          </div>
+  <div class="ticket-section">
+    <div class="section-header">
+      <div class="section-header-top">
+        <span class="section-header-top-title">Tickets</span>
+      </div>
+      <div class="section-header-buttom">
+        <div class="section-header-buttom-content">
+          <p class="align-left"><strong>3-Hour Playtime Limit.</strong></p>
+          <p class="align-left"><strong>No Expiration</strong> — Pass valid from 10 AM - 8 PM.</p>
+          <p class="align-left"><strong>Adult Supervision Required.</strong></p>
+          <p class="align-left"><strong>Waiver Required.</strong> Please Sign online for a quick and easy check-in. </p>          
         </div>
+       
       </div>
     </div>
 
-    <!-- Service Card 3 -->
-    <div class="col-sm">
-      <div class="card shadow-sm service-option">
-        <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
-        <div class="card-body">
-          <h5 class="card-title" style="font-size: 15px;">Group Rate (over 10 Children)</h5>
-          <p class="card-text">$13.00 per booking</p>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Qty</span>
-            <input type="number" 
-                  class="form-control quantity-input" 
-                  [value]="quantity10"
-                  min="10" 
-                  id="quantity10"
-                  inputmode="numeric" 
-                  pattern="[0-9]*"
-                  value="0" 
-                  data-price="13.00"
-                 
-                  >
-          </div>
-        </div>
-      </div>
+    <div class="section-body">
+    
+        <ul class="price">
+          <li class="header" style ="border: #eee solid 1px;">
+            <img class="responsive" src="assets/icons/weplay/__Linkedin Cover.jpg" class="card-img-top" >
+          </li>
+          <li class="grey d-flex">
+            <div class="grey-left flex-grow-1">
+              <p class="grey-left-content">Children 6 months and older  <strong>$15.99</strong></p>
+            </div>
+            <div class="grey-right">
+              <div class="input-group" style="padding-right: 15px;">
+                <span class="input-group-text">Qty</span>
+                <input type="number" class="form-control quantity-input" id="quantity2" min="0" value="0" data-price="15.99">
+              </div>  
+            </div>            
+          </li>
+          <li class="d-flex">
+            <div class="grey-left flex-grow-1">
+              <p class="grey-left-content">Children Under 6 months  <strong>Free Admission</strong> </p>
+            </div>
+            <div class="grey-right">
+              <div class="input-group" style="padding-right: 15px;">
+                <span class="input-group-text">Qty</span>
+                <input type="number" class="form-control quantity-input" id="quantity3" min="0" value="0" data-price="0.0">
+              </div>  
+            </div> 
+          </li>
+          <li class="grey d-flex">
+            <div class="grey-left flex-grow-1">
+              <p class="grey-left-content">Addtional Adult Pass  <strong>$8</strong></p>
+            </div>
+            <div class="grey-right">
+              <div class="input-group" style="padding-right: 15px;">
+                <span class="input-group-text">Qty</span>
+                <input type="number" class="form-control quantity-input" id="quantity1" min="0" value="0" data-price="8.00">
+              </div>  
+            </div>            
+          </li>
+          <li class="d-flex">
+            <div class="grey-left flex-grow-1">
+              <p class="grey-left-content">Group Rate (over 10 Children)  <strong>$13.00 per booking</strong> </p>
+            </div>
+            <div class="grey-right">
+              <div class="input-group" style="padding-right: 15px;">
+                <span class="input-group-text">Qty</span>
+                <input type="number" 
+                          class="form-control quantity-input" 
+                          [value]="quantity10"
+                          min="10" 
+                          id="quantity10"
+                          inputmode="numeric" 
+                          pattern="[0-9]*"
+                          value="0" 
+                          data-price="13.00">
+              </div>  
+            </div> 
+          </li>
+          <li class="grey d-flex" >
+            <div class="grey-left flex-grow-1">
+              <p class="grey-left-content">Group Rate (over 15 Children)  <strong>$11.00 per booking</strong></p>
+            </div>
+            <div class="grey-right">
+              <div class="input-group" style="padding-right: 15px;">
+                <span class="input-group-text">Qty</span>
+                <input type="number" 
+                          class="form-control quantity-input" 
+                          id="quantity15" 
+                          [value]="quantity15"
+                          min="15" 
+                          value="0" 
+                          inputmode="numeric" 
+                          pattern="[0-9]*"
+                          data-price="11.00" >
+              </div>  
+            </div>            
+          </li>
+        </ul>
+    
     </div>
+  </div>
+  <div class="ticket-section" id = "proceed-to-payment-button">
+    <div class="section-header">
+      <div class="section-header-top">
+        <span class="section-header-top-title">Your Order</span>
+      </div>
+      <div class="section-header-buttom">
+        <div class="section-header-buttom-content">
+          <p class="align-left"> <strong></strong></p>
+          <p class="align-left"> <strong></strong></p>
+          <p class="align-left"> <strong>Total Price:</strong>$<span id="total-price">0.00</span></p>
+        </div>
+     
+    </div>
+    </div>
+    <div class="section-body">
+      <!-- Total Price and Proceed Button 
+      <div class="text-center">
+       
+        <button class="btn payment-button" id="proceed-to-payment-button" type="button">Proceed to Payment</button>
+      </div> -->
+      <div class="section-header-buttom">
+        <div class="section-header-buttom-content">
+          <p class="align-left">Please click
+            <a href="#" routerLink = "/waiver">
+              <span style="color: #4878a3; ">Online Waiver</span>
+            </a> to sign 
+          </p>
+          <p class="align-left">Walk-ins always welcome!</p>
+        </div>
 
-    <!-- Service Card 4 -->
-    <div class="col-sm">
-      <div class="card shadow-sm service-option">
-        <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
-        <div class="card-body">
-          <h5 class="card-title" style="font-size: 15px;">Group Rate (over 15 Children)</h5>
-          <p class="card-text">$11.00 per booking</p>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Qty</span>
-            <input type="number" 
-                   class="form-control quantity-input" 
-                   id="quantity15" 
-                   [value]="quantity15"
-                   min="15" 
-                   value="0" 
-                   inputmode="numeric" 
-                   pattern="[0-9]*"
-                   data-price="11.00"
-                  
-                   >
-          </div>
-        </div>
       </div>
+      
     </div>
   </div>
-  <div class="description-card-payment">
-    <p>Please sign the 
-      <a href="#" routerLink = "/waiver">
-        <span style="color: #4878a3; ">Online Waiver</span>
-      </a> to ensure a seamless check-in experience
-    </p>
-    <p>Walk-ins always welcome!</p>
-  </div>
-  <!-- Total Price and Proceed Button -->
-  <div class="text-center mt-4">
-    <h4 class="description-card-payment">Total Price: $<span id="total-price">0.00</span></h4>
-    <button class="btn payment-button" id="proceed-to-payment-button" type="button">Proceed to Payment</button>
-  </div>
+
+  <div class="ticket-section">
+    <div class="section-header">
+      <div class="section-header">
+        <div class="section-header-top">
+          <span class="section-header-top-title">Purchaser Information</span>
+        </div>
+    </div>
+    <div class="section-body">
 
   <!-- Payment Form -->
-  <div id="payment-form-container" class="mt-5" style="display:none;">
-   
-    <h4 class="text-center mb-4">Payment Details</h4>
-   
-    <form id="payment-form">
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" name="firstName" required />
-
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" name="lastName" required />
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      <div id="payment-form-container" class="mt-5" style="display:none;"> 
       
-      <div id="card-container"></div>
-      <button id="card-button" type="button" class="btn payment-button">Pay Now</button>
-    </form>
+        <form id="payment-form">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
 
-    <div id="payment-status-container" class="mt-3"></div>
-  </div>
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          
+          <div id="card-container"></div>
+          <button id="card-button" type="button" class="btn payment-button">Pay Now</button>
+        </form>
+
+        <div id="payment-status-container" class="mt-3"></div>
+      </div>
+    </div>
+</div>
 </div>
