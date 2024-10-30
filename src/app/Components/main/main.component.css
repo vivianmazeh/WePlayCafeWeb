@@ -9,7 +9,7 @@
 /* Media query for desktop/tablet screens */
 @media screen and (min-width: 1025px) {
     .main{
-      
+    
         align-self: center;
         width: 100%;
     }

@@ -44,10 +44,15 @@
   }
 
   @media (min-width: 768px) and (max-width: 1024px){
-
+    .page-header{
+      padding-top: 25px;
+    }
   }
 /* Media query for desktop/tablet screens */
 @media screen and (min-width: 1025px) {
+  .page-header{
+    padding-top: 25px;
+  }
   .page-footer{
     background-color:#4878a3;
     height: 5%;

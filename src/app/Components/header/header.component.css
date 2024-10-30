@@ -1,9 +1,10 @@
-
 .header-container{
     display: flex;
     flex-direction: row;
     height: auto;   
+    padding-bottom: 18px;  
 }
+
 .header-container-text{
     width: auto;
     flex: 1 1 auto;
@@ -308,7 +309,7 @@ nav{
   }
 
   @media (min-width: 821px) and (max-width: 1024px){
-
+ 
     nav{
         background-color:  #4878a3;
     }

@@ -135,17 +135,13 @@
   #payment-status-container.is-failure.store-card-message:after {
     content: 'Store card failed';
   }
-  input:focus {
+  select:focus {
     border: 1px solid #006aff;
   } 
 
-  /* Force the up/down arrows to appear */
-input[type=number] {
-  -moz-appearance: textfield; /* For Firefox */
-}
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+select::-webkit-inner-spin-button,
+select::-webkit-outer-spin-button {
   -webkit-appearance: inner-spin-button !important;
   appearance: inner-spin-button !important;
   display: inline-block !important; /* Show on mobile */
@@ -231,13 +227,40 @@ input[type=number]::-webkit-outer-spin-button {
     }
     .section-header-buttom-content{
       width: 100%;   
+    } 
+    .grey-right{
+      width: 70%;
+    }
+    .video-container {
+      width: 100vw;  /* Full screen width on mobile */
+      max-width: 100vw;
+    }
+  
+    .video-container video {
+      width: 100%;
+      height: auto;
     }
     
+    .close-button {
+      top: 15px;
+      right: 15px;
+      font-size: 20px;
+    }
+    .card-img-top{
+      height: 100px;
+    }
   }
 
   @media screen and (min-width: 601px ){
     .section-header-buttom-content{
       width: 38%;
+    }
+    .grey-right{
+      width: 15%;
+    }
+    .card-img-top{
+      height: 100px;
+      width: auto;
     }
   }
   .section-header{
@@ -304,10 +327,7 @@ input[type=number]::-webkit-outer-spin-button {
   justify-content: center; /* Centers child elements horizontally */
   box-sizing: border-box;
 }
-.card-img-top{
-  height: 100px;
-  width: auto;
-}
+
 
 .video-overlay {
   display: flex;
@@ -329,22 +349,4 @@ input[type=number]::-webkit-outer-spin-button {
   border: none;
   color: white;
   cursor: pointer;
-}
-/* Media query for smaller devices */
-@media (max-width: 600px) {
-  .video-container {
-    width: 100vw;  /* Full screen width on mobile */
-    max-width: 100vw;
-  }
-
-  .video-container video {
-    width: 100%;
-    height: auto;
-  }
-  
-  .close-button {
-    top: 15px;
-    right: 15px;
-    font-size: 20px;
-  }
 }

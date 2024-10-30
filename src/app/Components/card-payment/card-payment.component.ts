@@ -20,19 +20,22 @@ export class CardPaymentComponent implements OnInit {
   private payments: any;
   private card: any;
   public price: any;
-  public totalAmount: number = 0; // Initial total
+  public totalPrice: number = 0; // Initial total
   private locationId = environment.locationId;
   private baseUrl = environment.baseUrl;
   private appId = environment.applicationId;
   private statusContainer: any;
-  public quantity10: number = 0;
-  public quantity15: number = 0;
   private proceedToPaymentButton: HTMLButtonElement | null = null;
   private paymentFormContainer: HTMLButtonElement | null = null;
   public videoOverPlay: HTMLButtonElement | null = null;
-  private quantityInputs: NodeListOf<HTMLInputElement> | null = null;
   public isVideoVisible: boolean = false;  // Controls video visibility
+  group15Options: number[] = [0,15,16, 17, 18, 19,20,21,22,23,24,25,26,27,
+                              28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]; 
 
+  group10Options: number[] = [0,10, 11, 12, 13, 14]; 
+  dailyPassOptions: number[] = [0,1,2,3,4,5,6,7,8,9]; 
+  additionalPass: number[] = [0,1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14,15,16, 17, 18, 19,20];
+  selectedOption = 0;
 
 
   async ngOnInit(): Promise<void> {
@@ -47,7 +50,7 @@ export class CardPaymentComponent implements OnInit {
     } catch (e) {
       console.error('Error during Square initialization', e);
     }
-    this.takeInputsValues();  
+   this.takeInputsValues();
   }
 
 
@@ -90,12 +93,12 @@ export class CardPaymentComponent implements OnInit {
   }
 
   private async takeInputsValues(){
-    // Ensure total price is updated on quantity change
-    this.quantityInputs = document.querySelectorAll('.quantity-input') as NodeListOf<HTMLInputElement>;
-    this.quantityInputs.forEach(input => {
+    const selectElements = document.querySelectorAll<HTMLSelectElement>('.form-select');
+    selectElements.forEach(select => {
     
       // Update total price when the value changes
-     input.addEventListener('blur', () => this.updateTotalPrice());
+     select.addEventListener('change', () => this.updateTotalPrice());
+
     });
 
     this.proceedToPaymentButton = document.getElementById('proceed-to-payment-button') as HTMLButtonElement | null;
@@ -113,9 +116,9 @@ export class CardPaymentComponent implements OnInit {
     }
 }
 
-private updateProceedButtonState() {
+public updateProceedButtonState() {
   if (this.proceedToPaymentButton) {
-    if (this.totalAmount > 0) {
+    if (this.totalPrice > 0) {
       this.proceedToPaymentButton.disabled = false; // Enable the button
     } else {
       this.proceedToPaymentButton.disabled = true;  // Disable the button
@@ -125,39 +128,45 @@ private updateProceedButtonState() {
     }
   }
 }
-  private updateTotalPrice() {
+public updateTotalPrice() {
   
-    let totalPrice = 0;
+  this.totalPrice = 0;
+  const selectElements = document.querySelectorAll<HTMLSelectElement>('.form-select');
+  const orderDetailsBody = document.getElementById('order-details-body');
+  if (!orderDetailsBody) return;
+
+  // Clear the table before updating
+  orderDetailsBody.innerHTML = '';
+
+  selectElements.forEach(select => {
+    const price = parseFloat(select.getAttribute('data-price') || '0');
+    const quantity = parseInt(select.value, 10) || 0;
+    const sectionName = select.getAttribute('aria-label') || 'Section';
   
-    if(this.quantityInputs)
-      this.quantityInputs.forEach(input => {
+    if (quantity > 0) {
+      const sectionTotal = price * quantity;
+      this.totalPrice += sectionTotal;
 
-        const price = parseFloat(input.getAttribute('data-price') || '0');
-        let quantity = parseInt(input.value, 10);
-        if(quantity != 0){
-          if (input.id === 'quantity10'){
-          
-            if(quantity < 10){
-              quantity = 10;
-              input.value = '10';
-            }
-             
-          }else if(input.id === 'quantity15'){
-            if(quantity < 15){
-              quantity = 15;
-              input.value = '15';
-            }
-             
-          }
-        }
-        totalPrice += price * quantity;
-      });
+      // Append a row to the table for the current selection
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>${sectionName}</td>
+          <td>$${price.toFixed(2)}</td>
+          <td>${quantity}</td>
+          <td>$${sectionTotal.toFixed(2)}</td>
+      `;
+      orderDetailsBody.appendChild(row);
+  }
+  });
+   
+    document.getElementById('total-price')!.innerText = this.totalPrice.toFixed(2);
 
-    this.totalAmount = totalPrice;
-    document.getElementById('total-price')!.innerText = totalPrice.toFixed(2);
+    
 
     this.updateProceedButtonState();
   }
+ 
+
 
   private async initializeCard(payments: any): Promise<any> {
     this.card = await payments.card();
@@ -171,7 +180,7 @@ private updateProceedButtonState() {
       sourceId: token,
       idempotencyKey: window.crypto.randomUUID(),
       amountMoney: {
-        amount: Math.round(this.totalAmount * 100), // Amount in cents
+        amount: Math.round(this.totalPrice * 100), // Amount in cents
         currency: 'USD'
       }
     });
