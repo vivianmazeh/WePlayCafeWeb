@@ -350,3 +350,7 @@ select::-webkit-outer-spin-button {
   color: white;
   cursor: pointer;
 }
+.required-symbol {
+  color: red;
+  font-weight: bold;
+}
