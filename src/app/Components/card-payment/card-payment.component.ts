@@ -382,8 +382,7 @@ private async createCustomer(firstName: string, lastName: string, email: string,
     const customerResponse = await fetch(`${this.baseUrl}customer`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       credentials: 'include',
       mode: 'cors',
