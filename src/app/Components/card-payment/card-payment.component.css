@@ -172,10 +172,6 @@ select::-webkit-outer-spin-button {
     box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
   }
 
-  .price .header {
-
-  }
-  
   .price li {
     padding: 8px;
     text-align: center;
