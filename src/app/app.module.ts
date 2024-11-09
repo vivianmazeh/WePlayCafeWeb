@@ -21,6 +21,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
+import { PaymentSuccessModalComponent } from './Components/payment-success-modal/payment-success-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,9 @@ import { CardPaymentComponent } from './Components/card-payment/card-payment.com
     ContactUsComponent,
     CityProfileComponent,
     BookPartySelectDateComponent,
-    CardPaymentComponent
-
+    CardPaymentComponent,
+    PaymentSuccessModalComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { CardPaymentComponent } from './Components/card-payment/card-payment.com
     NgbCollapseModule,
     GoogleMapsModule,
     FullCalendarModule,
-    CommonModule
+    CommonModule  
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

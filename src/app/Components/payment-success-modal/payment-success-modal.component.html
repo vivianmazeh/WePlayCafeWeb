@@ -1,0 +1,19 @@
+<div class="modal" [class.show]="isOpen" [style.display]="isOpen ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="assets/icons/weplay/weplaylogo4.png">
+        <h5 class="modal-title">Payment Successful!</h5>
+      </div>
+      <div class="modal-body">
+        <p>Thank you for your purchase. A confirmation Email will be sent to you shortly.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button close-button" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add backdrop as a separate element -->
+<div class="modal-backdrop fade show" *ngIf="isOpen"></div>

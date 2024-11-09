@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/env';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 declare global {
@@ -37,8 +38,9 @@ export class CardPaymentComponent implements OnInit {
   dailyPassOptions: number[] = [0,1,2,3,4,5,6,7,8,9]; 
   additionalPass: number[] = [0,1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14,15,16, 17, 18, 19,20];
   selectedOption = 0;
+  public showSuccessModal: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   async ngOnInit(): Promise<void> {
     this.price = {   
       monthly_one: 60,
@@ -334,6 +336,20 @@ public updateTotalPrice() {
       // Clear form
         form.reset();
         form.classList.remove('was-validated');
+         // Reset the card field
+        await this.card.clear();
+
+        // Hide the payment form container
+        if (this.paymentFormContainer) {
+          this.paymentFormContainer.style.display = 'none';
+        }
+
+         // Reset total price
+        this.totalPrice = 0;
+        this.updateTotalPrice();
+
+        // Show success modal
+       this.showSuccessModal = true;
 
     } catch (e) {
       cardButton.disabled = false;
@@ -395,5 +411,11 @@ private async createCustomer(firstName: string, lastName: string, email: string,
     this.isVideoVisible = false;
   }
   
+
+  public handleModalClose(): void {
+    this.showSuccessModal = false;
+    // Navigate to home page
+    this.router.navigate(['/home']);
+  }
 
 }
