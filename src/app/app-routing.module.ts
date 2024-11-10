@@ -11,6 +11,7 @@ import { BookPartySelectDateComponent } from './Components/book-party-select-dat
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
 
+
 // sets up routes constant where you define your routes
 const routes: Routes = [
 
@@ -28,6 +29,7 @@ const routes: Routes = [
             {path: 'select-date', component: BookPartySelectDateComponent}
    ]},
   {path: '', redirectTo: 'home', pathMatch : 'full'},
+
  
 ];
 
