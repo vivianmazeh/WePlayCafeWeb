@@ -22,6 +22,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
 import { PaymentSuccessModalComponent } from './Components/payment-success-modal/payment-success-modal.component';
+import { CustomerServiceService } from './service/customer-service.service';
+import { PaymentServiceService } from './service/payment-service.service';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,7 @@ import { PaymentSuccessModalComponent } from './Components/payment-success-modal
     CityProfileComponent,
     BookPartySelectDateComponent,
     CardPaymentComponent,
-    PaymentSuccessModalComponent
-    
+    PaymentSuccessModalComponent  
   ],
   imports: [
     BrowserModule,

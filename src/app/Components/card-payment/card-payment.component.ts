@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/env';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { cu } from '@fullcalendar/core/internal-common';
+import { PaymentServiceService } from 'src/app/service/payment-service.service';
+import { CustomerServiceService } from 'src/app/service/customer-service.service';
 
 
 declare global {
@@ -40,16 +43,15 @@ export class CardPaymentComponent implements OnInit {
   selectedOption = 0;
   public showSuccessModal: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private paymentService: PaymentServiceService,
+    private customerService: CustomerServiceService,
+    private router: Router
+  ) { }
+
   async ngOnInit(): Promise<void> {
-    this.price = {   
-      monthly_one: 60,
-      monthly_two: 115,
-      monthly_three: 165,
-      monthly_four: 195,  
-    };  
-    this.form = document.getElementById('payment-form') as HTMLFormElement;
-    this.cardButton = document.getElementById('card-button') as HTMLButtonElement;
+    this.initializePrices();
+    this.initializeFormElements();
     try {
       await this.initializeSquare();
     } catch (e) {
@@ -60,6 +62,19 @@ export class CardPaymentComponent implements OnInit {
   this.takeInputsValues();
   }
 
+  private initializePrices(): void {
+    this.price = {
+      monthly_one: 60,
+      monthly_two: 115,
+      monthly_three: 165,
+      monthly_four: 195,
+    };
+  }
+
+  private initializeFormElements(): void {
+    this.form = document.getElementById('payment-form') as HTMLFormElement;
+    this.cardButton = document.getElementById('card-button') as HTMLButtonElement;
+  }
      // Initialize form validation listeners and disable the Pay Now button initially
   private initializeValidationListeners(): void {
    
@@ -179,40 +194,7 @@ public updateTotalPrice() {
     return this.card;
   }
 
-  private async createPayment(token: string, customerId: string): Promise<any> {
- 
-    const body = JSON.stringify({
-      sourceId: token,
-      idempotencyKey: window.crypto.randomUUID(), 
-      amountMoney: {
-        amount: Math.round(this.totalPrice * 100), // Amount in cents
-        currency: 'USD'
-      },
-      customerId: customerId,
-      customer: null
-    });
-    try {
-      const paymentResponse = await fetch(`${this.baseUrl}payment`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors', 
-        body,
-      });
-
-      if (paymentResponse.ok) {
-        return paymentResponse.json();
-      }
-
-      const errorBody = await paymentResponse.text();
-      throw new Error(errorBody);
-    } catch (error) {
-      console.error('Payment failed:', error);
-      throw error;
-  }  
-  }
-
+  
   private async tokenize(paymentMethod: any) {
     const tokenResult = await paymentMethod.tokenize();
     if (tokenResult.status === 'OK') {
@@ -226,32 +208,6 @@ public updateTotalPrice() {
       }
 
       throw new Error(errorMessage);
-    }
-  }
-
-  // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
-  private async verifyBuyer(payments: any, token: string): Promise<string>{
-    const verificationDetails = {
-      amount: (this.totalPrice * 100).toString(),
-      billingContact: {
-        familyName: (document.getElementById('lastName') as HTMLInputElement).value,
-        givenName: (document.getElementById('firstName') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        phoneNo: (document.getElementById('phoneNo') as HTMLInputElement).value
-      },
-      currencyCode: 'USD',
-      intent: 'CHARGE'
-    };
-
-    try {
-      const verificationResults = await payments.verifyBuyer(
-        token,
-        verificationDetails
-      );
-      return verificationResults.token;
-    } catch (error) {
-      console.error('Buyer verification failed:', error);
-      throw error;
     }
   }
 
@@ -281,126 +237,91 @@ public updateTotalPrice() {
     event.preventDefault();
     const cardButton = event.target as HTMLButtonElement;
     cardButton.disabled = true;
+    cardButton.textContent = 'Processing...';
 
     try {
-       // Validate form
-      const form = document.getElementById('payment-form') as HTMLFormElement;
-      if (!form.checkValidity()) {
-        form.classList.add('was-validated');
-        return;
-      }
+      if (!this.validateForm()) return;
 
-      // disable the submit button as we await tokenization and make a payment request.
-      cardButton.disabled = true;
-      cardButton.textContent = 'Processing...';
-     
-       // Collect customer information from form inputs
-       const firstName = (document.getElementById('firstName') as HTMLInputElement).value;
-       const lastName = (document.getElementById('lastName') as HTMLInputElement).value;
-       const email = (document.getElementById('email') as HTMLInputElement).value;
-       const phoneNo = (document.getElementById('phoneNo') as HTMLInputElement).value;
-        
+      const customerInfo = this.getCustomerInfo();
+      const tokenResult = await this.tokenize(card);
       
-       // Tokenize card
-       const tokenResult = await this.tokenize(card);
-       if (!tokenResult) {
-         throw new Error('Card tokenization failed');
-       }
-
-         // Verify buyer
-      const verificationToken = await this.verifyBuyer(this.payments, tokenResult);
-      if (!verificationToken) {
-        throw new Error('Buyer verification failed');
-      }
-
-
-         // Create customer with token
-         const customerResponse = await this.createCustomer(
-          firstName, 
-          lastName, 
-          email, 
-          phoneNo,
-          tokenResult  // Pass the token to createCustomer
-        );
-     
-        if (!customerResponse) {
-          throw new Error('Failed to create customer');
+      const verificationToken = await this.paymentService.verifyBuyer(
+        this.payments,
+        tokenResult,
+        this.totalPrice * 100,
+        {
+          familyName: customerInfo.lastName,
+          givenName: customerInfo.firstName,
+          email: customerInfo.email,
+          phoneNo: customerInfo.phoneNo
         }
+      );
 
-       // Create payment
-      const paymentResults = await this.createPayment(tokenResult, customerResponse.squareCustomerId);
-      
-      this.displayPaymentResults('SUCCESS');
-      console.debug('Payment Success', paymentResults);
+      const customerResponse = await this.customerService.createCustomer({
+        sourceId: tokenResult,
+        ...customerInfo
+      }).toPromise();
 
-      // Clear form
-        form.reset();
-        form.classList.remove('was-validated');
-         // Reset the card field
-        await this.card.clear();
+      await this.paymentService.createPayment(
+        tokenResult,
+        customerResponse.squareCustomerId,
+        this.totalPrice
+      ).toPromise();
 
-        // Hide the payment form container
-        if (this.paymentFormContainer) {
-          this.paymentFormContainer.style.display = 'none';
-        }
-
-         // Reset total price
-        this.totalPrice = 0;
-        this.updateTotalPrice();
-
-        // Show success modal
-       this.showSuccessModal = true;
-
+      this.handlePaymentSuccess();
     } catch (e) {
-      cardButton.disabled = false;
-      this.displayPaymentResults('FAILURE');
-      console.error('Payment submission failed:',e);
-    } finally{
-      cardButton.disabled = false; // Re-enable button
-      cardButton.textContent = 'Pay Now';
+      this.handlePaymentError(e);
+    } finally {
+      this.resetCardButton(cardButton);
     }
   }
   
-  // In card-payment.component.ts
-
-private async createCustomer(firstName: string, lastName: string, email: string, phoneNo: string, token: string): Promise<any> {
-  const body = JSON.stringify({
-    sourceId: token,
-    idempotencyKey: window.crypto.randomUUID(), // Added idempotency key
-    amountMoney: null,
-    customerId: null,
-    customer: {
-      givenName: firstName,
-      familyName: lastName,
-      emailAddress: email,
-      phoneNumber: phoneNo,
-    },
-   
-  });
-
-  try {
-    const customerResponse = await fetch(`${this.baseUrl}customer`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      mode: 'cors',
-      body,
-    });
-
-    if (!customerResponse.ok) {
-      const errorText = await customerResponse.text();
-      throw new Error(`Failed to create customer: ${errorText}`);
+  private validateForm(): boolean {
+    const form = document.getElementById('payment-form') as HTMLFormElement;
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return false;
     }
-
-    return customerResponse.json();
-  } catch (error) {
-    console.error('Customer creation failed:', error);
-    throw error;
+    return true;
   }
-}
 
+  private getCustomerInfo() {
+    return {
+      firstName: (document.getElementById('firstName') as HTMLInputElement).value,
+      lastName: (document.getElementById('lastName') as HTMLInputElement).value,
+      email: (document.getElementById('email') as HTMLInputElement).value,
+      phoneNo: (document.getElementById('phoneNo') as HTMLInputElement).value
+    };
+  }
+  // In card-payment.component.ts
+  private handlePaymentSuccess(): void {
+    this.displayPaymentResults('SUCCESS');
+    this.resetForm();
+    this.showSuccessModal = true;
+  }
+
+  private handlePaymentError(error: any): void {
+    console.error('Payment submission failed:', error);
+    this.displayPaymentResults('FAILURE');
+  }
+
+  private resetCardButton(button: HTMLButtonElement): void {
+    button.disabled = false;
+    button.textContent = 'Pay Now';
+  }
+
+  private resetForm(): void {
+    if (this.form) {
+      this.form.reset();
+      this.form.classList.remove('was-validated');
+    }
+    this.card.clear();
+    if (this.paymentFormContainer) {
+      this.paymentFormContainer.style.display = 'none';
+    }
+    this.totalPrice = 0;
+    this.updateTotalPrice();
+  }
 
   openVideo() {
     this.isVideoVisible = true;
