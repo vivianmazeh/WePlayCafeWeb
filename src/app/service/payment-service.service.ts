@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/env';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -36,12 +36,13 @@ export class PaymentServiceService {
       withCredentials: true,
       observe: 'response' 
     }).pipe(
-        map(response => response.body),
+      
         catchError(error => {
 
           if (error.status === 301 || error.status === 302) {
             const redirectUrl = error.headers.get('Location');
             if (redirectUrl) {
+              console.log('Following redirect to:', redirectUrl);
               // Follow the redirect
               return this.http.post(redirectUrl, body, {
                 headers: new HttpHeaders({
@@ -59,8 +60,9 @@ export class PaymentServiceService {
             headers: error.headers,
             error: error.error
           });
-          throw error;
-        })
+          return throwError(() => error);
+        }),
+        map(response => 'body' in response ? response.body : response)
     );
   }
 
