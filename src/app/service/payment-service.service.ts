@@ -53,7 +53,7 @@ export class PaymentServiceService {
               });
             }
           }
-          console.error('Customer API Error:', {
+          console.error('Payment API Error:', {
             status: error.status,
             statusText: error.statusText,
             url: error.url,
