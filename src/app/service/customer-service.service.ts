@@ -12,7 +12,11 @@ export class CustomerServiceService {
 
   constructor(private http: HttpClient) {
     // Ensure baseUrl is properly formatted without trailing slash
-    this.baseUrl = environment.baseUrl.replace(/\/$/, '');
+    const currentOrigin = window.location.origin;
+    this.baseUrl = currentOrigin.includes('www') 
+      ? environment.baseUrl 
+      : environment.baseUrl.replace('www.', '');
+    
     console.log('Using base URL:', this.baseUrl);
   }
 
@@ -39,17 +43,17 @@ export class CustomerServiceService {
     return this.tryEndpoints(body);
   }
 
+
   private tryEndpoints(body: any): Observable<any> {
     const endpoints = [
-      '/customer',    // Try without trailing slash first
-      '/customer/',   // Try with trailing slash if first attempt fails
+      '/customer',
+      '/customer/'
     ];
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      'Origin': window.location.origin // Add origin header explicitly
+      'X-Requested-With': 'XMLHttpRequest'
     });
 
     return this.tryNextEndpoint(endpoints, 0, body, headers);
@@ -66,16 +70,25 @@ export class CustomerServiceService {
 
     return this.makeRequest(url, body, headers).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log(`Request to ${url} failed with status ${error.status}`);
-        if (error.status === 301 || error.status === 302 || error.status === 404 || error.status === 0) {
-          // Also catch status 0 which often indicates CORS issues
+        console.error(`Request to ${url} failed:`, error);
+        
+        // Handle specific error cases
+        if (error.status === 301 || error.status === 302) {
+          const redirectUrl = error.headers.get('Location');
+          if (redirectUrl) {
+            console.log(`Following redirect to: ${redirectUrl}`);
+            return this.makeRequest(redirectUrl, body, headers);
+          }
+        }
+        
+        if (error.status === 404 || error.status === 0) {
           return this.tryNextEndpoint(endpoints, index + 1, body, headers);
         }
+        
         return throwError(() => error);
       })
     );
   }
-
   private makeRequest(url: string, body: any, headers: HttpHeaders): Observable<any> {
     return this.http.post(url, body, {
       headers,
