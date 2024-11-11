@@ -9,9 +9,10 @@ import { catchError, map, Observable, throwError, retry, timer } from 'rxjs';
 export class CustomerServiceService {
   private baseUrl: string;
   private readonly maxRetries = 3;
+  private readonly API_PREFIX = '/api'; // Add API prefix
 
   constructor(private http: HttpClient) {
-    // Ensure baseUrl is properly formatted without trailing slash
+    // Use the current window location origin to determine the API base URL
     const currentOrigin = window.location.origin;
     this.baseUrl = currentOrigin.includes('www') 
       ? environment.baseUrl 
@@ -43,11 +44,10 @@ export class CustomerServiceService {
     return this.tryEndpoints(body);
   }
 
-
   private tryEndpoints(body: any): Observable<any> {
     const endpoints = [
-      '/customer',
-      '/customer/'
+      `${this.API_PREFIX}/customer`,      // Try with API prefix
+      `${this.API_PREFIX}/customer/`
     ];
 
     const headers = new HttpHeaders({
@@ -81,6 +81,12 @@ export class CustomerServiceService {
           }
         }
         
+        // Check if we received HTML instead of JSON
+        if (typeof error.error === 'string' && error.error.includes('<!doctype html>')) {
+          console.log('Received HTML response, trying next endpoint');
+          return this.tryNextEndpoint(endpoints, index + 1, body, headers);
+        }
+        
         if (error.status === 404 || error.status === 0) {
           return this.tryNextEndpoint(endpoints, index + 1, body, headers);
         }
@@ -89,6 +95,7 @@ export class CustomerServiceService {
       })
     );
   }
+
   private makeRequest(url: string, body: any, headers: HttpHeaders): Observable<any> {
     return this.http.post(url, body, {
       headers,
@@ -98,33 +105,17 @@ export class CustomerServiceService {
       retry({
         count: this.maxRetries,
         delay: (error, retryCount) => {
-          // Exponential backoff with jitter
+          if (typeof error.error === 'string' && error.error.includes('<!doctype html>')) {
+            return timer(0); // Don't retry HTML responses
+          }
+          const baseDelay = Math.min(1000 * Math.pow(2, retryCount), 5000);
           const jitter = Math.random() * 1000;
-          const delay = Math.min(1000 * Math.pow(2, retryCount) + jitter, 10000);
-          console.log(`Retrying request attempt ${retryCount + 1} after ${delay}ms`);
-          return timer(delay);
-        }
+          return timer(baseDelay + jitter);
+        },
+        resetOnSuccess: true
       }),
       catchError((error: HttpErrorResponse) => {
-        console.error('Request failed:', {
-          status: error.status,
-          statusText: error.statusText,
-          url: error.url,
-          headers: error.headers,
-          error: error.error
-        });
-
-        if (typeof error.error === 'string' && error.error.includes('<!doctype html>')) {
-          console.log('Received HTML response instead of API response');
-          return throwError(() => new Error('Received invalid API response'));
-        }
-
-        // Enhanced error handling for CORS
-        if (error.status === 0 && error.error instanceof ProgressEvent) {
-          console.log('CORS error detected');
-          return throwError(() => new Error('CORS error: Unable to access the API'));
-        }
-
+        console.error('Request failed:', error);
         return throwError(() => error);
       }),
       map(response => 'body' in response ? response.body : response)

@@ -6,13 +6,6 @@ import { cu } from '@fullcalendar/core/internal-common';
 import { PaymentServiceService } from 'src/app/service/payment-service.service';
 import { CustomerServiceService } from 'src/app/service/customer-service.service';
 
-
-declare global {
-  interface Window {
-    Square: any;
-  }
-}
-
 @Component({
   selector: 'app-card-payment',
   templateUrl: './card-payment.component.html',
