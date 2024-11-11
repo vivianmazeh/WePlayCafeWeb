@@ -9,33 +9,40 @@ declare var google: any;
 })
 export class ContactUsComponent implements OnInit {
 
-  map: google.maps.Map | undefined;
+  private map!: google.maps.Map;
 
   ngOnInit(): void {
     this.initMap();
   }
  
-
   async  initMap(): Promise<void> {
    
+    await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
    // const { Map} = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
     const center = {lat: 42.2550302, lng: -83.2543};
     this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
       center: center,
       zoom: 15,
+      mapId: 'a573258af1b0cb2a'
     });
 
-    const market = new google.maps.Marker({
+    const customElement = document.createElement('div');
+    const imgElement = document.createElement('img');
+    imgElement.src = '../assets/icons/weplay/__Insta Profile.jpg';
+    imgElement.style.width = '50px';
+    imgElement.style.height = '50px';
+    imgElement.style.borderRadius = '50%'; 
+
+    customElement.appendChild(imgElement);
+
+    const  marker = new google.maps.marker.AdvancedMarkerElement({
       position: center,
       map: this.map,
-      icon: {
-        url: '../assets/icons/weplay/__Insta Profile.jpg',
-        scaledSize: new google.maps.Size(50, 50) 
-      },
-      title: 'WePlay Cafe'
+      title: 'WePlay Cafe',
+      content: customElement
+      
     });
   }
-  
 
 }
 
