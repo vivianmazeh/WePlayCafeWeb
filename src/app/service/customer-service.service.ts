@@ -47,19 +47,9 @@ export class CustomerServiceService {
     return this.http.post(url, body, {
       headers,
       withCredentials: true,
-      observe: 'response'
     }).pipe(
-      retry({
-        count: this.maxRetries,
-        delay: (error, retryCount) => {
-          const baseDelay = Math.min(1000 * Math.pow(2, retryCount), 5000);
-          const jitter = Math.random() * 1000;
-          return timer(baseDelay + jitter);
-        }
-      }),
-      map(response => 'body' in response ? response.body : response),
       catchError((error: HttpErrorResponse) => {
-        console.error('Request failed:', error);
+        console.error('Request failed in createCustomer:', error);
         return throwError(() => error);
       })
     );

@@ -66,66 +66,18 @@ export class PaymentServiceService {
       headers,
       withCredentials: true,
       observe: 'response'
-    }).pipe(
-      retry({
-        count: this.maxRetries,
-        delay: (error, retryCount) => {
-          // Don't retry certain errors
-          if (error.status === 401 || error.status === 403 || error.status === 422) {
-            throw error;
-          }
-          // Exponential backoff with jitter
-          const baseDelay = Math.min(1000 * Math.pow(2, retryCount), 5000);
-          const jitter = Math.random() * 1000;
-          console.log(`Retrying payment request attempt ${retryCount + 1} after ${baseDelay + jitter}ms`);
-          return timer(baseDelay + jitter);
-        },
-        resetOnSuccess: true
-      }),
-      catchError((error: HttpErrorResponse) => {
+    }).pipe( 
+      catchError(error => {
         console.error('Payment request failed:', {
           status: error.status,
           statusText: error.statusText,
           url: error.url,
           headers: error.headers,
           error: error.error
-        });
-
-        // Handle redirects
-        if (error.status === 301 || error.status === 302) {
-          const redirectUrl = error.headers.get('Location');
-          if (redirectUrl) {
-            console.log(`Following payment redirect to: ${redirectUrl}`);
-            return this.makeRequest(redirectUrl, body, headers);
-          }
-        }
-
-        // Transform error messages for better client handling
-        let errorMessage: string;
-        switch (error.status) {
-          case 400:
-            errorMessage = 'Invalid payment request. Please check your payment details.';
-            break;
-          case 401:
-            errorMessage = 'Payment authorization failed. Please try again.';
-            break;
-          case 422:
-            errorMessage = 'Payment validation failed. Please check your card details.';
-            break;
-          case 429:
-            errorMessage = 'Too many payment attempts. Please wait a moment and try again.';
-            break;
-          default:
-            errorMessage = 'An error occurred while processing your payment. Please try again.';
-        }
-
-        return throwError(() => ({ 
-          message: errorMessage, 
-          originalError: error,
-          status: error.status 
-        }));
+        })
+        return throwError(() => error);
       }),
-      map(response => 'body' in response ? response.body : response)
+      
     );
   }
 
