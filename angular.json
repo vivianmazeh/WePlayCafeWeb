@@ -99,8 +99,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "easy-to-learn-web:build",
-            "proxyConfig": "proxy.conf.json"
+            "buildTarget": "easy-to-learn-web:build"
+          
           },
           "configurations": {
             "production": {

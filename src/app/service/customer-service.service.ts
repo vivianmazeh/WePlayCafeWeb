@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/env';
-import { catchError, map, Observable, throwError, retry, timer } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { CSPService } from './csp.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerServiceService {
   private baseUrl: string;
-  private readonly maxRetries = 3;
   private readonly API_PREFIX = '/api';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,  private cspService: CSPService) {
     this.baseUrl = environment.baseUrl;
     console.log('Using base URL:', this.baseUrl);
+    
   }
 
   createCustomer(customerData: {
@@ -36,22 +37,20 @@ export class CustomerServiceService {
       }
     };
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-    });
-
-    const url = `${this.baseUrl}${this.API_PREFIX}/customer`;
-    
-    return this.http.post(url, body, {
-      headers,
-      withCredentials: true,
-    }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Request failed in createCustomer:', error);
-        return throwError(() => error);
-      })
-    );
-  }
+   
+       // Use CSP service to get nonce and create headers
+       return this.cspService.getNonce().pipe(
+        switchMap(nonce => {
+          const url = `${this.baseUrl}${this.API_PREFIX}/customer`;
+          return this.http.post(url, body, {
+            headers: this.cspService.createHeadersWithNonce(nonce),
+            withCredentials: true,
+          });
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Request failed in createCustomer:', error);
+          return throwError(() => error);
+        })
+      );
+    }      
 }

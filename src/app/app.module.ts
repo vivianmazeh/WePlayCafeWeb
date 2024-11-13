@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -24,6 +24,7 @@ import { CardPaymentComponent } from './Components/card-payment/card-payment.com
 import { PaymentSuccessModalComponent } from './Components/payment-success-modal/payment-success-modal.component';
 import { CustomerServiceService } from './service/customer-service.service';
 import { PaymentServiceService } from './service/payment-service.service';
+import { CSPInterceptor } from './service/csp.interceptor';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,11 @@ import { PaymentServiceService } from './service/payment-service.service';
     CommonModule  
     
   ],
-  providers: [],
+  providers: [ {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CSPInterceptor,
+      multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

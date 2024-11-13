@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/env';
-import { catchError, map, Observable, throwError, retry, timer } from 'rxjs';
+import { catchError, map, Observable, throwError, retry, timer, switchMap } from 'rxjs';
+import { CSPService } from './csp.service';
 
 // Define Square types
 interface SquarePayments {
@@ -23,7 +24,8 @@ export class PaymentServiceService {
   private readonly maxRetries = 3;
   private readonly API_PREFIX = '/api';
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private cspService: CSPService) {
     // Use the current window location origin to determine the API base URL
     const currentOrigin = window.location.origin;
     this.baseUrl = currentOrigin.includes('www') 
@@ -52,33 +54,20 @@ export class PaymentServiceService {
     const url = `${this.baseUrl}${this.API_PREFIX}/payment`;
     console.log(`Attempting payment request to: ${url}`);
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-    });
-
-    return this.makeRequest(url, body, headers);
-  }
-
-  private makeRequest(url: string, body: any, headers: HttpHeaders): Observable<any> {
-    return this.http.post(url, body, {
-      headers,
-      withCredentials: true,
-      observe: 'response'
-    }).pipe( 
-      catchError(error => {
-        console.error('Payment request failed:', {
-          status: error.status,
-          statusText: error.statusText,
-          url: error.url,
-          headers: error.headers,
-          error: error.error
+      // Use CSP service to get nonce and create headers
+      return this.cspService.getNonce().pipe(
+        switchMap(nonce => {
+        
+          return this.http.post(url, body, {
+            headers: this.cspService.createHeadersWithNonce(nonce),
+            withCredentials: true,
+          });
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Request failed in createPayment:', error);
+          return throwError(() => error);
         })
-        return throwError(() => error);
-      }),
-      
-    );
+      );
   }
 
   async initializeSquare(appId: string, locationId: string): Promise<any> {
