@@ -16,12 +16,18 @@ declare global {
   }
 }
 
+interface CustomerData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNo: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentServiceService {
   private baseUrl: string;
-  private readonly maxRetries = 3;
   private readonly API_PREFIX = '/api';
 
 
@@ -35,7 +41,11 @@ export class PaymentServiceService {
     console.log('Using base URL:', this.baseUrl);
   }
 
-  createPayment(token: string, customerId: string, amount: number): Observable<any> {
+  createPayment(token: string, 
+                customerId: string, 
+                amount: number, 
+                customerData: CustomerData
+              ): Observable<any> {
     const body = {
       sourceId: token,
       idempotencyKey: window.crypto.randomUUID(),
@@ -44,7 +54,13 @@ export class PaymentServiceService {
         currency: 'USD'
       },
       customerId: customerId,
-      customer: null
+      customer: {
+        givenName:  customerData.firstName,
+        familyName:  customerData.lastName,
+        emailAddress:  customerData.email,
+        phoneNumber:  customerData.phoneNo,
+      },
+      buyerEmailAddress:customerData.email
     };
 
     return this.tryPaymentEndpoint(body);

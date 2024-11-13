@@ -6,6 +6,13 @@ import { cu } from '@fullcalendar/core/internal-common';
 import { PaymentServiceService } from 'src/app/service/payment-service.service';
 import { CustomerServiceService } from 'src/app/service/customer-service.service';
 
+interface CustomerInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNo: string;
+}
+
 @Component({
   selector: 'app-card-payment',
   templateUrl: './card-payment.component.html',
@@ -19,7 +26,6 @@ export class CardPaymentComponent implements OnInit {
   public price: any;
   public totalPrice: number = 0; // Initial total
   private locationId = environment.locationId;
-  private baseUrl = environment.baseUrl;
   private appId = environment.applicationId;
   private statusContainer: any;
   private paymentFormContainer: HTMLElement | null = null;
@@ -238,17 +244,6 @@ public updateTotalPrice() {
       const customerInfo = this.getCustomerInfo();
       const tokenResult = await this.tokenize(card);
       
-      const verificationToken = await this.paymentService.verifyBuyer(
-        this.payments,
-        tokenResult,
-        this.totalPrice * 100,
-        {
-          familyName: customerInfo.lastName,
-          givenName: customerInfo.firstName,
-          email: customerInfo.email,
-          phoneNo: customerInfo.phoneNo
-        }
-      );
 
       const customerResponse = await this.customerService.createCustomer({
         sourceId: tokenResult,
@@ -258,7 +253,8 @@ public updateTotalPrice() {
       await this.paymentService.createPayment(
         tokenResult,
         customerResponse.squareCustomerId,
-        this.totalPrice
+        this.totalPrice,
+        customerInfo
       ).toPromise();
 
       this.handlePaymentSuccess();
@@ -278,7 +274,7 @@ public updateTotalPrice() {
     return true;
   }
 
-  private getCustomerInfo() {
+  private getCustomerInfo(): CustomerInfo{
     return {
       firstName: (document.getElementById('firstName') as HTMLInputElement).value,
       lastName: (document.getElementById('lastName') as HTMLInputElement).value,

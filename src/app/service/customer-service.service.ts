@@ -34,7 +34,8 @@ export class CustomerServiceService {
         familyName: customerData.lastName,
         emailAddress: customerData.email,
         phoneNumber: customerData.phoneNo,
-      }
+      },
+      buyerEmailAddress:customerData.email
     };
 
    
