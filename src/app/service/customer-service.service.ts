@@ -10,10 +10,10 @@ import { CSPService } from './csp.service';
 export class CustomerServiceService {
   private baseUrl: string;
   private readonly API_PREFIX = '/api';
+ 
 
   constructor(private http: HttpClient,  private cspService: CSPService) {
     this.baseUrl = environment.baseUrl;
-    console.log('Using base URL:', this.baseUrl);
     
   }
 
@@ -22,7 +22,8 @@ export class CustomerServiceService {
     firstName: string,
     lastName: string,
     email: string,
-    phoneNo: string
+    phoneNo: string,
+  
   }): Observable<any> {
     const body = {
       sourceId: customerData.sourceId,
@@ -35,7 +36,8 @@ export class CustomerServiceService {
         emailAddress: customerData.email,
         phoneNumber: customerData.phoneNo,
       },
-      buyerEmailAddress:customerData.email
+      buyerEmailAddress:customerData.email,
+      orderInfo: []
     };
 
    

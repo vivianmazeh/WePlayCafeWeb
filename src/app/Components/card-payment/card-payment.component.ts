@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/env';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { cu } from '@fullcalendar/core/internal-common';
 import { PaymentServiceService } from 'src/app/service/payment-service.service';
 import { CustomerServiceService } from 'src/app/service/customer-service.service';
 
@@ -11,6 +9,12 @@ interface CustomerInfo {
   lastName: string;
   email: string;
   phoneNo: string;
+}
+
+interface Order {
+  price: number;
+  quantity: number;
+  sectionName: string;
 }
 
 @Component({
@@ -41,6 +45,7 @@ export class CardPaymentComponent implements OnInit {
   additionalPass: number[] = [0,1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14,15,16, 17, 18, 19,20];
   selectedOption = 0;
   public showSuccessModal: boolean = false;
+  public orderInfo: Array<Order> = [];
 
   constructor(
     private paymentService: PaymentServiceService,
@@ -150,6 +155,7 @@ export class CardPaymentComponent implements OnInit {
 public updateTotalPrice() {
   
   this.totalPrice = 0;
+  this.orderInfo = [];
   
   this.paymentFormContainer = document.getElementById('payment-form-container');
   const selectElements = document.querySelectorAll<HTMLSelectElement>('.form-select');
@@ -165,6 +171,14 @@ public updateTotalPrice() {
     const sectionName = select.getAttribute('aria-label') || 'Section';
   
     if (quantity > 0) {
+
+      const order: Order = {
+        price: price,
+        quantity: quantity,
+        sectionName: sectionName
+    };
+
+      this.orderInfo.push(order);
       const sectionTotal = price * quantity;
       this.totalPrice += sectionTotal;
 
@@ -243,18 +257,19 @@ public updateTotalPrice() {
 
       const customerInfo = this.getCustomerInfo();
       const tokenResult = await this.tokenize(card);
-      
+           
 
       const customerResponse = await this.customerService.createCustomer({
         sourceId: tokenResult,
-        ...customerInfo
+        ...customerInfo,
       }).toPromise();
 
       await this.paymentService.createPayment(
         tokenResult,
         customerResponse.squareCustomerId,
         this.totalPrice,
-        customerInfo
+        customerInfo,
+        this.orderInfo      
       ).toPromise();
 
       this.handlePaymentSuccess();

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/env';
-import { catchError, map, Observable, throwError, retry, timer, switchMap } from 'rxjs';
+import { catchError, map, Observable, throwError, retry, timer, switchMap, tap } from 'rxjs';
 import { CSPService } from './csp.service';
+
 
 // Define Square types
 interface SquarePayments {
@@ -23,67 +24,69 @@ interface CustomerData {
   phoneNo: string;
 }
 
+interface Order {
+  price: number;
+  quantity: number;
+  sectionName: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentServiceService {
   private baseUrl: string;
   private readonly API_PREFIX = '/api';
+ 
 
 
-  constructor(private http: HttpClient, private cspService: CSPService) {
+
+  constructor(private http: HttpClient, 
+              private cspService: CSPService) {
     // Use the current window location origin to determine the API base URL
     const currentOrigin = window.location.origin;
     this.baseUrl = currentOrigin.includes('www') 
       ? environment.baseUrl 
       : environment.baseUrl.replace('www.', '');
-    
-    console.log('Using base URL:', this.baseUrl);
   }
 
   createPayment(token: string, 
                 customerId: string, 
                 amount: number, 
-                customerData: CustomerData
+                customerData: CustomerData,
+                orderInfo: Array<Order>
               ): Observable<any> {
-    const body = {
-      sourceId: token,
-      idempotencyKey: window.crypto.randomUUID(),
-      amountMoney: {
-        amount: Math.round(amount * 100), // Amount in cents
-        currency: 'USD'
-      },
-      customerId: customerId,
-      customer: {
-        givenName:  customerData.firstName,
-        familyName:  customerData.lastName,
-        emailAddress:  customerData.email,
-        phoneNumber:  customerData.phoneNo,
-      },
-      buyerEmailAddress:customerData.email
-    };
 
-    return this.tryPaymentEndpoint(body);
-  }
-
-  private tryPaymentEndpoint(body: any): Observable<any> {
-    const url = `${this.baseUrl}${this.API_PREFIX}/payment`;
-    console.log(`Attempting payment request to: ${url}`);
-
-      // Use CSP service to get nonce and create headers
-      return this.cspService.getNonce().pipe(
-        switchMap(nonce => {
+        const url = `${this.baseUrl}${this.API_PREFIX}/payment`;
+        const body = {
+          sourceId: token,
+          idempotencyKey: window.crypto.randomUUID(),
+          amountMoney: {
+            amount: Math.round(amount * 100), // Amount in cents
+            currency: 'USD'
+            },
+          customerId: customerId,
+          customer: {
+            givenName:  customerData.firstName,
+            familyName:  customerData.lastName,
+            emailAddress:  customerData.email,
+            phoneNumber:  customerData.phoneNo,
+          },
+          buyerEmailAddress:customerData.email,
+          orderInfo: orderInfo
+        }
+        return this.cspService.getNonce().pipe(
+          switchMap(nonce => {
+            return this.http.post(url,body, {
+              headers: this.cspService.createHeadersWithNonce(nonce),
+              withCredentials: true,
+            });
+          }),
+          catchError((error: HttpErrorResponse) => {
+            console.error('Payment request failed:', error);
+            return throwError(() => error);
+          })
+        );
         
-          return this.http.post(url, body, {
-            headers: this.cspService.createHeadersWithNonce(nonce),
-            withCredentials: true,
-          });
-        }),
-        catchError((error: HttpErrorResponse) => {
-          console.error('Request failed in createPayment:', error);
-          return throwError(() => error);
-        })
-      );
   }
 
   async initializeSquare(appId: string, locationId: string): Promise<any> {
