@@ -10,7 +10,6 @@ import { LoginComponent } from './Components/login/login.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { MainComponent } from './Components/main/main.component';
-import { BuyTicketsComponent } from './Components/buy-tickets/buy-tickets.component';
 import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
@@ -20,10 +19,9 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
-import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
+import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component';
 import { PaymentSuccessModalComponent } from './Components/payment-success-modal/payment-success-modal.component';
-import { CustomerServiceService } from './service/customer-service.service';
-import { PaymentServiceService } from './service/payment-service.service';
+import { PaymentFormComponent }from './Components/payment-form/payment-form.component';
 import { CSPInterceptor } from './service/csp.interceptor';
 
 @NgModule({
@@ -38,15 +36,15 @@ import { CSPInterceptor } from './service/csp.interceptor';
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    BuyTicketsComponent,
-    BuyTicketsComponent,
     PriceComponent,
     GalleryComponent,
     ContactUsComponent,
     CityProfileComponent,
     BookPartySelectDateComponent,
-    CardPaymentComponent,
-    PaymentSuccessModalComponent  
+    BuyTicketComponent,
+    PaymentSuccessModalComponent,
+    PaymentFormComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -56,8 +54,7 @@ import { CSPInterceptor } from './service/csp.interceptor';
     NgbCollapseModule,
     GoogleMapsModule,
     FullCalendarModule,
-    CommonModule  
-    
+    CommonModule
   ],
   providers: [ {
       provide: HTTP_INTERCEPTORS,

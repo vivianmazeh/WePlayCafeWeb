@@ -3,13 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import  {WaiverComponent} from './Components/waiver/waiver.component'
 import {BookPartyComponent} from './Components/book-party/book-party.component';
-import {BuyTicketsComponent} from './Components/buy-tickets/buy-tickets.component';
 import { PriceComponent } from './Components/price/price.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
 import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
-import { CardPaymentComponent } from './Components/card-payment/card-payment.component';
+import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component';
 
 
 // sets up routes constant where you define your routes
@@ -20,9 +19,8 @@ const routes: Routes = [
   {path: 'price', component: PriceComponent},
   {path: 'gallery', component: GalleryComponent},
   {path: 'contactUs', component: ContactUsComponent},
-  {path: 'buy-tickets', component: BuyTicketsComponent},
   {path: 'city-profile', component: CityProfileComponent},
-  {path: 'card-payment', component: CardPaymentComponent},
+  {path: 'card-payment', component: BuyTicketComponent},
   {path: 'book-a-party', 
           component: BookPartyComponent,
           children: [    

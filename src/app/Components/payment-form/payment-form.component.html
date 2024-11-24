@@ -1,0 +1,32 @@
+  <!-- Payment Form -->
+  <div id="payment-form-container" class="mt-5" [style.display]="showForm ? 'block' : 'none'"> 
+      
+    <form id="payment-form" class="needs-validation" novalidate>
+    <div class="row g-3" style="margin-bottom: 30px;">
+        <div class="col-sm-6">              
+          <label class="form-label" for="firstName">First Name: <span class="required-symbol">*</span></label>
+          <input class="form-control" type="text" id="firstName" name="firstName" required />
+          <div class="invalid-feedback">Please enter your first name.</div>
+        </div>
+        <div class="col-sm-6">             
+          <label class="form-label" for="lastName">Last Name: <span class="required-symbol">*</span></label>
+          <input class="form-control" type="text" id="lastName" name="lastName" required />
+          <div class="invalid-feedback">Please enter your last name.</div>
+        </div>
+        <div class="col-sm-6">
+          <label class="form-label" for="email">Email: <span class="required-symbol">*</span></label>
+          <input class="form-control"  type="email" id="email" name="email" required />
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="col-sm-6">
+          <label class="form-label" for="phoneNo">Phone Number: <span class="required-symbol">*</span></label>
+          <input class="form-control"  type="tel" id="phoneNo" name="phone" required />
+          <div class="invalid-feedback">Please enter a valid Phone number.</div>
+        </div>
+      </div>
+
+      <div id="card-container"></div>
+      <button id="card-button" type="button" class="btn payment-button">Pay Now</button>
+    </form>    
+    <div id="payment-status-container" class="mt-3"></div>
+  </div>

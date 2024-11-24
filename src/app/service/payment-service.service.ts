@@ -36,10 +36,9 @@ interface Order {
 export class PaymentServiceService {
   private baseUrl: string;
   private readonly API_PREFIX = '/api';
+  private locationId = environment.locationId;
+  private appId = environment.applicationId;
  
-
-
-
   constructor(private http: HttpClient, 
               private cspService: CSPService) {
     // Use the current window location origin to determine the API base URL
@@ -89,13 +88,13 @@ export class PaymentServiceService {
         
   }
 
-  async initializeSquare(appId: string, locationId: string): Promise<any> {
+  async initializeSquare(): Promise<any> {
     try {
       if (!window.Square) {
         throw new Error('Square.js failed to load properly');
       }
 
-      const payments = await window.Square.payments(appId, locationId);
+      const payments = await window.Square.payments(this.appId, this.locationId);
       console.log('Square payments initialized successfully');
       return payments;
     } catch (error) {
@@ -130,16 +129,6 @@ export class PaymentServiceService {
       throw new Error(
         'Unable to verify payment information. Please check your details and try again.'
       );
-    }
-  }
-
-  // Helper method to validate amount
-  private validatePaymentAmount(amount: number): void {
-    if (!amount || amount <= 0) {
-      throw new Error('Invalid payment amount');
-    }
-    if (amount > 999999.99) { // Example maximum amount
-      throw new Error('Payment amount exceeds maximum allowed');
     }
   }
 
