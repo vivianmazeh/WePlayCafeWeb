@@ -28,19 +28,21 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
   dailyPassOptions: number[] = [0,1,2,3,4,5,6,7,8,9]; 
   additionalPass: number[] = [0,1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14,15,16, 17, 18, 19,20];
   selectedOption = 0;
+ 
 
   public orderInfo: Array<Order> = [];
   public subscriptionPlans = [
-    { id: 'PLAN_1_CHILDREN', children: 1, price: 60},
-    { id: 'PLAN_2_CHILDREN', children: 2, price: 115 },
-    { id: 'PLAN_3_CHILDREN', children: 3, price: 165 },
-    { id: 'PLAN_4_CHILDREN', children: 4, price: 195 }
+    { id: 'PLAN_1_CHILDREN', children: 'One', price: 60},
+    { id: 'PLAN_2_CHILDREN', children: 'Two', price: 115 },
+    { id: 'PLAN_3_CHILDREN', children: 'Three', price: 165 },
+    { id: 'PLAN_4_CHILDREN', children: 'Four', price: 195 }
   ];
 
   public selectedPlanId: string | undefined;
   private stateSubscription: Subscription | undefined;
   showPaymentForm = false;
   showSuccessModal = false;
+  activeTab: string = 'tickets';
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -59,6 +61,22 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.stateSubscription) {
       this.stateSubscription.unsubscribe();
+    }
+  }
+
+  onTabChange(event: any): void {
+    this.totalPrice = 0;
+    document.getElementById('total-price')!.innerText = this.totalPrice.toFixed(2);
+    this.orderInfo = [];
+    const  orderDetailsBody = document.getElementById('order-details-body');
+    if (!orderDetailsBody) return;
+    // Clear the table before updating
+    orderDetailsBody.innerHTML = '';
+    const tabId = event.target.getAttribute('data-bs-target');
+    if (tabId) {
+      this.activeTab = tabId.replace('#', '');
+      this.showPaymentForm = false;
+      this.selectedPlanId = undefined;
     }
   }
 
@@ -87,14 +105,14 @@ public updateTotalPrice() {
   this.totalPrice = 0;
   this.orderInfo = [];
   
-  const selectElements = document.querySelectorAll<HTMLSelectElement>('.form-select');
-  const orderDetailsBody = document.getElementById('order-details-body');
+  const selectTicketsElements = document.querySelectorAll<HTMLSelectElement>('.form-select');
+  const  orderDetailsBody = document.getElementById('order-details-body');
   if (!orderDetailsBody) return;
 
   // Clear the table before updating
   orderDetailsBody.innerHTML = '';
 
-  selectElements.forEach(select => {
+  selectTicketsElements.forEach(select => {
     const price = parseFloat(select.getAttribute('data-price') || '0');
     const quantity = parseInt(select.value, 10) || 0;
     const sectionName = select.getAttribute('aria-label') || 'Section';
@@ -111,6 +129,7 @@ public updateTotalPrice() {
       const sectionTotal = price * quantity;
       this.totalPrice += sectionTotal;
 
+
       // Append a row to the table for the current selection
       const row = document.createElement('tr');
       row.innerHTML = `
@@ -119,25 +138,46 @@ public updateTotalPrice() {
           <td>${quantity}</td>
           <td>$${sectionTotal.toFixed(2)}</td>
       `;
-      orderDetailsBody.appendChild(row);
+      
+        orderDetailsBody.appendChild(row);
   }
   });
-   
-   
+    
     document.getElementById('total-price')!.innerText = this.totalPrice.toFixed(2);
     this.paymentStateService.updatePaymentState(this.totalPrice, this.orderInfo);
     console.log('Updated total price:', this.totalPrice); 
   }
  
-  async startSubscription(planId: string) {
-    this.selectedPlanId = planId;
-    this.showPaymentForm = true;
-    if (!this.selectedPlanId) return;
-    
+  public startSubscription(planId: string, price: number, children: string) {
+    this.orderInfo = [];
+    const order: Order = {
+      price: price,
+      quantity: 1,
+      sectionName: `Membership for ${children}`
+    };
+    this.totalPrice = price;
+    document.getElementById('total-price')!.innerText = this.totalPrice.toFixed(2);
+    this.selectedPlanId = planId;   
+    const orderDetailsBody = document.getElementById('order-details-body');
+    if (!orderDetailsBody ) return;
+     // Clear the table before updating
+     orderDetailsBody.innerHTML = '';  
+      // Append a row to the table for the current selection
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>${order.sectionName}</td>
+          <td>$${order.price.toFixed(2)}</td>
+          <td>1</td>
+          <td>$${price.toFixed(2)}</td>
+      `;
+        orderDetailsBody.appendChild(row);
+        this.orderInfo.push(order);
+       this.paymentStateService.updatePaymentState(price, this.orderInfo );
     try {
-      const result = await this.subscriptionService.createSubscription(this.selectedPlanId);
+     // const result = await this.subscriptionService.createSubscription(this.selectedPlanId);
       // Handle successful subscription
-      this.showPaymentForm = false;
+    
+    //  this.showSuccessModal = true;
       // Redirect to success page or show confirmation
     } catch (error) {
       console.error('Payment failed:', error);

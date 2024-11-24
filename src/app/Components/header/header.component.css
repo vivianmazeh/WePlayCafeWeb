@@ -97,7 +97,7 @@ nav{
         padding-left: 5px;
     }
     .header-container-order-button {
-        border-radius: 15px;
+        border-radius: 5px;
         padding-top: 10px;
         width: 120px;
     }
@@ -182,9 +182,9 @@ nav{
 
     }
     .header-container-order-button {
-        border-radius: 15px;
+        border-radius: 5px;
         padding-top: 10px;
-        width: 160px;
+      
     }
 
     .main-bar{
@@ -234,10 +234,8 @@ nav{
         align-self: center;  
       }
 
-      .order-button-name{    
-        height: 16px;
+      .order-button-name{        
         padding-left: 2px;
-        justify-items: baseline;
         font-size: 12px;
     }
     .tea-icon{
@@ -278,7 +276,7 @@ nav{
         width: 150px;
         height: 50px;
         font-size: 20px;
-        border-radius: 16px;
+        border-radius: 5px;
         padding-top: 3px;
     }
 
@@ -288,8 +286,6 @@ nav{
     }
 
     .order-button-name{    
-        height: 16px;   
-        justify-items: baseline;
         font-size: 12px;
     }
     .tea-icon{
@@ -342,8 +338,6 @@ nav{
     }
 
     .order-button-name{    
-        height: 16px;   
-        justify-items: baseline;
         font-size: 12px;
     }
     .tea-icon{
@@ -370,10 +364,9 @@ nav{
     }
     
     .header-container-order-button {
-        width: 280px;
+        width: 260px;
         height: 50px;
-        font-size: 25px;
-        border-radius: 22px;
+        border-radius: 15px;
         padding-top: 10px;
     }
     .header-container-logo{   
@@ -385,12 +378,6 @@ nav{
     }
     nav{
         background-color:  #4878a3;
-    }
-
-    .order-button-name{    
-        height: 40px;
-        padding-left: 4px;
-        justify-items: baseline;
     }
 
     .header-logo{  

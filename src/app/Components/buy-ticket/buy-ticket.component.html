@@ -1,160 +1,231 @@
 <div class="container mt-5">
 
-   <!-- Subscrilption Services Section -->
-  <div  class="ticket-section" >
-    
-    <div class="section-header">
-      <div class="section-header-top">
-        <span class="section-header-top-title">Membership</span>
-      </div>
-      <div class="section-header-buttom">
-          <div class="section-header-buttom-content">
-            <p class="align-left"> <strong>Unlimited Entry</strong>– Visit as often as you like!</p>
-            <p class="align-left"> <strong>NO restrictions</strong>– Enjoy any day, including weekends.</p>
-            <p class="align-left"> <strong>Access to Events & Classes</strong> – Free with all materials provided!</p>
-            <p  class="align-left"><strong>Please click <button type="button"  (click)="openVideo()" class="btn btn-link">Our activities</button></strong></p>
-          </div>
-          <div class="video-overlay" id="videoOverlay"  *ngIf="isVideoVisible">
-            <div class="video-container">
-              <button class="close-button" (click)="closeVideo()">×</button>
-              <video controls autoplay>
-                <source src="assets/video/activities.mp4" type="video/mp4">         
-              </video>
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-3" id="ticketTabs" role="tablist" style="font-size: 22px; font-weight: 600;">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" 
+                id="tickets-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#tickets" 
+                type="button" 
+                role="tab" 
+                aria-controls="tickets" 
+                [attr.aria-selected]="activeTab === 'tickets'"
+                (click)="onTabChange($event)">
+          Tickets
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" 
+                id="membership-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#membership" 
+                type="button" 
+                role="tab" 
+                aria-controls="membership" 
+                [attr.aria-selected]="activeTab === 'membership'"
+                (click)="onTabChange($event)">
+          Membership
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" 
+                id="giftcard-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#giftcard" 
+                type="button" 
+                role="tab" 
+                aria-controls="giftcard" 
+                [attr.aria-selected]="activeTab === 'giftcard'"
+                (click)="onTabChange($event)">
+          Gift Card
+        </button>
+      </li>
+    </ul>
+   <!-- Tabs Content -->
+   <div class="tab-content" id="ticketTabsContent">
+
+    <div class="tab-pane fade" 
+         [class.show]="activeTab === 'tickets'"
+         [class.active]="activeTab === 'tickets'"
+         id="tickets" 
+         role="tabpanel" 
+         aria-labelledby="tickets-tab">
+         <div class="ticket-section">
+          <div class="section-header">
+            <div class="section-header-buttom">
+              <div class="section-header-buttom-content">
+                <p class="align-left"><strong>3-Hour Playtime Limit.</strong></p>
+                <p class="align-left"><strong>No Expiration</strong> — Pass valid from 10 AM - 8 PM.</p>
+                <p class="align-left"><strong>Adult Supervision Required.</strong></p>
+                <p class="align-left"><strong>Waiver Required.</strong> Please Sign online for a quick and easy check-in. </p>          
+              </div>
+             
             </div>
           </div>
-      </div>
+      
+          <div class="section-body">        
+              <ul class="price">
+                <li class="header" style ="border: #eee solid 1px;">
+                  <img class="responsive" src="assets/icons/weplay/__Linkedin Cover.jpg" class="card-img-top" >
+                </li>
+                <li class="grey d-flex">
+                  <div class="grey-left flex-grow-1">
+                    <p class="grey-left-content" id="select-name">Children 6 months and older  <strong>$15.99</strong></p>
+                  </div>
+                  <div class="grey-right">
+                    <div class="input-group">
+                      <span class="input-group-text">Qty</span>
+                      <select class="form-select form-select-lg" 
+                              aria-label="Children 6 months and older"
+                              id="dailyPassQty"
+                              data-price="15.99"
+                              ng-model="dailyPassQty"
+                              ng-change="updateTotalPrice()">
+                              <option *ngFor="let option of dailyPassOptions" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>  
+                  </div>            
+                </li>
+                <li class="d-flex">
+                  <div class="grey-left flex-grow-1">
+                    <p class="grey-left-content" id="select-name">Children Under 6 months  <strong>Free Admission</strong> </p>
+                  </div>
+                  <div class="grey-right">
+                    <div class="input-group">
+                      <span class="input-group-text">Qty</span>
+                      <select class="form-select form-select-lg" 
+                              aria-label="Children Under 6 months"
+                              id="freeAdmissionQty"
+                              data-price="0" 
+                              ng-model="freeAdmissionQty"
+                              ng-change="updateTotalPrice()">
+                              <option *ngFor="let option of additionalPass" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>  
+                  </div> 
+                </li>
+                <li class="grey d-flex">
+                  <div class="grey-left flex-grow-1">
+                    <p class="grey-left-content"id="select-name">Addtional Adult Pass  <strong>$8</strong></p>
+                  </div>
+                  <div class="grey-right">
+                    <div class="input-group">
+                      <span class="input-group-text">Qty</span>
+                      <select class="form-select form-select-lg" 
+                              aria-label="Addtional Adult Pass"
+                              id="addtionalQty"
+                              ng-model="addtionalQty"
+                              data-price="2.00" 
+                              ng-change="updateTotalPrice()" > 
+                              <option *ngFor="let option of additionalPass" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>  
+                  </div>            
+                </li>
+                <li class="d-flex">
+                  <div class="grey-left flex-grow-1">
+                    <p class="grey-left-content" id="select-name">Group Rate (over <strong>10</strong> Children) <strong>$13.00</strong> per booking </p>
+                  </div>
+                  <div class="grey-right">
+                    <div class="input-group">
+                      <span class="input-group-text">Qty</span>
+                      <select class="form-select form-select-lg"  
+                              aria-label="Group Rate (over 10 Children)"                                                              
+                              id="group10Qty"  
+                              ng-model="group10Qty"                 
+                              data-price="13.00"
+                              ng-change="updateTotalPrice()">
+                              <option *ngFor="let option of group10Options" [value]="option">{{ option }}</option>
+                      </select>
+                    </div>  
+                  </div> 
+                </li>
+                <li class="grey d-flex" >
+                  <div class="grey-left flex-grow-1">
+                    <p class="grey-left-content" id="select-name">Group Rate (over <strong>15</strong> Children)  <strong>$11.00</strong> per booking</p>
+                  </div>
+                  <div class="grey-right">
+                    <div class="input-group">
+                      <span class="input-group-text">Qty</span>
+                        <select class="form-select form-select-lg"
+                                aria-label="Group Rate (over 15 Children)"
+                                id="group15Qty"
+                                ng-model ="group15Qty"
+                                ng-change="updateTotalPrice()"
+                                data-price="11.00">
+                                <option *ngFor="let option of group15Options" [value]="option">{{ option }}</option>
+                          </select>
+                    </div>  
+                  </div>            
+                </li>
+              </ul>
+          
+          </div>
+        </div>    
     </div>
-    <div class="section-body">
-      <div class="row align-items-center">
-        <ul class="price col" *ngFor="let plan of subscriptionPlans">
-          <li class="header">
-            <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
-          </li>
-          <li class="grey">Membership for {{plan.children}}</li>
-          <li class="grey"><strong>$ {{plan.price}} / month</strong></li>
-          <li class="grey" style="height: 55px;">
-            <button (click)="startSubscription(plan.id)" href="#" class="button">Sign Up</button></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="ticket-section">
-    <div class="section-header">
-      <div class="section-header-top">
-        <span class="section-header-top-title">Tickets</span>
-      </div>
-      <div class="section-header-buttom">
-        <div class="section-header-buttom-content">
-          <p class="align-left"><strong>3-Hour Playtime Limit.</strong></p>
-          <p class="align-left"><strong>No Expiration</strong> — Pass valid from 10 AM - 8 PM.</p>
-          <p class="align-left"><strong>Adult Supervision Required.</strong></p>
-          <p class="align-left"><strong>Waiver Required.</strong> Please Sign online for a quick and easy check-in. </p>          
+    <div class="tab-pane fade show active" 
+         [class.show]="activeTab === 'membership'"
+         [class.active]="activeTab === 'membership'"
+         id="membership" 
+         role="tabpanel" 
+         aria-labelledby="membership-tab">
+         <!-- Subscrilption Services Section -->
+      <div  class="ticket-section" >
+        
+        <div class="section-header">    
+          <div class="section-header-buttom">
+              <div class="section-header-buttom-content">
+                <p class="align-left"> <strong>Unlimited Entry</strong>– Visit as often as you like!</p>
+                <p class="align-left"> <strong>NO restrictions</strong>– Enjoy any day, including weekends.</p>
+                <p class="align-left"> <strong>Access to Events & Classes</strong> – Free with all materials provided!</p>
+                <p  class="align-left"><strong>Please click <button type="button"  (click)="openVideo()" class="btn btn-link">Our activities</button></strong></p>
+              </div>
+              <div class="video-overlay" id="videoOverlay"  *ngIf="isVideoVisible">
+                <div class="video-container">
+                  <button class="close-button" (click)="closeVideo()">×</button>
+                  <video controls autoplay>
+                    <source src="assets/video/activities.mp4" type="video/mp4">         
+                  </video>
+                </div>
+              </div>
+          </div>
         </div>
-       
+        <div class="section-body">
+          <div class="row align-items-center">
+            <ul class="price col" *ngFor="let plan of subscriptionPlans">
+              <li class="header">
+                <img src="assets/icons/weplay/weplaylogo.png" class="card-img-top" >
+              </li>
+              <li class="grey">Membership for {{plan.children}}</li>
+              <li class="grey"><strong>$ {{plan.price}} / month</strong></li>
+              <li class="grey" style="height: 55px;">
+                <button (click)="startSubscription(plan.id, plan.price, plan.children)" class="button">Sign Up</button></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="section-body">
-    
-        <ul class="price">
-          <li class="header" style ="border: #eee solid 1px;">
-            <img class="responsive" src="assets/icons/weplay/__Linkedin Cover.jpg" class="card-img-top" >
-          </li>
-          <li class="grey d-flex">
-            <div class="grey-left flex-grow-1">
-              <p class="grey-left-content" id="select-name">Children 6 months and older  <strong>$15.99</strong></p>
+    <div class="tab-pane fade" 
+        [class.show]="activeTab === 'giftcard'"
+        [class.active]="activeTab === 'giftcard'"
+        id="giftcard" 
+        role="tabpanel" 
+        aria-labelledby="giftcard-tab">
+      <div class="ticket-section">
+        <div class="section-header">
+          <div class="section-header-buttom">
+            <div class="section-header-buttom-content">
+              <p class="align-left">Gift card options coming soon!</p>
             </div>
-            <div class="grey-right">
-              <div class="input-group">
-                <span class="input-group-text">Qty</span>
-                <select class="form-select form-select-lg" 
-                        aria-label="Children 6 months and older"
-                        id="dailyPassQty"
-                        data-price="15.99"
-                        ng-model="dailyPassQty"
-                        ng-change="updateTotalPrice()">
-                        <option *ngFor="let option of dailyPassOptions" [value]="option">{{ option }}</option>
-                </select>
-              </div>  
-            </div>            
-          </li>
-          <li class="d-flex">
-            <div class="grey-left flex-grow-1">
-              <p class="grey-left-content" id="select-name">Children Under 6 months  <strong>Free Admission</strong> </p>
-            </div>
-            <div class="grey-right">
-              <div class="input-group">
-                <span class="input-group-text">Qty</span>
-                <select class="form-select form-select-lg" 
-                        aria-label="Children Under 6 months"
-                        id="freeAdmissionQty"
-                        data-price="0" 
-                        ng-model="freeAdmissionQty"
-                        ng-change="updateTotalPrice()">
-                        <option *ngFor="let option of additionalPass" [value]="option">{{ option }}</option>
-                </select>
-              </div>  
-            </div> 
-          </li>
-          <li class="grey d-flex">
-            <div class="grey-left flex-grow-1">
-              <p class="grey-left-content"id="select-name">Addtional Adult Pass  <strong>$8</strong></p>
-            </div>
-            <div class="grey-right">
-              <div class="input-group">
-                <span class="input-group-text">Qty</span>
-                <select class="form-select form-select-lg" 
-                        aria-label="Addtional Adult Pass"
-                        id="addtionalQty"
-                        ng-model="addtionalQty"
-                        data-price="2.00" 
-                        ng-change="updateTotalPrice()" > 
-                        <option *ngFor="let option of additionalPass" [value]="option">{{ option }}</option>
-                </select>
-              </div>  
-            </div>            
-          </li>
-          <li class="d-flex">
-            <div class="grey-left flex-grow-1">
-              <p class="grey-left-content" id="select-name">Group Rate (over <strong>10</strong> Children) <strong>$13.00</strong> per booking </p>
-            </div>
-            <div class="grey-right">
-              <div class="input-group">
-                <span class="input-group-text">Qty</span>
-                <select class="form-select form-select-lg"  
-                        aria-label="Group Rate (over 10 Children)"                                                              
-                        id="group10Qty"  
-                        ng-model="group10Qty"                 
-                        data-price="13.00"
-                        ng-change="updateTotalPrice()">
-                        <option *ngFor="let option of group10Options" [value]="option">{{ option }}</option>
-                </select>
-              </div>  
-            </div> 
-          </li>
-          <li class="grey d-flex" >
-            <div class="grey-left flex-grow-1">
-              <p class="grey-left-content" id="select-name">Group Rate (over <strong>15</strong> Children)  <strong>$11.00</strong> per booking</p>
-            </div>
-            <div class="grey-right">
-              <div class="input-group">
-                <span class="input-group-text">Qty</span>
-                  <select class="form-select form-select-lg"
-                          aria-label="Group Rate (over 15 Children)"
-                          id="group15Qty"
-                          ng-model ="group15Qty"
-                          ng-change="updateTotalPrice()"
-                          data-price="11.00">
-                          <option *ngFor="let option of group15Options" [value]="option">{{ option }}</option>
-                    </select>
-              </div>  
-            </div>            
-          </li>
-        </ul>
-    
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+   </div>
+
+
   <div class="ticket-section">
     <div class="section-header">
       <div class="section-header-top">
