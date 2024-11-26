@@ -5,6 +5,7 @@ import { PaymentServiceService } from 'src/app/service/payment-service.service';
 import { CustomerServiceService } from 'src/app/service/customer-service.service';
 import { PaymentStateService, Order } from 'src/app/service/payment-state.service';
 import { Subscription, take } from 'rxjs';
+import { SubscriptionService } from 'src/app/service/subscription.service';
 
 
 interface CustomerInfo {
@@ -36,11 +37,11 @@ export class PaymentFormComponent implements OnInit, OnDestroy{
   public orderInfo: Order[] = [];
   public showForm = false;
 
-
   constructor(
     private paymentService: PaymentServiceService,
     private customerService: CustomerServiceService,
     private paymentStateService: PaymentStateService,
+    private subscriptionService: SubscriptionService,
     private router: Router,
   ) {}
 
@@ -138,20 +139,32 @@ export class PaymentFormComponent implements OnInit, OnDestroy{
         ...customerInfo,
       }).toPromise();
 
-      await this.paymentService.createPayment(
-        token,
-        customerResponse.squareCustomerId,
-        this.totalPrice,
-        customerInfo,
-        this.orderInfo
-      ).toPromise();
-
-      this.handlePaymentSuccess();
-    } catch (error) {
-      this.handlePaymentError(error);
-    } finally {
-      this.resetCardButton(button);
-    }
+      const isMembership = currentState.orderInfo.some(order => order.isMembership);
+      if(isMembership){
+        await this.subscriptionService.createSubscription(
+          token,
+          customerResponse.squareCustomerId,
+          this.totalPrice,
+          customerInfo,
+          this.orderInfo
+        ).toPromise();
+      }else{
+        await this.paymentService.createPayment(
+          token,
+          customerResponse.squareCustomerId,
+          this.totalPrice,
+          customerInfo,
+          this.orderInfo
+        ).toPromise();
+  
+        this.handlePaymentSuccess();
+      } 
+      }catch (error) {
+        this.handlePaymentError(error);
+      } finally {
+        this.resetCardButton(button);
+      }
+     
   }
 
   private async tokenizeCard(): Promise<string> {

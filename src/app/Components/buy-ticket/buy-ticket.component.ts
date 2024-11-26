@@ -6,8 +6,17 @@ import { SubscriptionService } from 'src/app/service/subscription.service';
 
 interface Order {
   price: number;
-  quantity: number;
+  quantityOfOrder: number;
   sectionName: string;
+  isMembership: boolean;
+  numberOfChildrenAllowed: number;
+}
+
+interface SubscriptionPlan {
+  id: string;
+  children: string;
+  price: number;
+  childrenCount: number
 }
 
 @Component({
@@ -32,10 +41,10 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
 
   public orderInfo: Array<Order> = [];
   public subscriptionPlans = [
-    { id: 'PLAN_1_CHILDREN', children: 'One', price: 60},
-    { id: 'PLAN_2_CHILDREN', children: 'Two', price: 115 },
-    { id: 'PLAN_3_CHILDREN', children: 'Three', price: 165 },
-    { id: 'PLAN_4_CHILDREN', children: 'Four', price: 195 }
+    { id: 'PLAN_1_CHILDREN', children: 'One', price: 60, childrenCount: 1},
+    { id: 'PLAN_2_CHILDREN', children: 'Two', price: 115, childrenCount: 2 },
+    { id: 'PLAN_3_CHILDREN', children: 'Three', price: 165, childrenCount: 3 },
+    { id: 'PLAN_4_CHILDREN', children: 'Four', price: 195, childrenCount: 4 }
   ];
 
   public selectedPlanId: string | undefined;
@@ -121,8 +130,10 @@ public updateTotalPrice() {
 
       const order: Order = {
         price: price,
-        quantity: quantity,
-        sectionName: sectionName
+        quantityOfOrder: quantity,
+        sectionName: sectionName,       
+        isMembership: false,
+        numberOfChildrenAllowed: 1 // if the order is not membership, then this variable is not useful
     };
 
       this.orderInfo.push(order);
@@ -148,16 +159,18 @@ public updateTotalPrice() {
     console.log('Updated total price:', this.totalPrice); 
   }
  
-  public startSubscription(planId: string, price: number, children: string) {
+  public startSubscription(plan: SubscriptionPlan) {
     this.orderInfo = [];
     const order: Order = {
-      price: price,
-      quantity: 1,
-      sectionName: `Membership for ${children}`
+      price: plan.price,
+      quantityOfOrder: 1,
+      sectionName: `Membership for ${plan.children}`,
+      isMembership: true,
+      numberOfChildrenAllowed: plan.childrenCount
     };
-    this.totalPrice = price;
+    this.totalPrice = plan.price;
     document.getElementById('total-price')!.innerText = this.totalPrice.toFixed(2);
-    this.selectedPlanId = planId;   
+    this.selectedPlanId = plan.id;   
     const orderDetailsBody = document.getElementById('order-details-body');
     if (!orderDetailsBody ) return;
      // Clear the table before updating
@@ -168,22 +181,15 @@ public updateTotalPrice() {
           <td>${order.sectionName}</td>
           <td>$${order.price.toFixed(2)}</td>
           <td>1</td>
-          <td>$${price.toFixed(2)}</td>
+          <td>$${plan.price.toFixed(2)}</td>
       `;
         orderDetailsBody.appendChild(row);
         this.orderInfo.push(order);
-       this.paymentStateService.updatePaymentState(price, this.orderInfo );
-    try {
-     // const result = await this.subscriptionService.createSubscription(this.selectedPlanId);
-      // Handle successful subscription
-    
-    //  this.showSuccessModal = true;
-      // Redirect to success page or show confirmation
-    } catch (error) {
-      console.error('Payment failed:', error);
-      // Handle error
-    }
+       this.paymentStateService.updatePaymentState(plan.price, this.orderInfo );    
+
   }
+
+ 
   openVideo() {
     this.isVideoVisible = true;
   }

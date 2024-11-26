@@ -3,8 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface Order {
   price: number;
-  quantity: number;
+  quantityOfOrder: number;
   sectionName: string;
+  isMembership: boolean;
+  numberOfChildrenAllowed: number;
 }
 export interface PaymentState {
   totalPrice: number;
@@ -40,13 +42,18 @@ export class PaymentStateService {
   getCurrentState(): PaymentState {
     return this.state.getValue();
   }
-
+ 
   setShowSuccessModal(show: boolean) {
     const currentState = this.state.getValue();
     this.state.next({
       ...currentState,
       showSuccessModal: show
     });
+  }
+
+  isMembershipOrder(): boolean {
+    const currentState = this.state.getValue();
+    return currentState.orderInfo.some(order => order.isMembership);
   }
 
   resetState() {

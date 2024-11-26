@@ -26,8 +26,10 @@ interface CustomerData {
 
 interface Order {
   price: number;
-  quantity: number;
+  quantityOfOrder: number;
   sectionName: string;
+  isMembership: boolean;
+  numberOfChildrenAllowed: number;
 }
 
 @Injectable({
