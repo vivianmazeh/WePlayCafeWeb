@@ -255,6 +255,10 @@ select::-webkit-outer-spin-button {
     font-size: 22px;
     font-weight: 600;
   }
+  .nav-tabs .nav-link {
+    font-size: 22px; 
+    
+  }
 }
 
 @media (max-width: 991px) {
@@ -266,6 +270,7 @@ select::-webkit-outer-spin-button {
   
   .nav-tabs .nav-link {
     padding: 0.4rem 0.8rem;
+    font-size: 18px;
   }
 }
 
@@ -278,9 +283,7 @@ select::-webkit-outer-spin-button {
   
   .nav-tabs .nav-link {
     padding: 0.3rem 0.6rem;
-  }
-  .giftcard-tab-text{
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 

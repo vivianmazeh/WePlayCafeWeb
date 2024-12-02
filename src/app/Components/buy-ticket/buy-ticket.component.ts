@@ -41,7 +41,7 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
 
   public orderInfo: Array<Order> = [];
   public subscriptionPlans = [
-    { id: 'PLAN_1_CHILDREN', children: 'One', price: 60, childrenCount: 1},
+    { id: 'PLAN_1_CHILDREN', children: 'One', price: 2, childrenCount: 1}, // Change back to 60
     { id: 'PLAN_2_CHILDREN', children: 'Two', price: 115, childrenCount: 2 },
     { id: 'PLAN_3_CHILDREN', children: 'Three', price: 165, childrenCount: 3 },
     { id: 'PLAN_4_CHILDREN', children: 'Four', price: 195, childrenCount: 4 }
