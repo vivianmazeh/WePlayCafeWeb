@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
 import { environment } from '../environments/env';
 import { CSPService } from './csp.service';
+import { PaymentStateService } from './payment-state.service';
 
 interface CustomerData {
   firstName: string;
@@ -29,14 +30,17 @@ export class SubscriptionService {
   private readonly API_PREFIX = '/api';
 
     constructor(private http: HttpClient, 
-              private cspService: CSPService) {
+              private cspService: CSPService,
+              private paymentStateService: PaymentStateService ) {
     // Use the current window location origin to determine the API base URL
     const currentOrigin = window.location.origin;
     this.baseUrl = currentOrigin.includes('www') 
       ? environment.baseUrl 
       : environment.baseUrl.replace('www.', '');
   }
-
+  ngOnDestroy() {
+    this.paymentStateService.setShowSuccessModal(false);
+  }
   createSubscription(token: string, 
                       customerId: string, 
                       amount: number, 
@@ -73,6 +77,10 @@ export class SubscriptionService {
           withCredentials: true,
         });
       }),
+      tap(() => {
+        // Show success modal after successful subscription creation
+        this.paymentStateService.setShowSuccessModal(true);
+      }),
       catchError((error: HttpErrorResponse) => {
         console.error('Payment request failed:', error);
         return throwError(() => error);
@@ -80,11 +88,11 @@ export class SubscriptionService {
     );
   }
 
-  cancelSubscription(subscriptionId: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}${this.API_PREFIX}/${subscriptionId}/cancel`, {});
+  getSubscriptionDetails(subscriptionId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}${this.API_PREFIX}/${subscriptionId}`);
   }
 
-  getSubscription(subscriptionId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}${this.API_PREFIX}/${subscriptionId}`);
+  confirmCancellation(subscriptionId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}${this.API_PREFIX}/cancel-subscription/${subscriptionId}/confirm`, {});
   }
 }

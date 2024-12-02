@@ -23,6 +23,7 @@ import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component
 import { PaymentSuccessModalComponent } from './Components/payment-success-modal/payment-success-modal.component';
 import { PaymentFormComponent }from './Components/payment-form/payment-form.component';
 import { CSPInterceptor } from './service/csp.interceptor';
+import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CSPInterceptor } from './service/csp.interceptor';
     BookPartySelectDateComponent,
     BuyTicketComponent,
     PaymentSuccessModalComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
+    CancelSubscriptionComponent
     
   ],
   imports: [

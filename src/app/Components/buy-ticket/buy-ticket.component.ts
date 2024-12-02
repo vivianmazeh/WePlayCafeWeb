@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { PaymentStateService } from 'src/app/service/payment-state.service';
 import { SubscriptionService } from 'src/app/service/subscription.service';
 
@@ -51,10 +51,10 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
   private stateSubscription: Subscription | undefined;
   showPaymentForm = false;
   showSuccessModal = false;
+  private destroy$ = new Subject<void>();
   activeTab: string = 'tickets';
 
   constructor(
-    private subscriptionService: SubscriptionService,
     private paymentStateService: PaymentStateService,
     private router: Router
   ) { }
@@ -65,12 +65,17 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
       this.showPaymentForm = state.showForm;
       this.showSuccessModal = state.showSuccessModal;
     });
+    this.paymentStateService.state$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(state => {
+      this.showPaymentForm = state.showForm;
+      this.showSuccessModal = state.showSuccessModal;
+    });
   }
 
   ngOnDestroy() {
-    if (this.stateSubscription) {
-      this.stateSubscription.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onTabChange(event: any): void {
@@ -90,7 +95,9 @@ export class BuyTicketComponent implements OnInit, OnDestroy {
   }
 
   handleModalClose() {
+
     this.paymentStateService.setShowSuccessModal(false);
+    
     setTimeout(() => {
       this.router.navigate(['/home']).then(() => {
         console.log('Navigation complete');

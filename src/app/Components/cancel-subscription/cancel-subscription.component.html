@@ -1,0 +1,41 @@
+<div class="cancel-subscription-container">
+    <div class="content-wrapper">
+      <!-- Header -->
+      <div class="header">
+        <img src="./assets/icons/weplay/weplaylogo4.png" alt="WePlay Logo" class="logo">
+        <h1>Subscription Cancellation</h1>
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+  
+      <!-- Main Content -->
+      <div *ngIf="!error && !cancelSuccess" class="main-content">
+        <div class="warning-box">   
+          <p>Please note:</p>
+          <ul>
+            <li>Your subscription will remain active until the end of the current billing period</li>
+            <li>You will lose access to all subscription benefits after cancellation</li>
+            <li>This action cannot be undone</li>
+          </ul>
+        </div>
+  
+        <div class="action-buttons">
+          <button 
+            (click)="cancelSubscription()" 
+            class="cancel-btn"
+            [disabled]="loading">
+            Cancel Subscription
+          </button>
+        </div>
+      </div>
+      <!-- Success Message -->
+      <div *ngIf="cancelSuccess" class="success-message">
+        <h4>Your WePlay membership Cancelled Successfully</h4>
+        <p>You will receive a confirmation email shortly.</p>
+        <p>Thank you for being our customer!</p>
+      </div>    
+    </div>
+  </div>

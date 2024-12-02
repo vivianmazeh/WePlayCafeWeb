@@ -9,6 +9,7 @@ import { ContactUsComponent } from './Components/contact-us/contact-us.component
 import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component';
+import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
 
 
 // sets up routes constant where you define your routes
@@ -26,6 +27,8 @@ const routes: Routes = [
           children: [    
             {path: 'select-date', component: BookPartySelectDateComponent}
    ]},
+   {path: 'cancel-subscription/:subscriptionId', 
+   component: CancelSubscriptionComponent},
   {path: '', redirectTo: 'home', pathMatch : 'full'},
 
  
