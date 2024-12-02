@@ -225,6 +225,19 @@ select::-webkit-outer-spin-button {
 }
 
 /* Tab Styles */
+.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to new line */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  display: none;
+}
 .nav-tabs .nav-link {
   color: #4878a3;
   border: 2px solid transparent;
@@ -234,6 +247,43 @@ select::-webkit-outer-spin-button {
   margin-bottom: -1px;
   transition: all 0.2s ease-in-out;
 }
+
+/* Responsive font sizes */
+@media (min-width: 992px) {
+  /* Desktop */
+  .nav-tabs {
+    font-size: 22px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Tablet */
+  .nav-tabs {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Mobile */
+  .nav-tabs {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 0.3rem 0.6rem;
+  }
+  .giftcard-tab-text{
+    font-size: 18px;
+  }
+}
+
 
 .nav-tabs .nav-link:hover {
   border-color: #e9ecef #e9ecef #dee2e6;
