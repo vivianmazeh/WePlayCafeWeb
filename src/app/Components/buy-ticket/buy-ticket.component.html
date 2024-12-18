@@ -28,19 +28,6 @@
           Membership
         </button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" 
-                id="giftcard-tab" 
-                data-bs-toggle="tab" 
-                data-bs-target="#giftcard" 
-                type="button" 
-                role="tab" 
-                aria-controls="giftcard" 
-                [attr.aria-selected]="activeTab === 'giftcard'"
-                (click)="onTabChange($event)">
-          Gift Card
-        </button>
-      </li>
     </ul>
    <!-- Tabs Content -->
    <div class="tab-content" id="ticketTabsContent">
@@ -56,9 +43,10 @@
             <div class="section-header-buttom">
               <div class="section-header-buttom-content">
                 <p class="align-left"><strong>3-Hour Playtime Limit.</strong></p>
-                <p class="align-left"><strong>No Expiration</strong> — Pass valid from 10 AM - 8 PM.</p>
+                <p class="align-left"><strong>No Expiration</strong> — Pass valid from 9 AM - 8 PM.</p>
                 <p class="align-left"><strong>Adult Supervision Required.</strong></p>
-                <p class="align-left"><strong>Waiver Required.</strong> Please Sign online for a quick and easy check-in. </p>          
+                <p class="align-left"><strong>Waiver Required.</strong> Please Sign online for a quick and easy check-in. </p>  
+                <p class="align-left"><strong>Walk-ins always welcome!</strong> Tickets can be purchased on arrival </p>            
               </div>
              
             </div>
@@ -179,6 +167,7 @@
                 <p class="align-left"> <strong>Unlimited Entry</strong>– Visit as often as you like!</p>
                 <p class="align-left"> <strong>NO restrictions</strong>– Enjoy any day, including weekends.</p>
                 <p class="align-left"> <strong>Access to Events & Classes</strong> – Free with all materials provided!</p>
+                <p class="align-left"> <strong>Membership can be purchased on arrival</strong></p>
                 <p  class="align-left"><strong>Please click <button type="button"  (click)="openVideo()" class="btn btn-link">Our activities</button></strong></p>
               </div>
               <div class="video-overlay" id="videoOverlay"  *ngIf="isVideoVisible">
@@ -206,25 +195,6 @@
         </div>
       </div>
     </div>
-
-    <div class="tab-pane fade" 
-        [class.show]="activeTab === 'giftcard'"
-        [class.active]="activeTab === 'giftcard'"
-        id="giftcard" 
-        role="tabpanel" 
-        aria-labelledby="giftcard-tab">
-      <div class="ticket-section">
-        <div class="section-header">
-          <div class="section-header-buttom">
-            <div class="section-header-buttom-content">
-              <p class="align-left">Gift card options coming soon!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   </div>
-
 
   <div class="ticket-section">
     <div class="section-header">
@@ -258,7 +228,7 @@
               <span style="color: #4878a3; "><strong>Online Waiver</strong></span>
             </a>
           </p>
-          <p class="align-left" style="font-size: 18px;"><strong>Walk-ins always welcome!</strong></p>
+   
         </div>
 
       </div>

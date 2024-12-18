@@ -10,7 +10,6 @@ import { LoginComponent } from './Components/login/login.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { MainComponent } from './Components/main/main.component';
-import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { PriceComponent } from './Components/price/price.component';
 import { WaiverComponent } from './Components/waiver/waiver.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
@@ -24,6 +23,7 @@ import { PaymentSuccessModalComponent } from './Components/payment-success-modal
 import { PaymentFormComponent }from './Components/payment-form/payment-form.component';
 import { CSPInterceptor } from './service/csp.interceptor';
 import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
+import { RulesComponent } from './Components/rules/rules.component';
 
 @NgModule({
   declarations: [
@@ -41,11 +41,11 @@ import { CancelSubscriptionComponent } from './Components/cancel-subscription/ca
     GalleryComponent,
     ContactUsComponent,
     CityProfileComponent,
-    BookPartySelectDateComponent,
     BuyTicketComponent,
     PaymentSuccessModalComponent,
     PaymentFormComponent,
-    CancelSubscriptionComponent
+    CancelSubscriptionComponent,
+    RulesComponent
     
   ],
   imports: [

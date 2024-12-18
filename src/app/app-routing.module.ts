@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import  {WaiverComponent} from './Components/waiver/waiver.component'
-import {BookPartyComponent} from './Components/book-party/book-party.component';
 import { PriceComponent } from './Components/price/price.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
-import { BookPartySelectDateComponent } from './Components/book-party-select-date/book-party-select-date.component';
 import { CityProfileComponent } from './Components/city-profile/city-profile.component';
 import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component';
 import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
+import { RulesComponent } from './Components/rules/rules.component';
 
 
 // sets up routes constant where you define your routes
@@ -22,11 +21,7 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'city-profile', component: CityProfileComponent},
   {path: 'card-payment', component: BuyTicketComponent},
-  {path: 'book-a-party', 
-          component: BookPartyComponent,
-          children: [    
-            {path: 'select-date', component: BookPartySelectDateComponent}
-   ]},
+  {path: 'rules', component: RulesComponent},
    {path: 'cancel-subscription/:subscriptionId', 
    component: CancelSubscriptionComponent},
   {path: '', redirectTo: 'home', pathMatch : 'full'},

@@ -1,0 +1,61 @@
+@import url(../../../assets/css/shared-style.css);
+
+.playground-rules-content{
+    line-height: 1.6;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.playground-rules-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .playground-rules-title-description {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+
+  .playground-rules-subtitle {
+    text-align: left;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+
+  }
+ 
+  
+  @media (max-width: 768px) {
+    .playground-rules-content {
+      padding: 15px;
+    }
+  
+    .playground-rules-title {
+      font-size: 1.8rem;
+    }
+  
+    .playground-rules-title-description {
+      font-size: 1rem;
+    }
+  
+    .playground-rules-subtitle {
+      font-size: 1.3rem;
+    }
+  
+    li {
+      font-size: 0.9rem;
+    }}

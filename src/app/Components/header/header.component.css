@@ -1,10 +1,22 @@
+.header-section{
+    display: flex;
+    flex-direction: column;
+   
+}
 .header-container{
     display: flex;
     flex-direction: row;
     height: auto;   
     padding-bottom: 18px;  
 }
-
+.marquee-msg{
+    color:#ffae00;
+    font-size: 18px;
+    min-height: 30px; /* Ensures minimum height for the marquee */
+    line-height: 30px; /* Vertically centers the text */
+    padding: 5px 0; /* Adds vertical padding */
+   
+}
 .header-container-text{
     width: auto;
     flex: 1 1 auto;
@@ -55,7 +67,6 @@
 }
 
 .header-container-bottom{
-
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -75,7 +86,6 @@ nav{
 }
 .nav-link-tab{
     color: #ffffff;
-    font-weight: bold;
 }
 
 
@@ -373,7 +383,7 @@ nav{
         width: 15%;
     }
     .nav-link-tab{  
-        font-size: 20px;
+        font-size: 18px;
         margin-left: 30px;
     }
     nav{

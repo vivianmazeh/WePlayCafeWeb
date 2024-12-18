@@ -1,103 +1,125 @@
-
-<div class="header-container">  
- 
-   <div class="header-container-logo">
-    <a href="#" routerLink = "home" >
-      <img src="./assets/icons/weplay/weplaylogo4.png" class="header-logo">
-    </a>
-    
-  </div>
-  <div class="header-container-text">
-    <div class="header-container-top">
-      <div class="header-container-top-text">Welcome to WePlay </div>
+<div class="header-section">
+  <marquee class="marquee-msg">🚧 Coming Soon! Please follow us on Instagram &#64;weplay_playground for opening updates and special offers. Please do NOT make party reservations until further notice. 🚧</marquee>
+  <div class="header-container">  
+    <div class="header-container-logo">
+      <a href="#" routerLink = "home" >
+        <img src="./assets/icons/weplay/weplaylogo4.png" class="header-logo">
+      </a>
+      
     </div>
-    <div class="header-container-bottom">
-      <div class="header-container-bottom-text">
-          <span class="text-title">An Indoor Playground </span>   
-      </div> 
-      <div class="header-container-bottom-text">
-        <span class="text-title">where Kids play, birthdays shine, and you unwind</span>
-        <span class="text-title">
-          <img src="./assets/icons/tea.png" class="tea-icon" >
-        </span>
+    <div class="header-container-text">
+      <div class="header-container-top">
+        <div class="header-container-top-text">Welcome to WePlay </div>
       </div>
-    </div>      
-  </div> 
-  <div class="header-container-order">
-    <div class="header-container-order-party">      
-      <a href="#" routerLink = "book-a-party" class="btn header-container-order-button active" >
-        <img src="./assets/icons/cake.png" class="book-party-icon" >
-        <span class="order-button-name">Reserve Party</span>
-      </a>
+      <div class="header-container-bottom">
+        <div class="header-container-bottom-text">
+            <span class="text-title">An Indoor Playground </span>   
+        </div> 
+        <div class="header-container-bottom-text">
+          <span class="text-title">where Kids play, birthdays shine, and you unwind</span>
+          <span class="text-title">
+            <img src="./assets/icons/tea.png" class="tea-icon" >
+          </span>
+        </div>
+      </div>      
+    </div> 
+    <div class="header-container-order">
+      <div class="header-container-order-party">      
+            <!-- Start Square Appointments Embed code -->
+        <a target="_top" class="btn header-container-order-button active"
+            href="https://app.squareup.com/appointments/book/nu0iyv224136mm/L0YRVCK6VFFB3/start" 
+            rel="nofollow">
+          
+            <img src="./assets/icons/cake.png" class="book-party-icon" >
+            <span class="order-button-name">Reserve Party</span>
+        </a>
+      </div>
+
+  <!-- End Square Appointments Embed code -->
+      <div class="header-container-order-party">
+        <a href="#" routerLink = "card-payment" class="btn header-container-order-button active" >
+          <img src="./assets/icons/buy-ticket.png" class="book-party-icon" >
+          <span class="order-button-name">Tickets and Memberships</span>
+        </a>
+      </div>   
     </div>
-    <div class="header-container-order-party">
-      <a href="#" routerLink = "card-payment" class="btn header-container-order-button active" >
-        <img src="./assets/icons/buy-ticket.png" class="book-party-icon" >
-        <span class="order-button-name">Tickets and Memberships</span>
-      </a>
-    </div>   
   </div>
-</div>
-  <div class="main-bar">
-    <nav class="navbar navbar-expand-md sticky-top">
-          <div class="container-nav-button">
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
-                    aria-expanded="false" aria-label="Toggle navigation" (click)="clickNavbarButton()">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapsed navbar-collapse"id="navbarNavAltMarkup">
+</div>    
 
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link nav-link-tab" aria-current="page"  routerLinkActive="active" routerLink = "home" (click)="closeNavbar()">
-                    <span class="nav-link-tab-title">Home</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link-tab" routerLink = "waiver" (click)="closeNavbar()" >
-                      <span class="nav-link-tab-title">Waiver</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link-tab" routerLink = "price" (click)="closeNavbar()" >
-                    <span class="nav-link-tab-title">Hours and Price</span></a>
-                </li>
+<div class="main-bar">
+  <nav class="navbar navbar-expand-md sticky-top">
+        <div class="container-nav-button">
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                  data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
+                  aria-expanded="false" aria-label="Toggle navigation" (click)="clickNavbarButton()">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapsed navbar-collapse"id="navbarNavAltMarkup">
 
-                <!-- <li class="nav-item">
-                  <a class="nav-link nav-link-tab" routerLink = "menu" (click)="closeNavbar()" >
-                    <span class="nav-link-tab-title">Menu</span></a>
-                </li> -->
-
-                <li class="nav-item dropdown">
-                  <a class="nav-link nav-link-tab dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="nav-link-tab-title">Join Us</span>
-                  </a>
-                  <ul class="dropdown-menu" style="background-color: lemonchiffon;">
-                    <li><a class="dropdown-item"  routerLink = "book-a-party" (click)="closeNavbar()">
-                          <span style="font-weight: 800; font-size: 18px;">Reserve Party</span>
-                        </a></li>
-                    <li><a class="dropdown-item"  routerLink = "card-payment" (click)="closeNavbar()">
-                          <span style="font-weight: 800; font-size: 18px;">Tickets and Memberships</span>
-                        </a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item"  routerLink = "buy-tickets" (click)="closeNavbar()">
-                          <span style="font-weight: 800; font-size: 18px;">Career</span>
-                        </a></li>                
-                  </ul>
-                </li>         
-                <!-- <a class="nav-link nav-link-tab" href="#" routerLink = "gallery" (click)="closeNavbar()">
-                  <span class="nav-link-tab-title">Gallery</span></a> -->
-                <li class="nav-item active">
-                  <a class="nav-link nav-link-tab" routerLink = "contactUs"  (click)="closeNavbar()">
-                    <span class="nav-link-tab-title">Contact Us</span></a>
-                </li>
-                <li class="nav-item" *ngIf="!hideNavbar">
-                  <a class="nav-link nav-link-tab"  routerLink = "city-profile" (click)="closeNavbar()" >
-                    <span class="nav-link-tab-title">City Profile</span></a>
-                </li>
-              </ul>
-            </div>
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link nav-link-tab" aria-current="page"  routerLinkActive="active" routerLink = "home" (click)="closeNavbar()">
+                  <span class="nav-link-tab-title">Home</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab" routerLink = "waiver" (click)="closeNavbar()" >
+                    <span class="nav-link-tab-title">Waiver</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab" routerLink = "price" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">Hours and Price</span></a>
+              </li>
+<!-- 
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab" routerLink = "menu" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">Menu</span></a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab" routerLink = "card-payment" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">Tickets</span></a>
+              </li>              
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab"  href="https://app.squareup.com/appointments/book/nu0iyv224136mm/L0YRVCK6VFFB3/start"  (click)="closeNavbar()">
+                <span class="nav-link-tab-title">Book Party</span>
+              </a></li>   
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab"  href="https://app.squareup.com/gift/MLHNBC6HNYRK0/order" (click)="closeNavbar()">
+                <span class="nav-link-tab-title">Gift Cards</span>
+              </a></li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-tab" routerLink = "contactUs"  (click)="closeNavbar()">
+                  <span class="nav-link-tab-title">Contact Us</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-link-tab dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="nav-link-tab-title">Join Us</span>
+                </a>
+                <ul class="dropdown-menu" style="background-color: lemonchiffon;">
+                  <li><a class="dropdown-item"  routerLink = "book-a-party" (click)="closeNavbar()">
+                        <span style="font-weight: 800; font-size: 18px;">Reserve Party</span>
+                      </a></li>
+                  <li><a class="dropdown-item"  routerLink = "card-payment" (click)="closeNavbar()">
+                        <span style="font-weight: 800; font-size: 18px;">Tickets and Memberships</span>
+                      </a></li>               
+                  <li><a class="dropdown-item"  href="https://app.squareup.com/gift/MLHNBC6HNYRK0/order" (click)="closeNavbar()">
+                    <span style="font-weight: 800; font-size: 18px;">Gift Cards</span>
+                  </a></li>
+                  <li><a class="dropdown-item"  routerLink = "rules" (click)="closeNavbar()">
+                    <span style="font-weight: 800; font-size: 18px;">Rules</span>
+                  </a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item"  routerLink = "buy-tickets" (click)="closeNavbar()">
+                        <span style="font-weight: 800; font-size: 18px;">Career</span>
+                      </a></li>                
+                </ul>
+              </li> 
+              <li class="nav-item" *ngIf="!hideNavbar">
+                <a class="nav-link nav-link-tab"  routerLink = "city-profile" (click)="closeNavbar()" >
+                  <span class="nav-link-tab-title">City Profile</span></a>
+              </li>
+            </ul>
           </div>
-        </nav>
- </div>
-     
+        </div>
+      </nav>
+</div>
