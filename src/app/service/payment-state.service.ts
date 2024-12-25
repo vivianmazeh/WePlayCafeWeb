@@ -14,6 +14,14 @@ export interface PaymentState {
   showForm: boolean;
   showSuccessModal: boolean;
 }
+export interface MenuItem {
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  unit: string;
+  quantity: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +36,30 @@ export class PaymentStateService {
   });
 
   state$ = this.state.asObservable();
+
+  updatePaymentStateFromMenuItems(menuItems: MenuItem[]) {
+    const orderInfo: Order[] = menuItems
+      .filter(item => item.quantity > 0)
+      .map(item => ({
+        price: item.price,
+        quantityOfOrder: item.quantity,
+        sectionName: item.name,
+        isMembership: false, // Default value for menu items
+        numberOfChildrenAllowed: 0 // Default value for menu items
+      }));
+      const totalPrice = orderInfo.reduce((sum, order) => 
+        sum + (order.price * order.quantityOfOrder), 0
+      );
+
+      const currentState = this.state.getValue();
+      this.state.next({
+        ...currentState,
+        totalPrice,
+        orderInfo,
+        showForm: totalPrice > 0
+      });
+    }
+  
 
   updatePaymentState(totalPrice: number, orderInfo: Order[]) {
     const currentState = this.state.getValue();

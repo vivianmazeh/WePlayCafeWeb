@@ -1,0 +1,142 @@
+<div class="menu-container">
+  <!-- Menu Section -->
+  <div class="menu-section">
+    <div class="category-nav">
+      <button *ngFor="let category of categories"
+        (click)="setActiveCategory(category)"
+        [class.active]="activeCategory === category"
+        class="category-btn">
+        {{category | titlecase}}
+      </button>
+    </div>
+  
+    <!-- Menu Items List -->
+    <div class="menu-list">
+      <div *ngFor="let item of filteredItems" class="menu-item">
+        <div class="item-info">
+          <div class="item-header">
+            <h3 class="item-name">{{item.name}}</h3>
+            <span class="item-price">${{item.price.toFixed(2)}}</span>
+          </div>
+          <div class="item-details">
+            <div class="item-description-container">
+              <p *ngIf="item.description" class="item-description">{{item.description}}</p>
+              <span class="item-unit">{{item.unit}}</span>
+            </div>
+            <div class="quantity-control">
+              <button (click)="updateQuantity(item, -1)"
+                [disabled]="item.quantity === 0"
+                class="quantity-btn">
+                <i class="fas fa-minus"></i>
+              </button>
+              <span class="quantity-display">{{item.quantity}}</span>
+              <button (click)="updateQuantity(item, 1)"
+                class="quantity-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Cart Section -->
+  <div *ngIf="cart.length > 0" class="desktop-cart-section">
+    <div class="category-nav">
+      <div class="section-header-top">
+        <span class="section-header-top-title">Your Order Details</span>
+      </div>
+    </div>
+    <div class="cart-content">
+      <div class="cart-info">
+        <i class="fas fa-shopping-cart"></i>
+        <span>{{getTotalItems()}} items</span>
+      </div>
+      <div class="cart-items">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart">
+              <td>{{item.name}}</td>
+              <td>${{item.price.toFixed(2)}}</td>
+              <td>{{item.quantity}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="2">Total Price:</th>
+              <th>${{total.toFixed(2)}}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <app-payment-form *ngIf="showPaymentForm"></app-payment-form>
+    </div>
+  </div>
+
+  <!-- Mobile-only Elements -->
+  <!-- Mobile Checkout Button -->
+  <div class="mobile-checkout-bar" *ngIf="cart.length > 0">
+    <div class="checkout-info">
+      <span class="items-count">{{getTotalItems()}} items</span>
+      <span class="total-price">${{total.toFixed(2)}}</span>
+    </div>
+    <button (click)="showCartPage()" class="checkout-button">
+      View Cart
+    </button>
+  </div>
+
+  <!-- Mobile Cart Page -->
+  <div class="mobile-cart-section" [class.show-cart]="isCartPageVisible">
+    <div class="cart-header">
+      <button class="back-button" (click)="hideCartPage()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <span class="section-header-top-title">Your Order Details</span>
+    </div>
+    <div class="cart-content">
+      <div class="cart-info">
+        <i class="fas fa-shopping-cart"></i>
+        <span>{{getTotalItems()}} items</span>
+      </div>
+      <div class="cart-items">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart">
+              <td>{{item.name}}</td>
+              <td>${{item.price.toFixed(2)}}</td>
+              <td>{{item.quantity}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="2">Total Price:</th>
+              <th>${{total.toFixed(2)}}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <app-payment-form *ngIf="showPaymentForm"></app-payment-form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal (works on both mobile and desktop) -->
+<app-payment-success-modal
+  [isOpen]="showSuccessModal"
+  (onClose)="handleModalClose()">
+</app-payment-success-modal>

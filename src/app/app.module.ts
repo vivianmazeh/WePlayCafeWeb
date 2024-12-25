@@ -24,6 +24,7 @@ import { PaymentFormComponent }from './Components/payment-form/payment-form.comp
 import { CSPInterceptor } from './service/csp.interceptor';
 import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
 import { RulesComponent } from './Components/rules/rules.component';
+import { MenuComponent } from './Components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { RulesComponent } from './Components/rules/rules.component';
     PaymentSuccessModalComponent,
     PaymentFormComponent,
     CancelSubscriptionComponent,
-    RulesComponent
+    RulesComponent,
+    MenuComponent
     
   ],
   imports: [

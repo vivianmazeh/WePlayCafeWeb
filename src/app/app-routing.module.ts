@@ -9,6 +9,7 @@ import { CityProfileComponent } from './Components/city-profile/city-profile.com
 import { BuyTicketComponent } from './Components/buy-ticket/buy-ticket.component';
 import { CancelSubscriptionComponent } from './Components/cancel-subscription/cancel-subscription.component';
 import { RulesComponent } from './Components/rules/rules.component';
+import { MenuComponent } from './Components/menu/menu.component';
 
 
 // sets up routes constant where you define your routes
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'city-profile', component: CityProfileComponent},
   {path: 'card-payment', component: BuyTicketComponent},
   {path: 'rules', component: RulesComponent},
+  {path: 'menu', component: MenuComponent},
    {path: 'cancel-subscription/:subscriptionId', 
    component: CancelSubscriptionComponent},
   {path: '', redirectTo: 'home', pathMatch : 'full'},
