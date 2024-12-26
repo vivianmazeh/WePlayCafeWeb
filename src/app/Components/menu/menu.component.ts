@@ -59,11 +59,18 @@ export class MenuComponent implements OnInit  {
       }
     });
   }
-  showCartPage(): void {
+  proceedToPayment() {
+    //this.paymentStateService. updatePaymentStateFromMenuItems(this.cart.map)
+    this.showPaymentForm = true;
+  }
+  showCartPage() {
     this.isCartPageVisible = true;
   }
-
-  hideCartPage(): void {
+  hideCartPage() {
+    // If payment form is showing, hide it first
+    if (this.showPaymentForm) {
+      this.showPaymentForm = false;
+    }
     this.isCartPageVisible = false;
   }
   private updateCategories(): void {

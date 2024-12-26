@@ -42,6 +42,7 @@
   </div>
 
   <!-- Desktop Cart Section -->
+ 
   <div *ngIf="cart.length > 0" class="desktop-cart-section">
     <div class="category-nav">
       <div class="section-header-top">
@@ -57,9 +58,9 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Item Name</th>
-              <th scope="col">Item Price</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
             </tr>
           </thead>
           <tbody>
@@ -77,12 +78,10 @@
           </tfoot>
         </table>
       </div>
-      <app-payment-form *ngIf="showPaymentForm"></app-payment-form>
     </div>
   </div>
 
-  <!-- Mobile-only Elements -->
-  <!-- Mobile Checkout Button -->
+  <!-- Mobile Cart Button -->
   <div class="mobile-checkout-bar" *ngIf="cart.length > 0">
     <div class="checkout-info">
       <span class="items-count">{{getTotalItems()}} items</span>
@@ -93,7 +92,7 @@
     </button>
   </div>
 
-  <!-- Mobile Cart Page -->
+  <!-- Mobile Cart Section -->
   <div class="mobile-cart-section" [class.show-cart]="isCartPageVisible">
     <div class="cart-header">
       <button class="back-button" (click)="hideCartPage()">
@@ -110,9 +109,9 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Item Name</th>
-              <th scope="col">Item Price</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
             </tr>
           </thead>
           <tbody>
@@ -130,12 +129,19 @@
           </tfoot>
         </table>
       </div>
-      <app-payment-form *ngIf="showPaymentForm"></app-payment-form>
+      <button (click)="proceedToPayment()" class="proceed-btn">
+        Proceed to Payment
+      </button>
     </div>
+
   </div>
+  <div class="payment-form-container" *ngIf="showPaymentForm">
+    <app-payment-form></app-payment-form>
+  </div>
+  <div class="reserved-space-1"></div>
+  <div class="reserved-space-2"></div>
 </div>
 
-<!-- Modal (works on both mobile and desktop) -->
 <app-payment-success-modal
   [isOpen]="showSuccessModal"
   (onClose)="handleModalClose()">
