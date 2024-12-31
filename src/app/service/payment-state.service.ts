@@ -28,7 +28,7 @@ export interface MenuItem {
 })
 export class PaymentStateService {
 
-  private state = new BehaviorSubject<PaymentState>({
+  public state = new BehaviorSubject<PaymentState>({
     totalPrice: 0,
     orderInfo: [],
     showForm: false,
@@ -56,7 +56,7 @@ export class PaymentStateService {
         ...currentState,
         totalPrice,
         orderInfo,
-        showForm: totalPrice > 0
+        showForm: currentState.showForm 
       });
     }
   

@@ -220,15 +220,20 @@
   border-radius: 8px;
   margin-top: 16px;
 }
+.section-header-top{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 18px;
+} 
+
 
 /* Mobile Elements */
 .mobile-cart-button {
   display: none;
-}
-
-.mobile-cart-overlay {
-  display: none;
-  
 }
 
 /* Mobile Styles */
@@ -296,7 +301,7 @@
 }
 @media screen and (max-width: 639px) {
   .menu-container {
-    padding: 0;
+    padding: 5px;
   }
   .menu-section {
     padding-bottom: 80px;
@@ -305,13 +310,29 @@
     transform: translateX(0);
   }
     /* Hide desktop cart on mobile */
-    .desktop-cart-section {
+ .desktop-cart-section {
       display: none;
     }
-
-  .mobile-checkout-bar {
-    display: block;
+  /* Mobile Cart Section */
+  .mobile-cart-section {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFF8F2;
+    z-index: 40;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
   }
+
+  .mobile-cart-section.show-cart {
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0);
+  }
+
   .menu-container > .cart-section {
     display: none;
   }
@@ -337,24 +358,11 @@
     height: 50vh;
     z-index: 20;
   }
-
   .cart-content {
-    height: 50%;
-    width: 100%; 
-    border-bottom: 1px solid #e5e7eb;
-    margin: 0;
+    flex: 1;
+    overflow-y: auto;
     padding: 16px;
-    display: block;
   }
-  .payment-form-container {
-    background: white;
-    padding: 20px;
-    margin: 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 50;
-  }
-
   .cart-info {
     position: sticky;
     top: 0;
@@ -369,50 +377,142 @@
     padding-bottom: 50vh; /* Match cart height */
   }
    /* Show mobile elements */
-   .mobile-checkout-bar {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 16px;
-    border-top: 1px solid #e5e7eb;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
-    z-index: 30;
+    /* Mobile Checkout Bar */
+    .mobile-checkout-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      border-top: 1px solid #e5e7eb;
+      box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .checkout-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .hover-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #4878a3;
+      border-radius: 9999px;
+      background-color: transparent;
+      color: #4878a3;
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hover-button span {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .hover-button i {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-button:hover span {
+      color: white;
+    }
+
+    .hover-button:hover i {
+      transform: translateX(0.25rem);
+    }
+
+    .hover-button::before,
+    .hover-button::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: #4878a3;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .hover-button::before {
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .hover-button::after {
+      z-index: 2;
+      transition-delay: 0.05s;
+    }
+
+    .hover-button:hover::before,
+    .hover-button:hover::after {
+      transform: translateY(0);
+    }
+
+      /* For devices that do support hover */
+  @media (hover: hover) {
+    .hover-button:hover span {
+      color: white;
+    }
+
+    .hover-button:hover i {
+      transform: translateX(0.25rem);
+    }
+
+    .hover-button:hover::before,
+    .hover-button:hover::after {
+      transform: translateY(0);
+    }
   }
-  .mobile-cart-section {
-    display: block;
+
+  .back-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #4b5563;
+  }
+
+  .section-header-top-title {
+    font-size: 18px;
+    font-weight: 500;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .payment-form-container {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 16px;
+    z-index: 50;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: white;
-    z-index: 40;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
     overflow-y: auto;
+    display: none;
   }
 
-  .mobile-cart-section.show-cart {
-    transform: translateX(0);
-  }
-
-  .cart-header {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  /* Ensure payment form is visible */
-  /* .mobile-cart-section.show-cart app-payment-form {
+  .payment-form-container.show-payment {
     display: block;
-    margin-bottom: env(safe-area-inset-bottom, 20px);
-  } */
+  }
+
+
 }

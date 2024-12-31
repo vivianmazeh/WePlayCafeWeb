@@ -87,8 +87,15 @@
       <span class="items-count">{{getTotalItems()}} items</span>
       <span class="total-price">${{total.toFixed(2)}}</span>
     </div>
-    <button (click)="showCartPage()" class="checkout-button">
-      View Cart
+    <button (click)="showCartPage()" 
+            type="button"
+            (touchstart)="handleTouchStart($event)"
+            (touchend)="handleTouchEnd($event)"
+            class="hover-button">
+      <span>
+        View Cart 
+        <i class="fa-sharp fa-solid fa-chevron-right"></i>
+      </span>
     </button>
   </div>
 
@@ -133,9 +140,14 @@
         Proceed to Payment
       </button>
     </div>
-
   </div>
-  <div class="payment-form-container" *ngIf="showPaymentForm">
+  <div class="payment-form-container" [class.show-payment]="showPaymentForm">
+    <div class="section-header-top">
+      <button class="back-button" (click)="hidePaymentForm()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <span class="section-header-top-title">Payment Details</span>
+    </div>
     <app-payment-form></app-payment-form>
   </div>
   <div class="reserved-space-1"></div>

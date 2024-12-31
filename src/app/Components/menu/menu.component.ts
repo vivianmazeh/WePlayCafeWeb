@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { PaymentStateService } from 'src/app/service/payment-state.service';
 import { Router } from '@angular/router';
@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit  {
   showPaymentForm = false;
   showSuccessModal = false;
   isCartPageVisible = false;
-
+  @ViewChild('paymentContainer') paymentContainer: ElementRef | undefined;
   constructor(private menuService: MenuService,
               private paymentStateService: PaymentStateService,
               private router: Router
@@ -43,7 +43,8 @@ export class MenuComponent implements OnInit  {
     this.loadMenuItems();
     // Subscribe to payment state changes
     this.paymentStateService.state$.subscribe(state => {
-      this.showPaymentForm = state.showForm;
+      // Only update other state properties, not form visibility
+      this.total = state.totalPrice;
     });
    
   }
@@ -60,12 +61,79 @@ export class MenuComponent implements OnInit  {
     });
   }
   proceedToPayment() {
-    //this.paymentStateService. updatePaymentStateFromMenuItems(this.cart.map)
+    // Update payment state
+    this.paymentStateService.updatePaymentState(
+      this.total,
+      this.cart.map(item => ({
+        price: item.price,
+        quantityOfOrder: item.quantity,
+        sectionName: item.name,
+        isMembership: false,
+        numberOfChildrenAllowed: 0
+      }))
+    );
+    
+        // Subscribe to state changes to ensure form visibility is updated
+        this.paymentStateService.state$.subscribe(state => {
+          this.showPaymentForm = state.showForm;
+        });
+    // Show payment form and hide cart
     this.showPaymentForm = true;
-  }
-  showCartPage() {
+    this.isCartPageVisible = false;
+
+    
+    // For mobile view, add show-payment class to payment form container
+    const paymentContainer = document.querySelector('.payment-form-container');
+    if (paymentContainer) {
+      paymentContainer.classList.add('show-payment');
+    }
+
+    // Hide mobile cart section
+    const mobileCartSection = document.querySelector('.mobile-cart-section');
+    if (mobileCartSection) {
+      mobileCartSection.classList.remove('show-cart');
+    }
+        // Ensure we're preventing any default navigation
+        setTimeout(() => {
+          if (!this.showPaymentForm) {
+            this.paymentStateService.updatePaymentState(this.total, this.cart.map(item => ({
+              price: item.price,
+              quantityOfOrder: item.quantity,
+              sectionName: item.name,
+              isMembership: false,
+              numberOfChildrenAllowed: 0
+            })));
+          }
+        }, 0);
+
+        
+}
+handleTouchStart(event: TouchEvent) {
+  const button = event.currentTarget as HTMLElement;
+  button.classList.add('active');
+}
+
+handleTouchEnd(event: TouchEvent) {
+  const button = event.currentTarget as HTMLElement;
+  button.classList.remove('active');
+}
+
+  hidePaymentForm() {
+    this.showPaymentForm = false;
+    // Don't reset the entire state, just hide the form
+    const currentState = this.paymentStateService.getCurrentState();
+    this.paymentStateService.updatePaymentState(
+      currentState.totalPrice,
+      currentState.orderInfo
+    );
+    // Show the cart page when hiding payment form
     this.isCartPageVisible = true;
   }
+  showCartPage() {
+    this.showPaymentForm = false;
+    this.isCartPageVisible = true;
+  }
+
   hideCartPage() {
     // If payment form is showing, hide it first
     if (this.showPaymentForm) {
@@ -107,7 +175,17 @@ export class MenuComponent implements OnInit  {
     // Filter items with quantity > 0 and update cart
     this.cart = [...this.menuItems.filter(item => item.quantity > 0)];
     this.calculateTotal();
-    this.paymentStateService.updatePaymentStateFromMenuItems(this.menuItems);
+    const orderInfo = this.menuItems
+    .filter(item => item.quantity > 0)
+    .map(item => ({
+      price: item.price,
+      quantityOfOrder: item.quantity,
+      sectionName: item.name,
+      isMembership: false,
+      numberOfChildrenAllowed: 0
+    }));
+    const currentState = this.paymentStateService.getCurrentState();
+    this.paymentStateService.updatePaymentState(this.total, orderInfo);
     // For debugging
   console.log('Cart updated:', this.cart);
   }
