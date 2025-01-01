@@ -45,10 +45,20 @@ export class MenuComponent implements OnInit  {
     this.paymentStateService.state$.subscribe(state => {
       // Only update other state properties, not form visibility
       this.total = state.totalPrice;
+      console.log('is Mobile view: ' + this.isMobileView());
+      if (this.isMobileView()) {
+        // On mobile, only show form when explicitly navigating
+        this.showPaymentForm = state.showForm && this.isCartPageVisible;
+      } else {
+        // On desktop, follow the state directly
+        this.showPaymentForm = state.showForm;
+      }
     });
    
   }
-
+  isMobileView(): boolean {
+    return window.innerWidth < 640; // Match the CSS breakpoint
+  }
   private loadMenuItems(): void {
     this.menuService.getMenuItems().subscribe({
       next: (items) => {
@@ -104,30 +114,29 @@ export class MenuComponent implements OnInit  {
               numberOfChildrenAllowed: 0
             })));
           }
-        }, 0);
-
-        
-}
-handleTouchStart(event: TouchEvent) {
-  const button = event.currentTarget as HTMLElement;
-  button.classList.add('active');
+        }, 0);       
 }
 
-handleTouchEnd(event: TouchEvent) {
-  const button = event.currentTarget as HTMLElement;
-  button.classList.remove('active');
-}
-
-  hidePaymentForm() {
+hidePaymentForm() {
     this.showPaymentForm = false;
-    // Don't reset the entire state, just hide the form
+    const paymentContainer = document.querySelector('.payment-form-container');
+    if (paymentContainer) {
+      paymentContainer.classList.remove('show-payment');
+    }
+
+    // Show cart page
+    this.isCartPageVisible = true;
+    const mobileCartSection = document.querySelector('.mobile-cart-section');
+    if (mobileCartSection) {
+      mobileCartSection.classList.add('show-cart');
+    }
+
+    // Keep the payment state but update form visibility
     const currentState = this.paymentStateService.getCurrentState();
     this.paymentStateService.updatePaymentState(
       currentState.totalPrice,
       currentState.orderInfo
     );
-    // Show the cart page when hiding payment form
-    this.isCartPageVisible = true;
   }
   showCartPage() {
     this.showPaymentForm = false;
@@ -185,9 +194,18 @@ handleTouchEnd(event: TouchEvent) {
       numberOfChildrenAllowed: 0
     }));
     const currentState = this.paymentStateService.getCurrentState();
-    this.paymentStateService.updatePaymentState(this.total, orderInfo);
-    // For debugging
-  console.log('Cart updated:', this.cart);
+    if (window.innerWidth < 640) { // Mobile view
+      // On mobile, preserve current showForm state
+      this.paymentStateService.state.next({
+        ...currentState,
+        totalPrice: this.total,
+        orderInfo: orderInfo,
+        showForm: false 
+      });
+    } else { // Desktop view
+      // On desktop, show form if cart has items
+      this.paymentStateService.updatePaymentState(this.total, orderInfo);
+    }
   }
 
   private calculateTotal(): void {
@@ -198,31 +216,7 @@ handleTouchEnd(event: TouchEvent) {
     return this.cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 
-  checkout(): void {
-    if (this.cart.length > 0) {
-      this.paymentStateService.updatePaymentStateFromMenuItems(this.menuItems);
-    }
-  }
-
-  // onPaymentComplete(paymentDetails: any): void {
-  //   // Handle successful payment
-  //   this.paymentStateService.setShowSuccessModal(true);
-  //   this.resetCart();
-  // }
-
-  // onPaymentCancel(): void {
-  //   this.paymentStateService.resetState();
-  // }
-
-  private resetCart(): void {
-    this.cart = [];
-    this.menuItems.forEach(item => item.quantity = 0);
-    this.total = 0;
-    this.paymentStateService.resetState();
-  }
-
   handleModalClose() {
-
     this.paymentStateService.setShowSuccessModal(false);
     
     setTimeout(() => {
